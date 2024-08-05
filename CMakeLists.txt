@@ -18,3 +18,11 @@ add_executable(
     ${PROJECT_NAME}
     ${SOURCES}
 )
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+    SFML::System
+    SFML::Graphics
+    SFML::Audio
+)
