@@ -13,6 +13,10 @@ foreach(VENDOR ${VENDORS})
             set(BUILD_SHARED_LIBS FALSE)
         endif()
 
+        if (VENDOR STREQUAL "raylib")
+            set(BUILD_SHARED_LIBS FALSE)
+        endif()
+
         message(STATUS "Adding vendor: ${VENDOR}")
         add_subdirectory(${VENDOR})
     endif()

@@ -1,58 +1,94 @@
 #include "Game.hpp"
+#include <inputs/MouseInput.hpp>
 
-Game::Game(unsigned int width, unsigned int height)
-    : m_isRunning(true)
+Game::Game()
+    : m_ScoreText("", 20, 20, 40)
 {
-    InitVariables();
-    InitWindow(width, height);
+    MouseInput::Initialize();
+    InitializeWindow();
+    InitializeVariables();
 }
 
 Game::~Game()
 {
-    delete m_window;
-    m_window = nullptr;
+    MouseInput::Release();
+    CloseWindow();
 }
 
-void Game::Update()
+void Game::InitializeVariables()
 {
-    PollEvents();
+    m_Enemies.push_back(Enemy::SpawnRandomly());
+    m_SpawnTimer.Reset();
 }
 
-void Game::Render()
+void Game::InitializeWindow()
 {
-    m_window->clear(sf::Color::Black);
+    const int screenWidth = 800;
+    const int screenHeight = 450;
 
-    m_window->display();
+    InitWindow(screenWidth, screenHeight, "Hero Cards");
+    SetTargetFPS(100);
+
+    m_ScoreText.SetText("Score: 0");
 }
 
-void Game::PollEvents()
+void Game::Update(float delta)
 {
-    while (const auto &event = m_window->pollEvent())
+    if (WindowShouldClose())
     {
-        if (event->is<sf::Event::Closed>())
-        {
-            m_isRunning = false;
-        }
+        m_ShouldClose = true;
+    }
 
-        if (event->is<sf::Event::KeyPressed>())
-        {
-            auto keyEvent = event->getIf<sf::Event::KeyPressed>();
+    UpdateEnemies(delta);
+    SpawnEnemy();
+}
 
-            if (keyEvent->code == sf::Keyboard::Key::Escape)
-            {
-                m_isRunning = false;
-            }
+void Game::UpdateEnemies(float delta)
+{
+    for (const auto &enemy : m_Enemies)
+    {
+        enemy->Update(delta);
+
+        if (!enemy->IsAlive())
+        {
+            m_Enemies.erase(std::remove(m_Enemies.begin(), m_Enemies.end(), enemy), m_Enemies.end());
+            m_Score++;
+            break;
         }
     }
 }
 
-void Game::InitVariables()
+void Game::SpawnEnemy()
 {
-    m_window = nullptr;
-    m_window = new sf::RenderWindow(sf::VideoMode({640, 480}), "SFML works");
+    if (m_SpawnTimer.GetDelta() >= 0.5f && m_Enemies.size() < 20)
+    {
+        m_Enemies.push_back(Enemy::SpawnRandomly());
+        m_SpawnTimer.Reset();
+    }
 }
 
-void Game::InitWindow(unsigned int width, unsigned int height)
+void Game::Render()
 {
-    m_window = new sf::RenderWindow(sf::VideoMode({width, height}), "SFML works");
+    BeginDrawing();
+
+    ClearBackground(BLACK);
+
+    RenderEnemies();
+    RenderScore();
+
+    EndDrawing();
+}
+
+void Game::RenderEnemies()
+{
+    for (const auto &enemy : m_Enemies)
+    {
+        enemy->Render();
+    }
+}
+
+void Game::RenderScore()
+{
+    m_ScoreText.SetText("Score: " + std::to_string(m_Score));
+    m_ScoreText.Render();
 }

@@ -1,24 +1,36 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+#include <common.hpp>
+#include "Enemy.hpp"
+#include <utils/timer/AccTimer.hpp>
+#include <components/components.hpp>
 
 class Game
 {
 public:
-    Game(unsigned int width = 640, unsigned int height = 480);
+    Game();
     ~Game();
 
-    inline const bool ShouldClose() const { return !m_isRunning; }
+    inline bool ShouldClose() const { return m_ShouldClose; }
 
-    void Update();
+    void Update(float delta);
     void Render();
 
 protected:
-    void PollEvents();
-    void InitVariables();
-    void InitWindow(unsigned int width, unsigned int height);
+    void InitializeVariables();
+    void InitializeWindow();
+
+    void UpdateEnemies(float delta);
+    void SpawnEnemy();
+
+    void RenderEnemies();
+
+    void RenderScore();
 
 private:
-    sf::RenderWindow *m_window;
-    bool m_isRunning = false;
+    bool m_ShouldClose = false;
+
+    List<Scope<Enemy>> m_Enemies;
+    AccTimer m_SpawnTimer;
+    Text m_ScoreText;
+    int m_Score = 0;
 };

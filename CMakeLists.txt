@@ -5,7 +5,7 @@ project(HeroCards)
 add_subdirectory(vendors)
 
 file(
-    GLOB
+    GLOB_RECURSE
     SOURCES
     src/*.cpp
 )
@@ -22,7 +22,11 @@ add_executable(
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
-    SFML::System
-    SFML::Graphics
-    SFML::Audio
+    raylib
+)
+
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC
+    src
 )

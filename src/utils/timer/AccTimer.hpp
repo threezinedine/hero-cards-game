@@ -1,0 +1,17 @@
+#pragma once
+#include "common.hpp"
+#include <chrono>
+
+class AccTimer
+{
+public:
+    AccTimer();
+    ~AccTimer();
+
+    void Reset();
+
+    float GetDelta() const;
+
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
+};
