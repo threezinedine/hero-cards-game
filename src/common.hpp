@@ -11,6 +11,7 @@
 #include <raylib.h>
 #include <nlohmann/json.hpp>
 #include <type_traits>
+#include <functional>
 
 template <typename T>
 using Scope = std::unique_ptr<T>;

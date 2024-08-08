@@ -12,6 +12,8 @@ public:
     void Update();
     void Draw();
 
+    inline void BindOnClicked(const std::function<void()> &func) { m_OnClicked = func; }
+
 protected:
     bool IsHovered() const;
 
@@ -21,4 +23,5 @@ private:
     Vector2 m_Size;
 
     int m_currentFrame = 0;
+    std::function<void()> m_OnClicked;
 };

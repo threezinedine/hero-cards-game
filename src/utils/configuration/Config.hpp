@@ -41,6 +41,22 @@ public:
         return defaultValue;
     }
 
+    static JSON GetSceneData(int index)
+    {
+        if (s_Configs.contains("scenes"))
+        {
+            if (s_Configs["scenes"].is_array())
+            {
+                if (index >= 0 && index < s_Configs["scenes"].size())
+                {
+                    return s_Configs["scenes"][index];
+                }
+            }
+        }
+
+        return JSON();
+    }
+
 private:
     static JSON s_Configs;
 };

@@ -1,111 +1,64 @@
 #include "Game.hpp"
 #include <inputs/MouseInput.hpp>
 #include <utils/utils.hpp>
+#include <common.hpp>
 
 Game::Game()
-    : m_ScoreText("", 20, 20, 40)
+    : m_CurrentSceneIndex(-1)
 {
-    MouseInput::Initialize();
-    InitializeWindow();
-    InitializeVariables();
+    m_Scenes.push_back(CreateScope<HomeScene>());
+    m_Scenes.push_back(CreateScope<GameScene>());
+
+    m_Scenes[0]->SetApplication(this);
+    m_Scenes[1]->SetApplication(this);
+
+    ChangeScene(0);
 }
 
 Game::~Game()
 {
-    MouseInput::Release();
-    CloseWindow();
+    m_Scenes[m_CurrentSceneIndex]->Release();
 }
 
-void Game::InitializeVariables()
+void Game::ChangeScene(int index)
 {
-    m_Enemies.push_back(Enemy::SpawnRandomly());
-    m_SpawnTimer.Reset();
-
-    m_Card = CreateScope<Img>(ResourcePath("images/deck-of-card.png"),
-                              13, 4);
-
-    m_Card->SetSize(100);
-
-    m_Button = CreateScope<Button>(ResourcePath("images/button.png"),
-                                   Vector2{400, 200}, Vector2{300, 50});
-}
-
-void Game::InitializeWindow()
-{
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    String title = Config::Get<String>("title", "Hero Cards");
-
-    InitWindow(screenWidth, screenHeight, title.c_str());
-    SetTargetFPS(100);
-
-    m_ScoreText.SetText("Score: 0");
-}
-
-void Game::Update(float delta)
-{
-    if (WindowShouldClose())
+    if (index < 0 || index >= m_Scenes.size())
     {
-        m_ShouldClose = true;
+        return;
     }
-
-    MouseInput::Get()->Update();
-
-    UpdateEnemies(delta);
-    SpawnEnemy();
-    m_Button->Update();
-}
-
-void Game::UpdateEnemies(float delta)
-{
-    for (const auto &enemy : m_Enemies)
+    else
     {
-        enemy->Update(delta);
-
-        if (!enemy->IsAlive())
+        if (m_CurrentSceneIndex != index)
         {
-            m_Enemies.erase(std::remove(m_Enemies.begin(), m_Enemies.end(), enemy), m_Enemies.end());
-            m_Score++;
-            break;
+            if (m_CurrentSceneIndex >= 0 &&
+                m_CurrentSceneIndex < m_Scenes.size() &&
+                m_Scenes[m_CurrentSceneIndex]->IsInitialized())
+            {
+                m_Scenes[m_CurrentSceneIndex]->Release();
+            }
+
+            if (!m_Scenes[index]->IsInitialized())
+            {
+                m_Scenes[index]->Init();
+            }
         }
+
+        m_CurrentSceneIndex = index;
     }
 }
 
-void Game::SpawnEnemy()
+void Game::UpdateImpl(float delta)
 {
-    if (m_SpawnTimer.GetDelta() >= 0.5f && m_Enemies.size() < 20)
+    if (m_CurrentSceneIndex >= 0 && m_CurrentSceneIndex < m_Scenes.size())
     {
-        m_Enemies.push_back(Enemy::SpawnRandomly());
-        m_SpawnTimer.Reset();
+        m_Scenes[m_CurrentSceneIndex]->Update(delta);
     }
 }
 
-void Game::Render()
+void Game::RenderImpl()
 {
-    BeginDrawing();
-
-    ClearBackground(BLACK);
-
-    RenderEnemies();
-    RenderScore();
-
-    m_Button->Draw();
-    m_Card->Render(0, 0, 300, 300);
-
-    EndDrawing();
-}
-
-void Game::RenderEnemies()
-{
-    for (const auto &enemy : m_Enemies)
+    if (m_CurrentSceneIndex >= 0 && m_CurrentSceneIndex < m_Scenes.size())
     {
-        enemy->Render();
+        m_Scenes[m_CurrentSceneIndex]->Render();
     }
-}
-
-void Game::RenderScore()
-{
-    m_ScoreText.SetText("Score: " + std::to_string(m_Score));
-    m_ScoreText.Render();
 }

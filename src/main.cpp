@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     DeltaTimer timer;
     timer.Start();
 
-    while (!game.ShouldClose())
+    while (game.IsRunning())
     {
         timer.Start();
         game.Update(timer.GetDelta());

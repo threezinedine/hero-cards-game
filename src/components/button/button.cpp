@@ -17,6 +17,12 @@ void Button::Update()
     if (IsHovered())
     {
         m_currentFrame = 1;
+
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+        {
+            m_OnClicked();
+        }
+
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         {
             m_currentFrame = 2;

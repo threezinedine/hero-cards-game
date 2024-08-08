@@ -1,38 +1,22 @@
 #pragma once
 #include <common.hpp>
-#include "Enemy.hpp"
-#include <utils/timer/AccTimer.hpp>
-#include <components/components.hpp>
+#include <cores/core.hpp>
+#include "GameScene.hpp"
+#include "HomeScene.hpp"
 
-class Game
+class Game : public Application
 {
 public:
     Game();
     ~Game();
 
-    inline bool ShouldClose() const { return m_ShouldClose; }
-
-    void Update(float delta);
-    void Render();
+    void ChangeScene(int index);
 
 protected:
-    void InitializeVariables();
-    void InitializeWindow();
-
-    void UpdateEnemies(float delta);
-    void SpawnEnemy();
-
-    void RenderEnemies();
-
-    void RenderScore();
+    void UpdateImpl(float delta) override;
+    void RenderImpl() override;
 
 private:
-    bool m_ShouldClose = false;
-
-    List<Scope<Enemy>> m_Enemies;
-    AccTimer m_SpawnTimer;
-    Text m_ScoreText;
-    int m_Score = 0;
-    Scope<Img> m_Card = nullptr;
-    Scope<Button> m_Button = nullptr;
+    List<Scope<Scene>> m_Scenes;
+    int m_CurrentSceneIndex;
 };
