@@ -9,6 +9,8 @@
 #include <string>
 #include <unordered_map>
 #include <raylib.h>
+#include <nlohmann/json.hpp>
+#include <type_traits>
 
 template <typename T>
 using Scope = std::unique_ptr<T>;
@@ -38,3 +40,5 @@ using String = std::string;
 
 template <typename T, typename U>
 using Map = std::unordered_map<T, U>;
+
+using JSON = nlohmann::json;

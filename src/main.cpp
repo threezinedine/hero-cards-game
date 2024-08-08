@@ -1,10 +1,11 @@
 #include <iostream>
-#include <utils/timer/DeltaTimer.hpp>
+#include <utils/utils.hpp>
 #include "Game.hpp"
 #include <inputs/MouseInput.hpp>
 
 int main(int argc, char **argv)
 {
+    Config::Load("C:/Users/Acer/Games Dev/hero-cards-game/project.config.json");
     Game game;
     DeltaTimer timer;
     timer.Start();

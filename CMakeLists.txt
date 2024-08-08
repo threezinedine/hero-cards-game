@@ -23,6 +23,7 @@ target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
     raylib
+    nlohmann_json
 )
 
 target_include_directories(

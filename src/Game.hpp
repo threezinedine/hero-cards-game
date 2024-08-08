@@ -33,4 +33,6 @@ private:
     AccTimer m_SpawnTimer;
     Text m_ScoreText;
     int m_Score = 0;
+    Scope<Img> m_Card = nullptr;
+    Scope<Button> m_Button = nullptr;
 };

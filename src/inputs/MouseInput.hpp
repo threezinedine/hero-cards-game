@@ -8,7 +8,7 @@ public:
     ~MouseInput() = default;
 
     void Update();
-    inline Vector2 GetMousePosition() const { return m_MousePosition; }
+    inline Vector2 GetMousePos() const { return m_MousePosition; }
     bool HasMouseLeftClicked() const { return IsMouseButtonPressed(MOUSE_LEFT_BUTTON); }
 
     static void Initialize();
