@@ -10,13 +10,9 @@ public:
     Game();
     ~Game();
 
-    void ChangeScene(int index);
-
 protected:
     void UpdateImpl(float delta) override;
     void RenderImpl() override;
 
 private:
-    List<Scope<Scene>> m_Scenes;
-    int m_CurrentSceneIndex;
 };

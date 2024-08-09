@@ -14,6 +14,8 @@ Application::Application()
 
     InitWindow(screenWidth, screenHeight, title.c_str());
     SetTargetFPS(fps);
+
+    m_SceneManagement = CreateRef<SceneManagement>();
 }
 
 Application::~Application()
@@ -30,6 +32,7 @@ void Application::Update(float delta)
     }
     MouseInput::Get()->Update();
 
+    m_SceneManagement->Update(delta);
     UpdateImpl(delta);
 }
 
@@ -42,6 +45,9 @@ void Application::Render()
     BeginDrawing();
 
     ClearBackground(BLACK);
+
+    m_SceneManagement->Render();
+
     RenderImpl();
 
     EndDrawing();

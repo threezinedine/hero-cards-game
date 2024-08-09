@@ -2,6 +2,7 @@
 
 #include <common.hpp>
 #include "IRenderable.hpp"
+#include "SceneManagement.hpp"
 
 class Application : public IRenderable
 {
@@ -18,6 +19,9 @@ protected:
     virtual void UpdateImpl(float delta);
     virtual void RenderImpl();
 
+    inline Ref<SceneManagement> GetSceneManagement() const { return m_SceneManagement; }
+
 private:
     bool m_Running;
+    Ref<SceneManagement> m_SceneManagement;
 };

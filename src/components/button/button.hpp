@@ -3,7 +3,7 @@
 #include <utils/utils.hpp>
 #include <components/components.hpp>
 
-class Button
+class Button : Component
 {
 public:
     Button(const IPath &path, const Vector2 &pos, const Vector2 &size);

@@ -57,7 +57,7 @@ void HomeScene::LoadData()
 
 void HomeScene::OnClickedStartButton()
 {
-    static_cast<Game *>(GetApp())->ChangeScene(1);
+    GetSceneManagement()->ChangeScene(1);
 }
 
 void HomeScene::UpdateImpl(float delta)

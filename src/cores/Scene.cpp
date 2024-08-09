@@ -1,12 +1,7 @@
 #include "Scene.hpp"
 
 Scene::Scene()
-    : m_App(nullptr)
-{
-}
-
-Scene::Scene(Application *app)
-    : m_App(app)
+    : m_SceneManagement(nullptr)
 {
 }
 
