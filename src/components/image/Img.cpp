@@ -3,7 +3,7 @@
 Img::Img(Scope<IPath> path, int numCols, int numRows)
     : m_NumCols(numCols), m_NumRows(numRows),
       m_ColIndex(0), m_RowIndex(0),
-      m_Texture(nullptr), m_PosX(0), m_PosY(0),
+      m_Texture(nullptr),
       m_Path(std::move(path))
 {
 }
@@ -22,7 +22,7 @@ void Img::LoadImpl()
 
     UnloadImage(img);
 
-    SetSize(DEFAULT_SIZE);
+    SetWidthKeepRatio(DEFAULT_SIZE);
 }
 
 void Img::UnloadImpl()
@@ -37,22 +37,22 @@ void Img::RenderImpl()
 
     DrawTexturePro(*m_Texture,
                    {drawColIndex * m_ColWidth, drawRowIndex * m_RowHeight, m_ColWidth, m_RowHeight},
-                   {m_PosX, m_PosY, m_width, m_height},
-                   {m_width / 2, m_height / 2},
+                   {GetPosX(), GetPosY(), GetWidth(), GetHeight()},
+                   {GetWidth() / 2, GetHeight() / 2},
                    0,
                    WHITE);
 }
 
-void Img::SetSize(float width)
+void Img::SetWidthKeepRatio(float width)
 {
     if (width == DEFAULT_SIZE)
     {
-        m_width = m_ColWidth;
+        SetWidth(m_ColWidth);
     }
     else
     {
-        m_width = width;
+        SetWidth(width);
     }
 
-    m_height = m_width * m_RowHeight / m_ColWidth;
+    SetHeight(GetWidth() * m_RowHeight / m_ColWidth);
 }

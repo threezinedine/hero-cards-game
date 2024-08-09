@@ -12,19 +12,13 @@ public:
         int numRows = 1);
     ~Img();
 
-    inline void SetPosition(float posX, float posY)
-    {
-        m_PosX = posX;
-        m_PosY = posY;
-    }
     inline void SetIndexes(int colIndex, int rowIndex)
     {
         m_ColIndex = colIndex;
         m_RowIndex = rowIndex;
     }
 
-    void SetSize(float width = DEFAULT_SIZE);
-    inline Vector2 GetSize() const { return Vector2{m_width, m_height}; }
+    void SetWidthKeepRatio(float width);
 
 protected:
     void LoadImpl() override;
@@ -41,10 +35,6 @@ private:
     int m_RowIndex;
     float m_ColWidth;
     float m_RowHeight;
-    float m_width;
-    float m_height;
-    float m_PosX;
-    float m_PosY;
     Scope<Texture2D> m_Texture;
     Scope<IPath> m_Path;
 };

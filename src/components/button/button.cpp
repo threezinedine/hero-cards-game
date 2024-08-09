@@ -6,8 +6,6 @@ Button::Button(Scope<IPath> path, const Vector2 &pos, const Vector2 &size)
       m_Size(size), m_currentFrame(0)
 {
     m_Img = CreateScope<Img>(std::move(path), 1, 3);
-    m_Img->SetIndexes(0, 0);
-    m_Img->SetPosition(m_Pos.x, m_Pos.y);
 }
 
 Button::~Button()
@@ -17,8 +15,10 @@ Button::~Button()
 void Button::LoadImpl()
 {
     m_Img->Load();
-    m_Img->SetPosition(m_Pos.x, m_Pos.y);
-    m_Img->SetSize(m_Size.x);
+    m_Img->SetIndexes(0, 0);
+    m_Img->SetPosX(m_Pos.x);
+    m_Img->SetPosY(m_Pos.y);
+    m_Img->SetWidthKeepRatio(m_Size.x);
 }
 
 void Button::UnloadImpl()
@@ -51,12 +51,13 @@ void Button::UpdateImpl(float delta)
 bool Button::IsHovered() const
 {
     auto mousePos = MouseInput::Get()->GetMousePos();
-    auto buttonSize = m_Img->GetSize();
+    auto buttonWidth = m_Img->GetWidth();
+    auto buttonHeight = m_Img->GetHeight();
 
-    return mousePos.x >= m_Pos.x - buttonSize.x / 2 &&
-           mousePos.x <= m_Pos.x + buttonSize.x / 2 &&
-           mousePos.y >= m_Pos.y - buttonSize.y / 2 &&
-           mousePos.y <= m_Pos.y + buttonSize.y / 2;
+    return mousePos.x >= m_Pos.x - buttonWidth / 2 &&
+           mousePos.x <= m_Pos.x + buttonWidth / 2 &&
+           mousePos.y >= m_Pos.y - buttonHeight / 2 &&
+           mousePos.y <= m_Pos.y + buttonHeight / 2;
 }
 
 void Button::RenderImpl()
