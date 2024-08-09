@@ -12,48 +12,12 @@ HomeScene::~HomeScene()
 
 void HomeScene::InitImpl()
 {
-    LoadData();
 
-    m_StartButton = CreateScope<Button>(CreateScope<ResourcePath>(m_ImgPath), m_Pos, m_Size);
+    m_StartButton = CreateScope<Button>(
+        CreateScope<ResourcePath>("images/button.png"), 0, 0, 100);
+    m_StartButton->ConfigLoad(Config::GetSceneData(0)["button"]);
     m_StartButton->BindOnClicked(std::bind(&OnClickedStartButton, this));
     m_StartButton->Load();
-}
-
-void HomeScene::LoadData()
-{
-    auto config = Config::GetSceneData(0);
-    m_ImgPath = "images/button.png";
-    m_Pos = Vector2{0, 0};
-    m_Size = Vector2{800, 600};
-
-    if (config.contains("button"))
-    {
-        auto button = config["button"];
-
-        if (button.contains("path"))
-        {
-            m_ImgPath = button["path"].get<String>();
-        }
-
-        if (button.contains("position") &&
-            button["position"].contains("x") &&
-            button["position"]["x"].is_number() &&
-            button["position"].contains("y") &&
-            button["position"]["y"].is_number())
-        {
-            auto pos = button["position"];
-            m_Pos = Vector2{button["position"]["x"].get<float>(),
-                            button["position"]["y"].get<float>()};
-        }
-
-        if (button.contains("size") &&
-            button["size"].contains("width") &&
-            button["size"]["width"].is_number())
-        {
-            float width = button["size"]["width"].get<float>();
-            m_Size = Vector2{width, width};
-        }
-    }
 }
 
 void HomeScene::OnClickedStartButton()

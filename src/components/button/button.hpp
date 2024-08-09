@@ -8,7 +8,8 @@ class Img;
 class Button : public Component
 {
 public:
-    Button(Scope<IPath> path, const Vector2 &pos, const Vector2 &size);
+    Button(Scope<IPath> path, float posX = 0.0f, float posY = 0.0f,
+           float width = 100.0f);
     ~Button();
 
     inline void BindOnClicked(const std::function<void()> &func) { m_OnClicked = func; }
@@ -24,8 +25,6 @@ protected:
 
 private:
     Scope<Img> m_Img;
-    Vector2 m_Pos;
-    Vector2 m_Size;
 
     int m_currentFrame = 0;
     std::function<void()> m_OnClicked;

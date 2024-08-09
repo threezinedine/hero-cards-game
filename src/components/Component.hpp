@@ -5,7 +5,8 @@
 class Component : public IRenderable
 {
 public:
-    Component() = default;
+    Component(float posX = 0.0f, float posY = 0.0f,
+              float width = 100.0f, float height = 100.0f);
     virtual ~Component() = default;
     void Load();
     void Unload();

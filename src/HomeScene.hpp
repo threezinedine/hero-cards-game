@@ -20,8 +20,4 @@ protected:
 
 private:
     Scope<Button> m_StartButton = nullptr;
-
-    String m_ImgPath;
-    Vector2 m_Pos;
-    Vector2 m_Size;
 };
