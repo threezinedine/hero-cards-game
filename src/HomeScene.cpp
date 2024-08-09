@@ -14,8 +14,9 @@ void HomeScene::InitImpl()
 {
     LoadData();
 
-    m_StartButton = CreateScope<Button>(ResourcePath(m_ImgPath), m_Pos, m_Size);
+    m_StartButton = CreateScope<Button>(CreateScope<ResourcePath>(m_ImgPath), m_Pos, m_Size);
     m_StartButton->BindOnClicked(std::bind(&OnClickedStartButton, this));
+    m_StartButton->Load();
 }
 
 void HomeScene::LoadData()
@@ -62,14 +63,15 @@ void HomeScene::OnClickedStartButton()
 
 void HomeScene::UpdateImpl(float delta)
 {
-    m_StartButton->Update();
+    m_StartButton->Update(delta);
 }
 
 void HomeScene::RenderImpl()
 {
-    m_StartButton->Draw();
+    m_StartButton->Render();
 }
 
 void HomeScene::ReleaseImpl()
 {
+    m_StartButton->Unload();
 }

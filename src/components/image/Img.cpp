@@ -1,33 +1,43 @@
 #include "Img.hpp"
 
-Img::Img(const IPath &path, int numCols, int numRows)
-    : m_NumCols(numCols), m_NumRows(numRows)
+Img::Img(Scope<IPath> path, int numCols, int numRows)
+    : m_NumCols(numCols), m_NumRows(numRows),
+      m_ColIndex(0), m_RowIndex(0),
+      m_Texture(nullptr), m_PosX(0), m_PosY(0),
+      m_Path(std::move(path))
 {
-    auto img = LoadImage(path.Get().c_str());
+}
+
+Img::~Img()
+{
+}
+
+void Img::LoadImpl()
+{
+    auto img = LoadImage(m_Path->Get().c_str());
     m_ColWidth = img.width / m_NumCols;
     m_RowHeight = img.height / m_NumRows;
 
-    m_Texture = LoadTextureFromImage(img);
+    m_Texture = CreateScope<Texture2D>(LoadTextureFromImage(img));
 
     UnloadImage(img);
 
     SetSize(DEFAULT_SIZE);
 }
 
-Img::~Img()
+void Img::UnloadImpl()
 {
-    UnloadTexture(m_Texture);
+    UnloadTexture(*m_Texture);
 }
 
-void Img::Render(int colIndex, int rowIndex,
-                 float posX, float posY)
+void Img::RenderImpl()
 {
-    int drawColIndex = colIndex < m_ColWidth ? colIndex : m_NumCols - 1;
-    int drawRowIndex = rowIndex < m_RowHeight ? rowIndex : m_NumRows - 1;
+    int drawColIndex = m_ColIndex < m_NumCols ? m_ColIndex : m_NumCols - 1;
+    int drawRowIndex = m_RowIndex < m_NumRows ? m_RowIndex : m_NumRows - 1;
 
-    DrawTexturePro(m_Texture,
+    DrawTexturePro(*m_Texture,
                    {drawColIndex * m_ColWidth, drawRowIndex * m_RowHeight, m_ColWidth, m_RowHeight},
-                   {posX, posY, m_width, m_height},
+                   {m_PosX, m_PosY, m_width, m_height},
                    {m_width / 2, m_height / 2},
                    0,
                    WHITE);

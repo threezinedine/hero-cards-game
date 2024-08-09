@@ -28,6 +28,10 @@ void Component::UnloadImpl()
 
 void Component::Update(float delta)
 {
+    if (!m_Loaded)
+    {
+        Load();
+    }
     UpdateImpl(delta);
 }
 
@@ -37,6 +41,10 @@ void Component::UpdateImpl(float delta)
 
 void Component::Render()
 {
+    if (!m_Loaded)
+    {
+        Load();
+    }
     RenderImpl();
 }
 

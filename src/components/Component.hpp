@@ -2,7 +2,7 @@
 #include <common.hpp>
 #include <cores/core.hpp>
 
-class Component : IRenderable
+class Component : public IRenderable
 {
 public:
     Component() = default;

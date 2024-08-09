@@ -1,28 +1,50 @@
 #pragma once
 #include <common.hpp>
 #include <utils/utils.hpp>
+#include <components/components.hpp>
 
 #define DEFAULT_SIZE -1
 
-class Img
+class Img : public Component
 {
 public:
-    Img(const IPath &path, int numCols = 1,
+    Img(Scope<IPath> path, int numCols = 1,
         int numRows = 1);
     ~Img();
 
-    void Render(int colIndex, int rowIndex,
-                float posX, float posY);
+    inline void SetPosition(float posX, float posY)
+    {
+        m_PosX = posX;
+        m_PosY = posY;
+    }
+    inline void SetIndexes(int colIndex, int rowIndex)
+    {
+        m_ColIndex = colIndex;
+        m_RowIndex = rowIndex;
+    }
 
     void SetSize(float width = DEFAULT_SIZE);
     inline Vector2 GetSize() const { return Vector2{m_width, m_height}; }
 
+protected:
+    void LoadImpl() override;
+    void UnloadImpl() override;
+
+    void RenderImpl() override;
+
+    // void ConfigLoadImpl(JSON config) override;
+
 private:
     int m_NumCols;
     int m_NumRows;
+    int m_ColIndex;
+    int m_RowIndex;
     float m_ColWidth;
     float m_RowHeight;
     float m_width;
     float m_height;
-    Texture2D m_Texture;
+    float m_PosX;
+    float m_PosY;
+    Scope<Texture2D> m_Texture;
+    Scope<IPath> m_Path;
 };
