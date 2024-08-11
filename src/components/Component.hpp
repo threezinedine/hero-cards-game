@@ -1,6 +1,7 @@
 #pragma once
 #include <common.hpp>
 #include <cores/core.hpp>
+#include "ScriptManager.hpp"
 
 namespace ntt
 {
@@ -38,6 +39,26 @@ namespace ntt
         virtual void RenderImpl();
 
         virtual void ConfigLoadImpl(JSON config);
+
+        virtual void OnHover();
+        virtual void OnUnhover();
+
+        virtual void OnLeftPressed();
+        virtual void OnLeftPressing();
+        virtual void OnLeftReleased();
+
+        virtual void OnRightPressed();
+        virtual void OnRightPressing();
+        virtual void OnRightReleased();
+
+        virtual void OnMiddlePressed();
+        virtual void OnMiddlePressing();
+        virtual void OnMiddleReleased();
+
+        bool OnHovered();
+        void GeometryUpdate();
+
+        Scope<ScriptManager> m_ScriptManager;
 
     private:
         bool m_Loaded = false;

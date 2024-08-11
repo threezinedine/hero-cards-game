@@ -6,8 +6,8 @@ HomeScene::HomeScene()
     : Scene("home")
 {
     m_StartButton = CreateScope<Button>(
-        CreateScope<ResourcePath>("images/button.png"), 0, 0, 100);
-    m_StartButton->BindOnClicked(std::bind(&OnClickedStartButton, this));
+        CreateScope<ResourcePath>("images/button.png"), 0, 0, 100,
+        std::bind(&HomeScene::OnClickedStartButton, this));
 
     m_ComponentManagement->RegisterComponent("button", std::move(m_StartButton));
 

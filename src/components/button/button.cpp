@@ -3,9 +3,12 @@
 
 namespace ntt
 {
-    Button::Button(Scope<IPath> path, float posX, float posY, float width)
+    Button::Button(Scope<IPath> path, float posX,
+                   float posY, float width,
+                   const std::function<void()> &onClicked)
         : Component(posX, posY, width),
-          m_currentFrame(0)
+          m_currentFrame(0),
+          m_OnClicked(onClicked)
     {
         m_Img = CreateScope<Img>(std::move(path), 1, 3);
     }
@@ -30,36 +33,26 @@ namespace ntt
 
     void Button::UpdateImpl(float delta)
     {
-        if (IsHovered())
-        {
-            m_Img->SetIndexes(0, 1);
-
-            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-            {
-                m_OnClicked();
-            }
-
-            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-            {
-                m_Img->SetIndexes(0, 2);
-            }
-        }
-        else
-        {
-            m_Img->SetIndexes(0, 0);
-        }
     }
 
-    bool Button::IsHovered() const
+    void Button::OnHover()
     {
-        auto mousePos = MouseInput::Get()->GetMousePos();
-        auto buttonWidth = m_Img->GetWidth();
-        auto buttonHeight = m_Img->GetHeight();
+        m_Img->SetIndexes(0, 1);
+    }
 
-        return mousePos.x >= GetPosX() - buttonWidth / 2 &&
-               mousePos.x <= GetPosX() + buttonWidth / 2 &&
-               mousePos.y >= GetPosY() - buttonHeight / 2 &&
-               mousePos.y <= GetPosY() + buttonHeight / 2;
+    void Button::OnLeftPressing()
+    {
+        m_Img->SetIndexes(0, 2);
+    }
+
+    void Button::OnLeftReleased()
+    {
+        m_OnClicked();
+    }
+
+    void Button::OnUnhover()
+    {
+        m_Img->SetIndexes(0, 0);
     }
 
     void Button::RenderImpl()

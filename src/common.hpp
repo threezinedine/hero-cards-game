@@ -45,4 +45,9 @@ namespace ntt
     using Map = std::unordered_map<T, U>;
 
     using JSON = nlohmann::json;
+
+    template <typename T, typename... Args>
+    using Func = std::function<T(Args...)>;
+
+#include <utils/log/log.hpp>
 }
