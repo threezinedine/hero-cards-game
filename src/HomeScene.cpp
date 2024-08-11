@@ -21,9 +21,7 @@ void HomeScene::InitImpl()
 
     m_MenuButton = CreateScope<Sprite>(
         CreateScope<ResourcePath>("images/new-btn.png"), 1, 2, 500);
-    m_MenuButton->SetPosX(200);
-    m_MenuButton->SetPosY(200);
-    m_MenuButton->SetWidth(300);
+    m_MenuButton->ConfigLoad(Config::GetSceneData(0)["menu"]);
     m_MenuButton->Load();
 }
 
