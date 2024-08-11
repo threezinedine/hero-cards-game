@@ -5,3 +5,4 @@
 #include "random/random.hpp"
 #include "timer/timer.hpp"
 #include "path/path.hpp"
+#include "log/log.hpp"

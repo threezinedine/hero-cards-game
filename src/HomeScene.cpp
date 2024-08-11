@@ -3,7 +3,17 @@
 #include "Game.hpp"
 
 HomeScene::HomeScene()
+    : Scene("home")
 {
+    m_StartButton = CreateScope<Button>(
+        CreateScope<ResourcePath>("images/button.png"), 0, 0, 100);
+    m_StartButton->BindOnClicked(std::bind(&OnClickedStartButton, this));
+
+    m_ComponentManagement->RegisterComponent("button", std::move(m_StartButton));
+
+    m_MenuButton = CreateScope<Sprite>(
+        CreateScope<ResourcePath>("images/new-btn.png"), 1, 2, 500);
+    m_ComponentManagement->RegisterComponent("menu", std::move(m_MenuButton));
 }
 
 HomeScene::~HomeScene()
@@ -12,17 +22,6 @@ HomeScene::~HomeScene()
 
 void HomeScene::InitImpl()
 {
-
-    m_StartButton = CreateScope<Button>(
-        CreateScope<ResourcePath>("images/button.png"), 0, 0, 100);
-    m_StartButton->ConfigLoad(Config::GetSceneData(0)["button"]);
-    m_StartButton->BindOnClicked(std::bind(&OnClickedStartButton, this));
-    m_StartButton->Load();
-
-    m_MenuButton = CreateScope<Sprite>(
-        CreateScope<ResourcePath>("images/new-btn.png"), 1, 2, 500);
-    m_MenuButton->ConfigLoad(Config::GetSceneData(0)["menu"]);
-    m_MenuButton->Load();
 }
 
 void HomeScene::OnClickedStartButton()
@@ -32,18 +31,12 @@ void HomeScene::OnClickedStartButton()
 
 void HomeScene::UpdateImpl(float delta)
 {
-    m_StartButton->Update(delta);
-    m_MenuButton->Update(delta);
 }
 
 void HomeScene::RenderImpl()
 {
-    m_StartButton->Render();
-    m_MenuButton->Render();
 }
 
 void HomeScene::ReleaseImpl()
 {
-    m_StartButton->Unload();
-    m_MenuButton->Unload();
 }

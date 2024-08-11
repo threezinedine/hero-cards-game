@@ -3,3 +3,4 @@
 #include "image/Img.hpp"
 #include "button/button.hpp"
 #include "sprites/Sprite.hpp"
+#include "components/ComponentManagement.hpp"

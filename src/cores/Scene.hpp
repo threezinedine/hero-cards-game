@@ -5,11 +5,12 @@
 #include "Application.hpp"
 
 class SceneManagement;
+class ComponentManagement;
 
 class Scene : public IRenderable, public ILifetime
 {
 public:
-    Scene();
+    Scene(String sceneName);
     virtual ~Scene();
 
     void Init() override;
@@ -20,6 +21,7 @@ public:
     inline bool IsInitialized() const override { return m_IsInitialized; }
 
     inline void SetSceneManagement(SceneManagement *sceneManagement) { m_SceneManagement = sceneManagement; }
+    inline String GetSceneName() const { return m_SceneName; }
 
 protected:
     virtual void InitImpl();
@@ -29,7 +31,10 @@ protected:
 
     inline SceneManagement *GetSceneManagement() const { return m_SceneManagement; }
 
+    Scope<ComponentManagement> m_ComponentManagement;
+
 private:
     SceneManagement *m_SceneManagement;
     bool m_IsInitialized = false;
+    String m_SceneName;
 };

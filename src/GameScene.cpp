@@ -1,6 +1,7 @@
 #include "GameScene.hpp"
 
 GameScene::GameScene()
+    : Scene("game")
 {
 }
 
