@@ -20,6 +20,11 @@ public:
 
     void SetWidthKeepRatio(float width);
 
+    inline int GetNumCols() const { return m_NumCols; }
+    inline int GetNumRows() const { return m_NumRows; }
+    inline void SetNumCols(int numCols) { m_NumCols = numCols; }
+    inline void SetNumRows(int numRows) { m_NumRows = numRows; }
+
 protected:
     void LoadImpl() override;
     void UnloadImpl() override;

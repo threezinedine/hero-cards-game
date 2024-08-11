@@ -20,4 +20,5 @@ protected:
 
 private:
     Scope<Button> m_StartButton = nullptr;
+    Scope<Sprite> m_MenuButton = nullptr;
 };
