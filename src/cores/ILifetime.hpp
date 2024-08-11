@@ -2,13 +2,16 @@
 
 #include <common.hpp>
 
-class ILifetime
+namespace ntt
 {
-public:
-    virtual ~ILifetime() = default;
+    class ILifetime
+    {
+    public:
+        virtual ~ILifetime() = default;
 
-    virtual void Init() = 0;
-    virtual void Release() = 0;
+        virtual void Init() = 0;
+        virtual void Release() = 0;
 
-    virtual bool IsInitialized() const = 0;
-};
+        virtual bool IsInitialized() const = 0;
+    };
+}

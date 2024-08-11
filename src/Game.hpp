@@ -4,6 +4,8 @@
 #include "GameScene.hpp"
 #include "HomeScene.hpp"
 
+using namespace ntt;
+
 class Game : public Application
 {
 public:

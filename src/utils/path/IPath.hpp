@@ -2,10 +2,13 @@
 
 #include <common.hpp>
 
-class IPath
+namespace ntt
 {
-public:
-    virtual ~IPath() = default;
+    class IPath
+    {
+    public:
+        virtual ~IPath() = default;
 
-    virtual String Get() const = 0;
-};
+        virtual String Get() const = 0;
+    };
+}

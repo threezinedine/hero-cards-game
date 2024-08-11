@@ -2,9 +2,12 @@
 
 #include "RelativePath.hpp"
 
-class ResourcePath : public RelativePath
+namespace ntt
 {
-public:
-    ResourcePath(String path);
-    virtual ~ResourcePath();
-};
+    class ResourcePath : public RelativePath
+    {
+    public:
+        ResourcePath(String path);
+        virtual ~ResourcePath();
+    };
+}

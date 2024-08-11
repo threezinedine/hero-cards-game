@@ -1,59 +1,62 @@
 #pragma once
 #include <common.hpp>
 
-class Config
+namespace ntt
 {
-public:
-    static void Load(String path);
-
-    template <typename T>
-    static T Get(String key, T defaultValue = T())
+    class Config
     {
-        if (s_Configs.contains(key))
+    public:
+        static void Load(String path);
+
+        template <typename T>
+        static T Get(String key, T defaultValue = T())
         {
-            return s_Configs[key].get<T>();
+            if (s_Configs.contains(key))
+            {
+                return s_Configs[key].get<T>();
+            }
+
+            // TODO: Add warning message
+
+            return defaultValue;
         }
 
-        // TODO: Add warning message
-
-        return defaultValue;
-    }
-
-    template <typename T>
-    static List<T> Get(String key, List<T> defaultValue = List<T>())
-    {
-        if (s_Configs.contains(key))
+        template <typename T>
+        static List<T> Get(String key, List<T> defaultValue = List<T>())
         {
-            if (s_Configs[key].is_array())
+            if (s_Configs.contains(key))
             {
-                List<T> list;
-                for (const auto &item : s_Configs[key])
+                if (s_Configs[key].is_array())
                 {
-                    list.push_back(item.get<T>());
+                    List<T> list;
+                    for (const auto &item : s_Configs[key])
+                    {
+                        list.push_back(item.get<T>());
+                    }
+
+                    return list;
                 }
-
-                return list;
             }
+
+            // TODO: Add warning message
+
+            return defaultValue;
         }
 
-        // TODO: Add warning message
-
-        return defaultValue;
-    }
-
-    static JSON GetSceneData(String sceneName)
-    {
-        if (s_Configs.contains("scenes"))
+        static JSON GetSceneData(String sceneName)
         {
-            if (s_Configs["scenes"].contains(sceneName))
+            if (s_Configs.contains("scenes"))
             {
-                return s_Configs["scenes"][sceneName];
+                if (s_Configs["scenes"].contains(sceneName))
+                {
+                    return s_Configs["scenes"][sceneName];
+                }
             }
+
+            return JSON();
         }
 
-        return JSON();
-    }
-
-private:
-    static JSON s_Configs;
-};
+    private:
+        static JSON s_Configs;
+    };
+}

@@ -2,16 +2,19 @@
 #include "common.hpp"
 #include <chrono>
 
-class AccTimer
+namespace ntt
 {
-public:
-    AccTimer();
-    ~AccTimer();
+    class AccTimer
+    {
+    public:
+        AccTimer();
+        ~AccTimer();
 
-    void Reset();
+        void Reset();
 
-    float GetDelta() const;
+        float GetDelta() const;
 
-private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
-};
+    private:
+        std::chrono::time_point<std::chrono::high_resolution_clock> m_start;
+    };
+}

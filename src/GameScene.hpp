@@ -5,6 +5,8 @@
 #include "Enemy.hpp"
 #include <components/components.hpp>
 
+using namespace ntt;
+
 class GameScene : public Scene
 {
 public:

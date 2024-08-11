@@ -1,22 +1,25 @@
 #include "AccTimer.hpp"
 
-AccTimer::AccTimer()
+namespace ntt
 {
-    Reset();
-}
+    AccTimer::AccTimer()
+    {
+        Reset();
+    }
 
-AccTimer::~AccTimer()
-{
-}
+    AccTimer::~AccTimer()
+    {
+    }
 
-void AccTimer::Reset()
-{
-    m_start = std::chrono::high_resolution_clock::now();
-}
+    void AccTimer::Reset()
+    {
+        m_start = std::chrono::high_resolution_clock::now();
+    }
 
-float AccTimer::GetDelta() const
-{
-    auto newPoint = std::chrono::high_resolution_clock::now();
+    float AccTimer::GetDelta() const
+    {
+        auto newPoint = std::chrono::high_resolution_clock::now();
 
-    return std::chrono::duration<float, std::chrono::seconds::period>(newPoint - m_start).count();
+        return std::chrono::duration<float, std::chrono::seconds::period>(newPoint - m_start).count();
+    }
 }

@@ -4,29 +4,32 @@
 #include <cores/core.hpp>
 #include <utils/utils.hpp>
 
-class Img;
-
-class Sprite : public Component
+namespace ntt
 {
-public:
-    Sprite(Scope<IPath> path, int numCols = 1,
-           int numRows = 1, int changePerMillis = 100);
-    virtual ~Sprite();
+    class Img;
 
-protected:
-    void LoadImpl() override;
-    void UnloadImpl() override;
+    class Sprite : public Component
+    {
+    public:
+        Sprite(Scope<IPath> path, int numCols = 1,
+               int numRows = 1, int changePerMillis = 100);
+        virtual ~Sprite();
 
-    void UpdateImpl(float delta) override;
-    void RenderImpl() override;
+    protected:
+        void LoadImpl() override;
+        void UnloadImpl() override;
 
-    void NextFrame();
+        void UpdateImpl(float delta) override;
+        void RenderImpl() override;
 
-private:
-    Scope<Img> m_Img;
-    AccTimer m_Timer;
+        void NextFrame();
 
-    int m_ChangePerMillis;
-    int m_CurrentRowIndex = 0;
-    int m_CurrentColIndex = 0;
-};
+    private:
+        Scope<Img> m_Img;
+        AccTimer m_Timer;
+
+        int m_ChangePerMillis;
+        int m_CurrentRowIndex = 0;
+        int m_CurrentColIndex = 0;
+    };
+}

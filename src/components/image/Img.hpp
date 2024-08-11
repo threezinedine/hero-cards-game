@@ -5,41 +5,44 @@
 
 #define DEFAULT_SIZE -1
 
-class Img : public Component
+namespace ntt
 {
-public:
-    Img(Scope<IPath> path, int numCols = 1,
-        int numRows = 1);
-    ~Img();
-
-    inline void SetIndexes(int colIndex, int rowIndex)
+    class Img : public Component
     {
-        m_ColIndex = colIndex;
-        m_RowIndex = rowIndex;
-    }
+    public:
+        Img(Scope<IPath> path, int numCols = 1,
+            int numRows = 1);
+        ~Img();
 
-    void SetWidthKeepRatio(float width);
+        inline void SetIndexes(int colIndex, int rowIndex)
+        {
+            m_ColIndex = colIndex;
+            m_RowIndex = rowIndex;
+        }
 
-    inline int GetNumCols() const { return m_NumCols; }
-    inline int GetNumRows() const { return m_NumRows; }
-    inline void SetNumCols(int numCols) { m_NumCols = numCols; }
-    inline void SetNumRows(int numRows) { m_NumRows = numRows; }
+        void SetWidthKeepRatio(float width);
 
-protected:
-    void LoadImpl() override;
-    void UnloadImpl() override;
+        inline int GetNumCols() const { return m_NumCols; }
+        inline int GetNumRows() const { return m_NumRows; }
+        inline void SetNumCols(int numCols) { m_NumCols = numCols; }
+        inline void SetNumRows(int numRows) { m_NumRows = numRows; }
 
-    void RenderImpl() override;
+    protected:
+        void LoadImpl() override;
+        void UnloadImpl() override;
 
-    // void ConfigLoadImpl(JSON config) override;
+        void RenderImpl() override;
 
-private:
-    int m_NumCols;
-    int m_NumRows;
-    int m_ColIndex;
-    int m_RowIndex;
-    float m_ColWidth;
-    float m_RowHeight;
-    Scope<Texture2D> m_Texture;
-    Scope<IPath> m_Path;
-};
+        // void ConfigLoadImpl(JSON config) override;
+
+    private:
+        int m_NumCols;
+        int m_NumRows;
+        int m_ColIndex;
+        int m_RowIndex;
+        float m_ColWidth;
+        float m_RowHeight;
+        Scope<Texture2D> m_Texture;
+        Scope<IPath> m_Path;
+    };
+}

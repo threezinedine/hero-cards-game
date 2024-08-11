@@ -2,25 +2,28 @@
 #include <common.hpp>
 #include <cores/core.hpp>
 
-class Component;
-
-class ComponentManagement : public IRenderable
+namespace ntt
 {
-public:
-    ComponentManagement(String sceneName);
-    ~ComponentManagement();
+    class Component;
 
-    void Load();
-    void Update(float delta) override;
-    void Render() override;
-    void Unload();
+    class ComponentManagement : public IRenderable
+    {
+    public:
+        ComponentManagement(String sceneName);
+        ~ComponentManagement();
 
-    void Configure(JSON config);
+        void Load();
+        void Update(float delta) override;
+        void Render() override;
+        void Unload();
 
-    void RegisterComponent(String componentName, Scope<Component> component);
+        void Configure(JSON config);
 
-protected:
-private:
-    String m_SceneName;
-    Map<String, Scope<Component>> m_Components;
-};
+        void RegisterComponent(String componentName, Scope<Component> component);
+
+    protected:
+    private:
+        String m_SceneName;
+        Map<String, Scope<Component>> m_Components;
+    };
+}

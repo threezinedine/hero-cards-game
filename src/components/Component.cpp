@@ -1,94 +1,97 @@
 #include "Component.hpp"
 
-Component::Component(float posX, float posY, float width, float height)
-    : m_PosX(posX), m_PosY(posY), m_Width(width), m_Height(height)
+namespace ntt
 {
-}
-
-void Component::Load()
-{
-    if (!m_Loaded)
+    Component::Component(float posX, float posY, float width, float height)
+        : m_PosX(posX), m_PosY(posY), m_Width(width), m_Height(height)
     {
-        LoadImpl();
-        m_Loaded = true;
     }
-}
 
-void Component::LoadImpl()
-{
-}
-
-void Component::Unload()
-{
-    if (m_Loaded)
+    void Component::Load()
     {
-        UnloadImpl();
-        m_Loaded = false;
-    }
-}
-
-void Component::UnloadImpl()
-{
-}
-
-void Component::Update(float delta)
-{
-    if (!m_Loaded)
-    {
-        Load();
-    }
-    UpdateImpl(delta);
-}
-
-void Component::UpdateImpl(float delta)
-{
-}
-
-void Component::Render()
-{
-    if (!m_Loaded)
-    {
-        Load();
-    }
-    RenderImpl();
-}
-
-void Component::RenderImpl()
-{
-}
-
-void Component::ConfigLoad(JSON config)
-{
-    if (config.contains("position"))
-    {
-        auto position = config["position"];
-        if (position.contains("x") && position["x"].is_number())
+        if (!m_Loaded)
         {
-            SetPosX(position["x"]);
-        }
-        if (position.contains("y") && position["y"].is_number())
-        {
-            SetPosY(position["y"]);
+            LoadImpl();
+            m_Loaded = true;
         }
     }
 
-    if (config.contains("size"))
+    void Component::LoadImpl()
     {
-        auto size = config["size"];
-        if (size.contains("width") && size["width"].is_number())
+    }
+
+    void Component::Unload()
+    {
+        if (m_Loaded)
         {
-            SetWidth(size["width"]);
-        }
-        if (size.contains("height") && size["height"].is_number())
-        {
-            SetHeight(size["height"]);
+            UnloadImpl();
+            m_Loaded = false;
         }
     }
 
-    ConfigLoadImpl(config);
-    m_ConfigLoaded = true;
-}
+    void Component::UnloadImpl()
+    {
+    }
 
-void Component::ConfigLoadImpl(JSON config)
-{
+    void Component::Update(float delta)
+    {
+        if (!m_Loaded)
+        {
+            Load();
+        }
+        UpdateImpl(delta);
+    }
+
+    void Component::UpdateImpl(float delta)
+    {
+    }
+
+    void Component::Render()
+    {
+        if (!m_Loaded)
+        {
+            Load();
+        }
+        RenderImpl();
+    }
+
+    void Component::RenderImpl()
+    {
+    }
+
+    void Component::ConfigLoad(JSON config)
+    {
+        if (config.contains("position"))
+        {
+            auto position = config["position"];
+            if (position.contains("x") && position["x"].is_number())
+            {
+                SetPosX(position["x"]);
+            }
+            if (position.contains("y") && position["y"].is_number())
+            {
+                SetPosY(position["y"]);
+            }
+        }
+
+        if (config.contains("size"))
+        {
+            auto size = config["size"];
+            if (size.contains("width") && size["width"].is_number())
+            {
+                SetWidth(size["width"]);
+            }
+            if (size.contains("height") && size["height"].is_number())
+            {
+                SetHeight(size["height"]);
+            }
+        }
+
+        ConfigLoadImpl(config);
+        m_ConfigLoaded = true;
+    }
+
+    void Component::ConfigLoadImpl(JSON config)
+    {
+    }
 }

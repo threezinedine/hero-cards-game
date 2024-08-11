@@ -1,6 +1,8 @@
 #pragma once
 #include <common.hpp>
 
+using namespace ntt;
+
 class Enemy
 {
 public:

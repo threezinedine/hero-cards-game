@@ -2,11 +2,14 @@
 
 #include <common.hpp>
 
-class IRenderable
+namespace ntt
 {
-public:
-    virtual ~IRenderable() = default;
+    class IRenderable
+    {
+    public:
+        virtual ~IRenderable() = default;
 
-    virtual void Update(float delta) = 0;
-    virtual void Render() = 0;
-};
+        virtual void Update(float delta) = 0;
+        virtual void Render() = 0;
+    };
+}

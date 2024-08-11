@@ -2,23 +2,26 @@
 #include <common.hpp>
 #include "IRenderable.hpp"
 
-class Scene;
-
-class SceneManagement : public IRenderable
+namespace ntt
 {
-public:
-    SceneManagement();
-    ~SceneManagement();
+    class Scene;
 
-    void AddScene(Scope<Scene> scene);
+    class SceneManagement : public IRenderable
+    {
+    public:
+        SceneManagement();
+        ~SceneManagement();
 
-    void Update(float delta) override;
-    void Render() override;
+        void AddScene(Scope<Scene> scene);
 
-    void ChangeScene(int index);
+        void Update(float delta) override;
+        void Render() override;
 
-protected:
-private:
-    List<Scope<Scene>> m_Scenes;
-    int m_CurrentSceneIndex;
-};
+        void ChangeScene(int index);
+
+    protected:
+    private:
+        List<Scope<Scene>> m_Scenes;
+        int m_CurrentSceneIndex;
+    };
+}

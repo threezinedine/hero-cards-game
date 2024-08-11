@@ -1,17 +1,20 @@
 #pragma once
 #include <chrono>
 
-class DeltaTimer
+namespace ntt
 {
-public:
-    DeltaTimer();
-    ~DeltaTimer();
+    class DeltaTimer
+    {
+    public:
+        DeltaTimer();
+        ~DeltaTimer();
 
-    void Start();
+        void Start();
 
-    inline const float GetDelta() const { return m_delta; }
+        inline const float GetDelta() const { return m_delta; }
 
-private:
-    std::chrono::high_resolution_clock::time_point m_start;
-    float m_delta = 0.0f;
-};
+    private:
+        std::chrono::high_resolution_clock::time_point m_start;
+        float m_delta = 0.0f;
+    };
+} // namespace ntt

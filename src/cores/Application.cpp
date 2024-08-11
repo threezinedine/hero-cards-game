@@ -2,57 +2,60 @@
 #include <inputs/MouseInput.hpp>
 #include <utils/utils.hpp>
 
-Application::Application()
-    : m_Running(true)
+namespace ntt
 {
-    MouseInput::Initialize();
-    const int screenWidth = Config::Get<int>("screenWidth", 800);
-    const int screenHeight = Config::Get<int>("screenHeight", 600);
-    const int fps = Config::Get<int>("fps", 60);
-
-    String title = Config::Get<String>("title", "Hero Cards");
-
-    InitWindow(screenWidth, screenHeight, title.c_str());
-    SetTargetFPS(fps);
-
-    m_SceneManagement = CreateRef<SceneManagement>();
-}
-
-Application::~Application()
-{
-    MouseInput::Release();
-    CloseWindow();
-}
-
-void Application::Update(float delta)
-{
-    if (WindowShouldClose())
+    Application::Application()
+        : m_Running(true)
     {
-        m_Running = false;
+        MouseInput::Initialize();
+        const int screenWidth = Config::Get<int>("screenWidth", 800);
+        const int screenHeight = Config::Get<int>("screenHeight", 600);
+        const int fps = Config::Get<int>("fps", 60);
+
+        String title = Config::Get<String>("title", "Hero Cards");
+
+        InitWindow(screenWidth, screenHeight, title.c_str());
+        SetTargetFPS(fps);
+
+        m_SceneManagement = CreateRef<SceneManagement>();
     }
-    MouseInput::Get()->Update();
 
-    m_SceneManagement->Update(delta);
-    UpdateImpl(delta);
-}
+    Application::~Application()
+    {
+        MouseInput::Release();
+        CloseWindow();
+    }
 
-void Application::UpdateImpl(float delta)
-{
-}
+    void Application::Update(float delta)
+    {
+        if (WindowShouldClose())
+        {
+            m_Running = false;
+        }
+        MouseInput::Get()->Update();
 
-void Application::Render()
-{
-    BeginDrawing();
+        m_SceneManagement->Update(delta);
+        UpdateImpl(delta);
+    }
 
-    ClearBackground(BLACK);
+    void Application::UpdateImpl(float delta)
+    {
+    }
 
-    m_SceneManagement->Render();
+    void Application::Render()
+    {
+        BeginDrawing();
 
-    RenderImpl();
+        ClearBackground(BLACK);
 
-    EndDrawing();
-}
+        m_SceneManagement->Render();
 
-void Application::RenderImpl()
-{
+        RenderImpl();
+
+        EndDrawing();
+    }
+
+    void Application::RenderImpl()
+    {
+    }
 }

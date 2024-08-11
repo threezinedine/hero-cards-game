@@ -3,6 +3,8 @@
 #include <common.hpp>
 #include <components/components.hpp>
 
+using namespace ntt;
+
 class HomeScene : public Scene
 {
 public:

@@ -3,29 +3,32 @@
 #include <utils/utils.hpp>
 #include <components/components.hpp>
 
-class Img;
-
-class Button : public Component
+namespace ntt
 {
-public:
-    Button(Scope<IPath> path, float posX = 0.0f, float posY = 0.0f,
-           float width = 100.0f);
-    ~Button();
+    class Img;
 
-    inline void BindOnClicked(const std::function<void()> &func) { m_OnClicked = func; }
+    class Button : public Component
+    {
+    public:
+        Button(Scope<IPath> path, float posX = 0.0f, float posY = 0.0f,
+               float width = 100.0f);
+        ~Button();
 
-protected:
-    void LoadImpl() override;
-    void UnloadImpl() override;
+        inline void BindOnClicked(const std::function<void()> &func) { m_OnClicked = func; }
 
-    void UpdateImpl(float delta) override;
-    void RenderImpl() override;
+    protected:
+        void LoadImpl() override;
+        void UnloadImpl() override;
 
-    bool IsHovered() const;
+        void UpdateImpl(float delta) override;
+        void RenderImpl() override;
 
-private:
-    Scope<Img> m_Img;
+        bool IsHovered() const;
 
-    int m_currentFrame = 0;
-    std::function<void()> m_OnClicked;
-};
+    private:
+        Scope<Img> m_Img;
+
+        int m_currentFrame = 0;
+        std::function<void()> m_OnClicked;
+    };
+}

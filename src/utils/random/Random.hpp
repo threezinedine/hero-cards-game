@@ -2,4 +2,7 @@
 
 #include "common.hpp"
 
-float RandomFloatUniform(float min, float max);
+namespace ntt
+{
+    float RandomFloatUniform(float min, float max);
+}
