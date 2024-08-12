@@ -12,9 +12,9 @@ namespace ntt
     {
         for (auto &scene : m_Scenes)
         {
-            if (scene->IsInitialized())
+            if (scene->IsLoaded())
             {
-                scene->Release();
+                scene->Unload();
             }
         }
     }
@@ -58,14 +58,14 @@ namespace ntt
             {
                 if (m_CurrentSceneIndex >= 0 &&
                     m_CurrentSceneIndex < m_Scenes.size() &&
-                    m_Scenes[m_CurrentSceneIndex]->IsInitialized())
+                    m_Scenes[m_CurrentSceneIndex]->IsLoaded())
                 {
-                    m_Scenes[m_CurrentSceneIndex]->Release();
+                    m_Scenes[m_CurrentSceneIndex]->Unload();
                 }
 
-                if (!m_Scenes[index]->IsInitialized())
+                if (!m_Scenes[index]->IsLoaded())
                 {
-                    m_Scenes[index]->Init();
+                    m_Scenes[index]->Load();
                 }
             }
 

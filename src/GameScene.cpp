@@ -9,11 +9,11 @@ GameScene::~GameScene()
 {
 }
 
-void GameScene::InitImpl()
+void GameScene::LoadImpl()
 {
     m_Enemies.push_back(Enemy::SpawnRandomly());
     m_SpawnTimer.Reset();
-    m_ScoreText = CreateScope<Text>("Score: 0", 20, 20, 40);
+    // m_ScoreText = CreateScope<Text>("Score: 0", 20, 20, 40);
 }
 
 void GameScene::UpdateImpl(float delta)
@@ -33,7 +33,7 @@ void GameScene::UpdateEnemies(float delta)
             m_Enemies.erase(std::remove(m_Enemies.begin(), m_Enemies.end(), enemy),
                             m_Enemies.end());
             m_Score++;
-            m_ScoreText->SetText("Score: " + std::to_string(m_Score));
+            // m_ScoreText->SetText("Score: " + std::to_string(m_Score));
             break;
         }
     }
@@ -55,9 +55,9 @@ void GameScene::RenderImpl()
         enemy->Render();
     }
 
-    m_ScoreText->Render();
+    // m_ScoreText->Render();
 }
 
-void GameScene::ReleaseImpl()
+void GameScene::UnloadImpl()
 {
 }

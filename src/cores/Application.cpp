@@ -1,38 +1,37 @@
 #include "Application.hpp"
-#include <inputs/MouseInput.hpp>
 #include <utils/utils.hpp>
+#include <renderer/renderer.hpp>
 
 namespace ntt
 {
     Application::Application()
         : m_Running(true)
     {
-        MouseInput::Initialize();
+        // MouseInput::Initialize();
         const int screenWidth = Config::Get<int>("screenWidth", 800);
         const int screenHeight = Config::Get<int>("screenHeight", 600);
         const int fps = Config::Get<int>("fps", 60);
 
         String title = Config::Get<String>("title", "Hero Cards");
 
-        InitWindow(screenWidth, screenHeight, title.c_str());
-        SetTargetFPS(fps);
+        renderer::Init(title, screenWidth, screenHeight, fps);
 
         m_SceneManagement = CreateRef<SceneManagement>();
     }
 
     Application::~Application()
     {
-        MouseInput::Release();
-        CloseWindow();
+        // MouseInput::Release();
+        renderer::Release();
     }
 
     void Application::Update(float delta)
     {
-        if (WindowShouldClose())
+        if (renderer::IsWindowClosed())
         {
             m_Running = false;
         }
-        MouseInput::Get()->Update();
+        // MouseInput::Get()->Update();
 
         m_SceneManagement->Update(delta);
         UpdateImpl(delta);
@@ -40,19 +39,15 @@ namespace ntt
 
     void Application::UpdateImpl(float delta)
     {
+        renderer::BeginUpdate();
+        renderer::EndUpdate();
     }
 
     void Application::Render()
     {
-        BeginDrawing();
-
-        ClearBackground(BLACK);
-
+        renderer::BeginDraw();
         m_SceneManagement->Render();
-
-        RenderImpl();
-
-        EndDrawing();
+        renderer::EndDraw();
     }
 
     void Application::RenderImpl()

@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <string>
 #include <unordered_map>
-#include <raylib.h>
 #include <nlohmann/json.hpp>
 #include <type_traits>
 #include <functional>
@@ -48,6 +47,12 @@ namespace ntt
 
     template <typename T, typename... Args>
     using Func = std::function<T(Args...)>;
+
+    using rid_t = unsigned int;
+    constexpr rid_t INVALID_RID = -1;
+
+    using eid_t = unsigned int;
+    constexpr eid_t INVALID_EID = -1;
 
 #include <utils/log/log.hpp>
 }

@@ -43,18 +43,9 @@ namespace ntt
             return defaultValue;
         }
 
-        static JSON GetSceneData(String sceneName)
-        {
-            if (s_Configs.contains("scenes"))
-            {
-                if (s_Configs["scenes"].contains(sceneName))
-                {
-                    return s_Configs["scenes"][sceneName];
-                }
-            }
-
-            return JSON();
-        }
+        static JSON GetSceneData(String sceneName);
+        static Map<rid_t, JSON> GetResourcesMapOfScene(String name);
+        static Map<eid_t, JSON> GetEntitiesMapOfScene(String name);
 
     private:
         static JSON s_Configs;

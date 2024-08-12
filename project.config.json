@@ -5,25 +5,32 @@
 	"screenHeight": 600,
 	"scenes": {
 		"home": {
-			"button": {
-				"position": {
-					"x": 450,
-					"y": 300
-				},
-				"size": {
-					"width": 200
+			"resources": [
+				{
+					"rid": 0,
+					"relPath": "images/button.png"
 				}
-			},
-
-			"menu": {
-				"position": {
-					"x": 100,
-					"y": 200
-				},
-				"size": {
-					"width": 250
+			],
+			"entities": [
+				{
+					"eid": 0,
+					"rid": 0,
+					"geometry": {
+						"position": {
+							"x": 200,
+							"y": 100
+						},
+						"size": {
+							"width": 30,
+							"height": 100
+						}
+					}
 				}
-			}
+			]
+		},
+		"game": {
+			"resources": [],
+			"entities": []
 		}
 	}
 }

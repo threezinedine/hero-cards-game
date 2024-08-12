@@ -1,7 +1,8 @@
 #pragma once
 #include <common.hpp>
+#include <cores/core.hpp>
 
 namespace ntt
 {
-    float CalculateDistance(const Vector2 &a, const Vector2 &b);
+    float CalculateDistance(const Point &a, const Point &b);
 }

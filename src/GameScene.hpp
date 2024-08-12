@@ -3,7 +3,7 @@
 #include <cores/core.hpp>
 #include <utils/utils.hpp>
 #include "Enemy.hpp"
-#include <components/components.hpp>
+// #include <components/components.hpp>
 
 using namespace ntt;
 
@@ -14,10 +14,10 @@ public:
     virtual ~GameScene();
 
 protected:
-    void InitImpl() override;
+    void LoadImpl() override;
     void UpdateImpl(float delta) override;
     void RenderImpl() override;
-    void ReleaseImpl() override;
+    void UnloadImpl() override;
 
     void UpdateEnemies(float delta);
     void SpawnEnemy();
@@ -26,6 +26,6 @@ protected:
 private:
     List<Scope<Enemy>> m_Enemies;
     AccTimer m_SpawnTimer;
-    Scope<Text> m_ScoreText;
+    // Scope<Text> m_ScoreText;
     int m_Score = 0;
 };

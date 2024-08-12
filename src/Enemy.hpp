@@ -18,15 +18,13 @@ public:
     inline const bool IsAlive() const { return m_IsAlive; }
 
 protected:
-    bool IsMouseOn() const;
-
 private:
-    Vector2 m_Position;
+    float m_PosX;
+    float m_PosY;
     float m_Radius;
 
     float m_SpeedX;
     float m_SpeedY;
 
     bool m_IsAlive;
-    Color m_Color = RED;
 };

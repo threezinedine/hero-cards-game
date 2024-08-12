@@ -1,39 +1,40 @@
 #include "Scene.hpp"
 #include <components/ComponentManagement.hpp>
 #include <utils/utils.hpp>
+#include <cores/resources/ResourceManager.hpp>
 
 namespace ntt
 {
     Scene::Scene(String sceneName)
         : m_SceneManagement(nullptr), m_SceneName(sceneName)
     {
-        m_ComponentManagement = CreateScope<ComponentManagement>(sceneName);
+        // m_ComponentManagement = CreateScope<ComponentManagement>(sceneName);
+        m_ResourceManager = CreateRef<ResourceManager>(sceneName);
+        m_EntityManager = CreateRef<EntityManager>(sceneName);
     }
 
     Scene::~Scene()
     {
     }
 
-    void Scene::Init()
+    void Scene::Load()
     {
-        DEBUG_POINT();
-        m_IsInitialized = true;
-        DEBUG_POINT();
-        m_ComponentManagement->Load();
+        m_Loaded = true;
+        GetResourceManager()->Load();
+        GetEntityManager()->Load();
 
-        DEBUG_POINT();
-        InitImpl();
-        DEBUG_POINT();
+        LoadImpl();
     }
 
-    void Scene::InitImpl()
+    void Scene::LoadImpl()
     {
     }
 
     void Scene::Update(float delta)
     {
+        m_EntityManager->Update(delta);
         UpdateImpl(delta);
-        m_ComponentManagement->Update(delta);
+        // m_ComponentManagement->Update(delta);
     }
 
     void Scene::UpdateImpl(float delta)
@@ -42,22 +43,23 @@ namespace ntt
 
     void Scene::Render()
     {
+        m_EntityManager->Render();
         RenderImpl();
-        m_ComponentManagement->Render();
+        // m_ComponentManagement->Render();
     }
 
     void Scene::RenderImpl()
     {
     }
 
-    void Scene::Release()
+    void Scene::Unload()
     {
-        m_ComponentManagement->Unload();
-        ReleaseImpl();
-        m_IsInitialized = false;
+        GetResourceManager()->Unload();
+        UnloadImpl();
+        m_Loaded = false;
     }
 
-    void Scene::ReleaseImpl()
+    void Scene::UnloadImpl()
     {
     }
 }

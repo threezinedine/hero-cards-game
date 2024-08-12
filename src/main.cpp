@@ -1,7 +1,6 @@
 #include <iostream>
 #include <utils/utils.hpp>
 #include "Game.hpp"
-#include <inputs/MouseInput.hpp>
 
 int main(int argc, char **argv)
 {

@@ -1,12 +1,11 @@
 #include "Game.hpp"
-#include <inputs/MouseInput.hpp>
 #include <utils/utils.hpp>
 #include <common.hpp>
 
 Game::Game()
 {
     GetSceneManagement()->AddScene(std::move(CreateScope<HomeScene>()));
-    GetSceneManagement()->AddScene(std::move(CreateScope<GameScene>()));
+    // GetSceneManagement()->AddScene(std::move(CreateScope<GameScene>()));
 }
 
 Game::~Game()

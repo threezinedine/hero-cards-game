@@ -1,7 +1,7 @@
 #pragma once
 #include <cores/core.hpp>
 #include <common.hpp>
-#include <components/components.hpp>
+// #include <components/components.hpp>
 
 using namespace ntt;
 
@@ -12,15 +12,16 @@ public:
     virtual ~HomeScene();
 
 protected:
-    void InitImpl() override;
+    void LoadImpl() override;
     void UpdateImpl(float delta) override;
     void RenderImpl() override;
-    void ReleaseImpl() override;
+    void UnloadImpl() override;
 
     void LoadData();
     void OnClickedStartButton();
 
 private:
-    Scope<Button> m_StartButton = nullptr;
-    Scope<Sprite> m_MenuButton = nullptr;
+    int m_Texture;
+    // Scope<Button> m_StartButton = nullptr;
+    // Scope<Sprite> m_MenuButton = nullptr;
 };
