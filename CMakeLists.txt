@@ -17,12 +17,6 @@ foreach(SOURCE ${SOURCES})
     endif()
 endforeach()
 
-foreach(SOURCE ${SOURCES})
-    message(${SOURCE})
-endforeach()
-
-
-
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(_DEBUG)
 endif()

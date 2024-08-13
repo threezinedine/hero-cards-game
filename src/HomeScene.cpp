@@ -23,7 +23,8 @@ HomeScene::HomeScene()
             CreateScope<ResourcePath>("images/button.png")));
 
     auto button = CreateScope<Button>(0, 0);
-    button->AddScript(CreateScope<HoverCheckScript>(23));
+    // button->AddScript(CreateScope<HoverCheckScript>(23));
+    button->AddScript(CreateScope<SpriteScript>(1));
     GetEntityManager()->AddEntity(std::move(button));
 }
 

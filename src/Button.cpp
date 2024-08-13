@@ -18,5 +18,5 @@ void Button::RenderImpl()
 {
     // PRINT("Position: (%f, %f)\n", GetGeometry().GetPoint().x, GetGeometry().GetPoint().y);
     // PRINT("Size: (%f, %f)\n", GetGeometry().GetSize().width, GetGeometry().GetSize().height);
-    renderer::DrawTexture(GetResourceID(), GetGeometry().GetPoint(), GetGeometry().GetSize());
+    // renderer::DrawTexture(GetResourceID(), GetGeometry().GetPoint(), GetGeometry().GetSize());
 }

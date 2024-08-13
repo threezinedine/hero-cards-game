@@ -31,6 +31,11 @@ namespace ntt
             DEBUG_POINT();
             entity->LoadConfigure(config[entity->GetEntityID()]);
         }
+
+        for (auto &entity : m_Entities)
+        {
+            entity->Load();
+        }
     }
 
     void EntityManager::Update(float delta)
@@ -51,5 +56,9 @@ namespace ntt
 
     void EntityManager::Unload()
     {
+        for (auto &entity : m_Entities)
+        {
+            entity->Unload();
+        }
     }
 } // namespace ntt

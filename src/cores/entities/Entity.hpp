@@ -3,11 +3,12 @@
 #include <cores/datatypes.hpp>
 #include "Geometry.hpp"
 #include <cores/IRenderable.hpp>
+#include <cores/ILoadable.hpp>
 #include <cores/scripts/scripts.hpp>
 
 namespace ntt
 {
-    class Entity : public IRenderable
+    class Entity : public IRenderable, public ILoadable
     {
     public:
         Entity(eid_t entityId, rid_t resourId);
@@ -17,16 +18,22 @@ namespace ntt
         inline eid_t GetEntityID() const { return m_EntityID; }
         inline rid_t GetResourceID() const { return m_ResourceID; }
 
+        void Load() override;
         void Update(float delta) override;
         void Render() override;
+        void Unload() override;
 
         void LoadConfigure(JSON config);
 
         void AddScript(Scope<Script> script);
 
+        inline bool IsLoaded() const override { return true; }
+
     protected:
+        virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
         virtual void RenderImpl();
+        virtual void UnloadImpl();
 
     private:
         Geometry m_Geometry;

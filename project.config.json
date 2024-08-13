@@ -17,18 +17,25 @@
 					"rid": 0,
 					"geometry": {
 						"position": {
-							"x": 200,
-							"y": 100
+							"x": 300,
+							"y": 400
 						},
 						"size": {
-							"width": 30,
-							"height": 100
+							"width": 200
 						}
 					},
 					"scripts": [
 						{
 							"sid": 23,
 							"factor": 20
+						},
+						{
+							"sid": 1,
+							"grid": {
+								"numCols": 1,
+								"numRows": 3
+							},
+							"changePerSecond": 1
 						}
 					]
 				}
