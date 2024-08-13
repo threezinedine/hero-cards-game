@@ -4,6 +4,7 @@
 #include "Application.hpp"
 #include "IRenderable.hpp"
 #include "ILifetime.hpp"
+#include "IConfigurable.hpp"
 #include "ILoadable.hpp"
 #include "datatypes.hpp"
 #include "resources/resources.hpp"

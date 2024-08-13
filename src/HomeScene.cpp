@@ -3,6 +3,7 @@
 #include "Game.hpp"
 #include <renderer/renderer.hpp>
 #include "Button.hpp"
+#include <cores/scripts/defaults/defaults.hpp>
 
 HomeScene::HomeScene()
     : Scene("home")
@@ -21,8 +22,9 @@ HomeScene::HomeScene()
             0,
             CreateScope<ResourcePath>("images/button.png")));
 
-    GetEntityManager()->AddEntity(
-        CreateScope<Button>(0, 0));
+    auto button = CreateScope<Button>(0, 0);
+    button->AddScript(CreateScope<HoverCheckScript>(23));
+    GetEntityManager()->AddEntity(std::move(button));
 }
 
 HomeScene::~HomeScene()

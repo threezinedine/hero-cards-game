@@ -54,5 +54,8 @@ namespace ntt
     using eid_t = unsigned int;
     constexpr eid_t INVALID_EID = -1;
 
+    using sid_t = unsigned int;
+    constexpr sid_t INVALID_SID = -1;
+
 #include <utils/log/log.hpp>
 }

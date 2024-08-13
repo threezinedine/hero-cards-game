@@ -24,7 +24,13 @@
 							"width": 30,
 							"height": 100
 						}
-					}
+					},
+					"scripts": [
+						{
+							"sid": 23,
+							"factor": 20
+						}
+					]
 				}
 			]
 		},

@@ -3,6 +3,7 @@
 #include <cores/datatypes.hpp>
 #include "Geometry.hpp"
 #include <cores/IRenderable.hpp>
+#include <cores/scripts/scripts.hpp>
 
 namespace ntt
 {
@@ -21,6 +22,8 @@ namespace ntt
 
         void LoadConfigure(JSON config);
 
+        void AddScript(Scope<Script> script);
+
     protected:
         virtual void UpdateImpl(float delta);
         virtual void RenderImpl();
@@ -29,5 +32,6 @@ namespace ntt
         Geometry m_Geometry;
         eid_t m_EntityID;
         rid_t m_ResourceID;
+        Map<sid_t, Scope<Script>> m_Scripts;
     };
 } // namespace ntt
