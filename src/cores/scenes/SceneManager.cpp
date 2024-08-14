@@ -1,14 +1,14 @@
-#include "SceneManagement.hpp"
+#include "SceneManager.hpp"
 #include "Scene.hpp"
 
 namespace ntt
 {
-    SceneManagement::SceneManagement()
+    SceneManager::SceneManager()
         : m_CurrentSceneIndex(-1)
     {
     }
 
-    SceneManagement::~SceneManagement()
+    SceneManager::~SceneManager()
     {
         for (auto &scene : m_Scenes)
         {
@@ -19,9 +19,9 @@ namespace ntt
         }
     }
 
-    void SceneManagement::AddScene(Scope<Scene> scene)
+    void SceneManager::AddScene(Scope<Scene> scene)
     {
-        scene->SetSceneManagement(this);
+        scene->SetSceneManager(this);
         m_Scenes.push_back(std::move(scene));
 
         if (m_Scenes.size() == 1)
@@ -30,7 +30,7 @@ namespace ntt
         }
     }
 
-    void SceneManagement::Update(float delta)
+    void SceneManager::Update(float delta)
     {
         if (m_CurrentSceneIndex != -1)
         {
@@ -38,7 +38,7 @@ namespace ntt
         }
     }
 
-    void SceneManagement::Render()
+    void SceneManager::Render()
     {
         if (m_CurrentSceneIndex != -1)
         {
@@ -46,7 +46,7 @@ namespace ntt
         }
     }
 
-    void SceneManagement::ChangeScene(int index)
+    void SceneManager::ChangeScene(int index)
     {
         if (index < 0 || index >= m_Scenes.size())
         {

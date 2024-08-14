@@ -1,16 +1,14 @@
 #pragma once
 #include <common.hpp>
-#include "interfaces/IRenderable.hpp"
-#include "interfaces/ILoadable.hpp"
-#include "Application.hpp"
-#include "resources/ResourceManager.hpp"
-#include "entities/EntityManager.hpp"
+#include <cores/interfaces/interfaces.hpp>
+#include <cores/resources/ResourceManager.hpp>
+#include <cores/entities/EntityManager.hpp>
 
 namespace ntt
 {
-    class SceneManagement;
-    class ComponentManagement;
+    class SceneManager;
     class ResourceManager;
+    class Application;
 
     class Scene : public IRenderable, public ILoadable
     {
@@ -25,7 +23,7 @@ namespace ntt
 
         inline bool IsLoaded() const override { return m_Loaded; }
 
-        inline void SetSceneManagement(SceneManagement *sceneManagement) { m_SceneManagement = sceneManagement; }
+        inline void SetSceneManager(SceneManager *sceneManager) { m_SceneManager = sceneManager; }
         inline String GetSceneName() const { return m_SceneName; }
 
     protected:
@@ -35,12 +33,12 @@ namespace ntt
         virtual void UnloadImpl();
 
         // Scope<ComponentManagement> m_ComponentManagement;
-        inline SceneManagement *GetSceneManagement() const { return m_SceneManagement; }
+        inline SceneManager *GetSceneManager() const { return m_SceneManager; }
         inline Ref<ResourceManager> GetResourceManager() const { return m_ResourceManager; }
         inline Ref<EntityManager> GetEntityManager() const { return m_EntityManager; }
 
     private:
-        SceneManagement *m_SceneManagement;
+        SceneManager *m_SceneManager;
         Ref<ResourceManager> m_ResourceManager;
         Ref<EntityManager> m_EntityManager;
         bool m_Loaded = false;

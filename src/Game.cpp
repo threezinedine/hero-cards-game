@@ -4,8 +4,7 @@
 
 Game::Game()
 {
-    GetSceneManagement()->AddScene(std::move(CreateScope<HomeScene>()));
-    // GetSceneManagement()->AddScene(std::move(CreateScope<GameScene>()));
+    GetSceneManager()->AddScene(std::move(CreateScope<HomeScene>()));
 }
 
 Game::~Game()

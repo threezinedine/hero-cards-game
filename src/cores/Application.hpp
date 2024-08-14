@@ -2,7 +2,7 @@
 
 #include <common.hpp>
 #include "interfaces/IRenderable.hpp"
-#include "SceneManagement.hpp"
+#include "scenes/SceneManager.hpp"
 
 namespace ntt
 {
@@ -21,10 +21,10 @@ namespace ntt
         virtual void UpdateImpl(float delta);
         virtual void RenderImpl();
 
-        inline Ref<SceneManagement> GetSceneManagement() const { return m_SceneManagement; }
+        inline Ref<SceneManager> GetSceneManager() const { return m_SceneManager; }
 
     private:
         bool m_Running;
-        Ref<SceneManagement> m_SceneManagement;
+        Ref<SceneManager> m_SceneManager;
     };
 }

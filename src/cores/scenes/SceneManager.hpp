@@ -1,16 +1,16 @@
 #pragma once
 #include <common.hpp>
-#include "interfaces/IRenderable.hpp"
+#include <cores/interfaces/IRenderable.hpp>
 
 namespace ntt
 {
     class Scene;
 
-    class SceneManagement : public IRenderable
+    class SceneManager : public IRenderable
     {
     public:
-        SceneManagement();
-        ~SceneManagement();
+        SceneManager();
+        ~SceneManager();
 
         void AddScene(Scope<Scene> scene);
 

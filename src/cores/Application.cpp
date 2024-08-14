@@ -7,7 +7,6 @@ namespace ntt
     Application::Application()
         : m_Running(true)
     {
-        // MouseInput::Initialize();
         const int screenWidth = Config::Get<int>("screenWidth", 800);
         const int screenHeight = Config::Get<int>("screenHeight", 600);
         const int fps = Config::Get<int>("fps", 60);
@@ -16,12 +15,11 @@ namespace ntt
 
         renderer::Init(title, screenWidth, screenHeight, fps);
 
-        m_SceneManagement = CreateRef<SceneManagement>();
+        m_SceneManager = CreateRef<SceneManager>();
     }
 
     Application::~Application()
     {
-        // MouseInput::Release();
         renderer::Release();
     }
 
@@ -31,9 +29,8 @@ namespace ntt
         {
             m_Running = false;
         }
-        // MouseInput::Get()->Update();
 
-        m_SceneManagement->Update(delta);
+        m_SceneManager->Update(delta);
         UpdateImpl(delta);
     }
 
@@ -46,7 +43,7 @@ namespace ntt
     void Application::Render()
     {
         renderer::BeginDraw();
-        m_SceneManagement->Render();
+        m_SceneManager->Render();
         renderer::EndDraw();
     }
 
