@@ -1,5 +1,4 @@
 #include "Scene.hpp"
-#include <components/ComponentManagement.hpp>
 #include <utils/utils.hpp>
 #include <cores/resources/ResourceManager.hpp>
 
