@@ -15,7 +15,7 @@ namespace ntt
 
     void ResourceManager::AddResource(Scope<Resource> resource)
     {
-        m_Resources.push_back(std::move(resource));
+        m_Resources[resource->GetResourceID()] = std::move(resource);
     }
 
     void ResourceManager::Load()
@@ -23,18 +23,29 @@ namespace ntt
         auto config = Config::GetResourcesMapOfScene(m_SceneName);
         for (auto &resource : m_Resources)
         {
-            if (resource->IsLoaded())
+            if (resource.second->IsLoaded())
             {
                 continue;
             }
 
-            auto it = config.find(resource->GetResourceID());
-            if (it != config.end())
-            {
-                resource->LoadConfigure(it->second);
-            }
+            resource.second->Load();
+        }
+    }
 
-            resource->Load();
+    void ResourceManager::LoadConfigure(JSON config)
+    {
+        if (config.contains("resources") && config["resources"].is_array())
+        {
+            for (const auto &rscCfg : config["resources"])
+            {
+                if (rscCfg.contains("rid") && rscCfg["rid"].is_number())
+                {
+                    if (m_Resources.find(rscCfg["rid"]) != m_Resources.end())
+                    {
+                        m_Resources[rscCfg["rid"]]->LoadConfigure(rscCfg);
+                    }
+                }
+            }
         }
     }
 
@@ -42,11 +53,11 @@ namespace ntt
     {
         for (auto &resource : m_Resources)
         {
-            if (!resource->IsLoaded())
+            if (!resource.second->IsLoaded())
             {
                 continue;
             }
-            resource->Unload();
+            resource.second->Unload();
         }
     }
 } // namespace ntt

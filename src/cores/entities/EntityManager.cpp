@@ -14,25 +14,31 @@ namespace ntt
 
     void EntityManager::AddEntity(Scope<Entity> entity)
     {
-        m_Entities.push_back(std::move(entity));
+        m_Entities[entity->GetEntityID()] = std::move(entity);
     }
 
     void EntityManager::Load()
     {
-        auto config = Config::GetEntitiesMapOfScene(m_SceneName);
-
         for (auto &entity : m_Entities)
         {
-            if (config.find(entity->GetEntityID()) == config.end())
-            {
-                continue;
-            }
-            entity->LoadConfigure(config[entity->GetEntityID()]);
+            entity.second->Load();
         }
+    }
 
-        for (auto &entity : m_Entities)
+    void EntityManager::LoadConfigure(JSON config)
+    {
+        if (config.contains("entities") && config["entities"].is_array())
         {
-            entity->Load();
+            for (const auto &enCfg : config["entities"])
+            {
+                if (enCfg.contains("eid") && enCfg["eid"].is_number())
+                {
+                    if (m_Entities.find(enCfg["eid"]) != m_Entities.end())
+                    {
+                        m_Entities[enCfg["eid"]]->LoadConfigure(enCfg);
+                    }
+                }
+            }
         }
     }
 
@@ -40,7 +46,7 @@ namespace ntt
     {
         for (auto &entity : m_Entities)
         {
-            entity->Update(delta);
+            entity.second->Update(delta);
         }
     }
 
@@ -48,7 +54,7 @@ namespace ntt
     {
         for (auto &entity : m_Entities)
         {
-            entity->Render();
+            entity.second->Render();
         }
     }
 
@@ -56,7 +62,7 @@ namespace ntt
     {
         for (auto &entity : m_Entities)
         {
-            entity->Unload();
+            entity.second->Unload();
         }
     }
 } // namespace ntt

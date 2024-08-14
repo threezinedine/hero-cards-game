@@ -9,6 +9,10 @@
 				{
 					"rid": 0,
 					"relPath": "images/button.png"
+				},
+				{
+					"rid": 1,
+					"relPath": "images/new-btn.png"
 				}
 			],
 			"entities": [

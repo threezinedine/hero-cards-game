@@ -9,6 +9,7 @@ Card game online
 -   [x] Change SceneManagment -> SceneManager
 -   [ ] Add IConfigurable for needed classes
 -   [ ] Handle the proble of IsLoadded method
+-   [ ] Convert project to library format
 -   [ ] Load configure file using List rather than using Map
 -   [ ] Separate Configure file -> mutile files
 -   [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)

@@ -10,12 +10,11 @@ namespace ntt
     class Entity : public IRenderable, public ILoadable, public IConfigurable
     {
     public:
-        Entity(eid_t entityId, rid_t resourId);
+        Entity(eid_t entityId);
         virtual ~Entity();
 
         inline Geometry &GetGeometry() { return m_Geometry; }
         inline eid_t GetEntityID() const { return m_EntityID; }
-        inline rid_t GetResourceID() const { return m_ResourceID; }
 
         void Load() override;
         void Update(float delta) override;
@@ -38,7 +37,6 @@ namespace ntt
     private:
         Geometry m_Geometry;
         eid_t m_EntityID;
-        rid_t m_ResourceID;
         Map<sid_t, Scope<Script>> m_Scripts;
     };
 } // namespace ntt

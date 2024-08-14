@@ -3,10 +3,11 @@
 #include "Entity.hpp"
 #include <cores/interfaces/ILoadable.hpp>
 #include <cores/interfaces/IRenderable.hpp>
+#include <cores/interfaces/IConfigurable.hpp>
 
 namespace ntt
 {
-    class EntityManager : public IRenderable, public ILoadable
+    class EntityManager : public IRenderable, public ILoadable, public IConfigurable
     {
     public:
         EntityManager(String sceneName);
@@ -21,9 +22,11 @@ namespace ntt
 
         void AddEntity(Scope<Entity> entity);
 
+        void LoadConfigure(JSON config) override;
+
     protected:
     private:
         String m_SceneName;
-        List<Scope<Entity>> m_Entities;
+        Map<eid_t, Scope<Entity>> m_Entities;
     };
 } // namespace ntt

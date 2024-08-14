@@ -2,11 +2,12 @@
 #include <cores/commons/common.hpp>
 #include <cores/commons/datatypes.hpp>
 #include <cores/interfaces/ILoadable.hpp>
+#include <cores/interfaces/IConfigurable.hpp>
 #include "Resource.hpp"
 
 namespace ntt
 {
-    class ResourceManager : public ILoadable
+    class ResourceManager : public ILoadable, public IConfigurable
     {
     public:
         ResourceManager(const String &sceneName);
@@ -18,8 +19,10 @@ namespace ntt
 
         bool IsLoaded() const override { return true; }
 
+        void LoadConfigure(JSON config) override;
+
     private:
-        List<Scope<Resource>> m_Resources;
+        Map<rid_t, Scope<Resource>> m_Resources;
         String m_SceneName;
     };
 } // namespace ntt

@@ -5,7 +5,10 @@
 #define BIND(x) std::bind(&Button::x, this)
 
 Button::Button(eid_t entityId, rid_t resourceId)
-    : Entity(entityId, resourceId)
+    : Entity(entityId), m_ResourceId(m_ResourceId),
+      m_NumCols(1), m_NumRows(3),
+      m_CurrentColIndex(0), m_CurrentRowIndex(0),
+      m_ChangePerSecond(1)
 {
     auto fsm = CreateScope<FSMScript>(2);
 

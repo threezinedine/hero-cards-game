@@ -18,10 +18,23 @@ namespace ntt
     void Scene::Load()
     {
         m_Loaded = true;
+        LoadConfigure(Config::GetSceneData(m_SceneName));
+
         GetResourceManager()->Load();
         GetEntityManager()->Load();
 
         LoadImpl();
+    }
+
+    void Scene::LoadConfigure(JSON config)
+    {
+        LoadConfigureImpl(config);
+        GetResourceManager()->LoadConfigure(config);
+        GetEntityManager()->LoadConfigure(config);
+    }
+
+    void Scene::LoadConfigureImpl(JSON config)
+    {
     }
 
     void Scene::LoadImpl()
