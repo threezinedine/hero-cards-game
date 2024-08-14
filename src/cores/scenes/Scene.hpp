@@ -1,10 +1,10 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/interfaces/interfaces.hpp>
 #include <cores/resources/ResourceManager.hpp>
 #include <cores/entities/EntityManager.hpp>
 #include <cores/interfaces/Loadable.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
+#include <cores/interfaces/IRenderable.hpp>
 
 namespace ntt
 {

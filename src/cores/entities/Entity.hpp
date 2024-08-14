@@ -2,8 +2,10 @@
 #include <cores/commons/common.hpp>
 #include <cores/commons/datatypes.hpp>
 #include "Geometry.hpp"
-#include <cores/interfaces/interfaces.hpp>
 #include <cores/scripts/scripts.hpp>
+#include <cores/interfaces/IConfigurable.hpp>
+#include <cores/interfaces/Loadable.hpp>
+#include <cores/interfaces/IRenderable.hpp>
 
 namespace ntt
 {
