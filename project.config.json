@@ -15,6 +15,11 @@
 				{
 					"eid": 0,
 					"rid": 0,
+					"grid": {
+						"numCols": 1,
+						"numRows": 3
+					},
+					"changePerSecond": 1,
 					"geometry": {
 						"position": {
 							"x": 300,
@@ -28,14 +33,6 @@
 						{
 							"sid": 23,
 							"factor": 20
-						},
-						{
-							"sid": 1,
-							"grid": {
-								"numCols": 1,
-								"numRows": 3
-							},
-							"changePerSecond": 1
 						}
 					]
 				}

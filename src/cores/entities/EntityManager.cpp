@@ -23,12 +23,10 @@ namespace ntt
 
         for (auto &entity : m_Entities)
         {
-            DEBUG_POINT();
             if (config.find(entity->GetEntityID()) == config.end())
             {
                 continue;
             }
-            DEBUG_POINT();
             entity->LoadConfigure(config[entity->GetEntityID()]);
         }
 

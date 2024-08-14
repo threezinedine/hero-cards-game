@@ -11,8 +11,8 @@ namespace ntt
         Geometry(const Point &point, const Size &size);
         virtual ~Geometry();
 
-        inline const Point &GetPoint() const { return point; }
-        inline const Size &GetSize() const { return size; }
+        inline Point &GetPoint() { return point; }
+        inline Size &GetSize() { return size; }
 
         void LoadConfigure(JSON config);
 

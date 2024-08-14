@@ -51,30 +51,28 @@ namespace ntt
             m_Geometry.LoadConfigure(config["geometry"]);
         }
 
-        DEBUG_POINT();
         if (config.contains("scripts") && config["scripts"].is_array())
         {
-            DEBUG_POINT();
             auto configScripts = config["scripts"];
 
-            DEBUG_POINT();
             for (const auto &configScript : configScripts)
             {
-                DEBUG_POINT();
                 if (configScript.contains("sid") && configScript["sid"].is_number())
                 {
-                    DEBUG_POINT();
                     auto sid = configScript["sid"];
                     if (m_Scripts.find(sid) != m_Scripts.end())
                     {
-                        DEBUG_POINT();
-                        std::cout << "config: " << configScript << std::endl;
                         m_Scripts[sid]->LoadConfigure(configScript);
                     }
                 }
             }
         }
-        DEBUG_POINT();
+
+        LoadConfigureImpl(config);
+    }
+
+    void Entity::LoadConfigureImpl(JSON config)
+    {
     }
 
     void Entity::AddScript(Scope<Script> script)

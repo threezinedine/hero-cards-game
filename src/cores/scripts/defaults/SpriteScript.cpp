@@ -19,48 +19,38 @@ namespace ntt
 
     void SpriteScript::LoadConfigureImpl(JSON config)
     {
-        DEBUG_POINT();
         if (config.contains("rid") && config["rid"].is_number_unsigned())
         {
-            DEBUG_POINT();
             m_ResourceId = config["rid"];
         }
 
         if (config.contains("grid") && config["grid"].is_object())
         {
-            DEBUG_POINT();
             auto gridCfg = config["grid"];
             if (gridCfg.contains("numCols") && gridCfg["numCols"].is_number_unsigned())
             {
-                DEBUG_POINT();
                 m_NumCols = gridCfg["numCols"];
             }
 
             if (gridCfg.contains("numRows") && gridCfg["numRows"].is_number_unsigned())
             {
-                DEBUG_POINT();
                 m_NumRows = gridCfg["numRows"];
             }
         }
 
-        DEBUG_POINT();
         if (config.contains("changePerSecond") && config["changePerSecond"].is_number())
         {
-            DEBUG_POINT();
             m_ChangePerSecond = config["changePerSecond"];
         }
     }
 
     void SpriteScript::LoadImpl()
     {
-        DEBUG_POINT();
         auto textureSize = renderer::GetTextureSize(m_ResourceId);
 
-        DEBUG_POINT();
         m_ResourceSize.width = textureSize.width;
         m_ResourceSize.height = textureSize.height;
 
-        DEBUG_POINT();
         m_FrameSize.width = m_ResourceSize.width / m_NumCols;
         m_FrameSize.height = m_ResourceSize.height / m_NumRows;
 

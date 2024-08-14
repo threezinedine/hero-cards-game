@@ -4,17 +4,18 @@
 #include "Geometry.hpp"
 #include <cores/IRenderable.hpp>
 #include <cores/ILoadable.hpp>
+#include <cores/IConfigurable.hpp>
 #include <cores/scripts/scripts.hpp>
 
 namespace ntt
 {
-    class Entity : public IRenderable, public ILoadable
+    class Entity : public IRenderable, public ILoadable, public IConfigurable
     {
     public:
         Entity(eid_t entityId, rid_t resourId);
         virtual ~Entity();
 
-        inline const Geometry &GetGeometry() const { return m_Geometry; }
+        inline Geometry &GetGeometry() { return m_Geometry; }
         inline eid_t GetEntityID() const { return m_EntityID; }
         inline rid_t GetResourceID() const { return m_ResourceID; }
 
@@ -23,7 +24,7 @@ namespace ntt
         void Render() override;
         void Unload() override;
 
-        void LoadConfigure(JSON config);
+        void LoadConfigure(JSON config) override;
 
         void AddScript(Scope<Script> script);
 
@@ -34,6 +35,7 @@ namespace ntt
         virtual void UpdateImpl(float delta);
         virtual void RenderImpl();
         virtual void UnloadImpl();
+        virtual void LoadConfigureImpl(JSON config);
 
     private:
         Geometry m_Geometry;

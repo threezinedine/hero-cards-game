@@ -9,4 +9,13 @@ namespace ntt::renderer
 
         return Point{pos.x, pos.y};
     }
+
+    bool IsMouseButtonPressed(MouseButton button)
+    {
+        switch (button)
+        {
+        default:
+            return ::IsMouseButtonDown(MOUSE_LEFT_BUTTON);
+        }
+    }
 } // namespace ntt::renderer
