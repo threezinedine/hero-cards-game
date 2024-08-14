@@ -29,7 +29,12 @@ namespace ntt
         virtual void LoadImpl();
         virtual void UnloadImpl();
 
-        inline rid_t &GetResourceIDRef() { return m_ResourceID; }
+        virtual void LoadConfigureImpl(JSON config);
+
+        inline rid_t &GetResourceIDRef()
+        {
+            return m_ResourceID;
+        }
 
     private:
         bool m_Loaded = false;

@@ -8,15 +8,15 @@
 HomeScene::HomeScene()
     : Scene("home")
 {
-    GetResourceManager()->AddResource(
-        CreateScope<ImageResource>(
-            0,
-            CreateScope<ResourcePath>("images/button.png")));
+    // GetResourceManager()->AddResource(
+    //     CreateScope<ImageResource>(
+    //         0,
+    //         CreateScope<ResourcePath>("images/button.png")));
 
-    GetResourceManager()->AddResource(
-        CreateScope<ImageResource>(
-            1,
-            CreateScope<ResourcePath>("images/button.png")));
+    // GetResourceManager()->AddResource(
+    //     CreateScope<ImageResource>(
+    //         1,
+    //         CreateScope<ResourcePath>("images/button.png")));
 
     auto button = CreateScope<Button>(0, 0);
     GetEntityManager()->AddEntity(std::move(button));

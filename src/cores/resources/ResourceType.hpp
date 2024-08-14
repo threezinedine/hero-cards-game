@@ -4,6 +4,6 @@ namespace ntt
 {
     enum ResourceType
     {
-        IMAGE,
+        IMAGE = 0,
     };
 } // namespace ntt

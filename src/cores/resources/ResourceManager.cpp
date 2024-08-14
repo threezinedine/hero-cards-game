@@ -38,11 +38,28 @@ namespace ntt
         {
             for (const auto &rscCfg : config["resources"])
             {
-                if (rscCfg.contains("rid") && rscCfg["rid"].is_number())
+                if (!rscCfg.is_object())
                 {
-                    if (m_Resources.find(rscCfg["rid"]) != m_Resources.end())
+                    continue;
+                }
+
+                if (!rscCfg.contains("rid") || !rscCfg["rid"].is_number_unsigned())
+                {
+                    continue;
+                }
+
+                auto rid = rscCfg["rid"].get<rid_t>();
+
+                if (rscCfg.contains("type") && rscCfg["type"].is_number_unsigned())
+                {
+                    auto type = rscCfg["type"].get<ResourceType>();
+                    switch (type)
                     {
-                        m_Resources[rscCfg["rid"]]->LoadConfigure(rscCfg);
+                    default:
+                        m_Resources[rid] = std::move(CreateScope<ImageResource>(
+                            rid,
+                            CreateScope<ResourcePath>("images/button.png")));
+                        m_Resources[rid]->LoadConfigure(rscCfg);
                     }
                 }
             }
