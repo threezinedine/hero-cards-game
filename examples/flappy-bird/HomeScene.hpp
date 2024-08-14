@@ -1,7 +1,5 @@
 #pragma once
-#include <cores/core.hpp>
-#include <cores/commons/common.hpp>
-// #include <components/components.hpp>
+#include <NTTEngine.hpp>
 
 using namespace ntt;
 
@@ -22,6 +20,4 @@ protected:
 
 private:
     int m_Texture;
-    // Scope<Button> m_StartButton = nullptr;
-    // Scope<Sprite> m_MenuButton = nullptr;
 };

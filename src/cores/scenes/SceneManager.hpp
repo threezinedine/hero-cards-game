@@ -12,16 +12,15 @@ namespace ntt
         SceneManager();
         ~SceneManager();
 
-        void AddScene(Scope<Scene> scene);
+        void AddScene(Ref<Scene> scene);
 
         void Update(float delta) override;
         void Render() override;
 
-        void ChangeScene(int index);
+        void ChangeScene(String sceneName);
 
-    protected:
     private:
-        List<Scope<Scene>> m_Scenes;
-        int m_CurrentSceneIndex;
+        Map<String, Ref<Scene>> m_Scenes;
+        Ref<Scene> m_CurrentScene;
     };
 }

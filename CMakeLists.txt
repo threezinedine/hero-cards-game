@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(HeroCards)
+project(NTTEngine)
 
 add_subdirectory(vendors)
 
@@ -21,8 +21,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(_DEBUG)
 endif()
 
-add_executable(
+add_compile_definitions(_LIB)
+
+add_library(
     ${PROJECT_NAME}
+    STATIC
     ${SOURCES}
 )
 
@@ -37,4 +40,7 @@ target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
     src
+    include
 )
+
+add_subdirectory(examples)

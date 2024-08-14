@@ -20,14 +20,12 @@ namespace ntt
 
     void ResourceManager::Load()
     {
-        auto config = Config::GetResourcesMapOfScene(m_SceneName);
         for (auto &resource : m_Resources)
         {
             if (resource.second->IsLoaded())
             {
                 continue;
             }
-
             resource.second->Load();
         }
     }

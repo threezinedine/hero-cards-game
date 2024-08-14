@@ -13,13 +13,11 @@ namespace ntt
         virtual ~ImageResource();
 
         inline String ResourceName() const override { return "ImageResource"; }
-        inline int GetTextureId() const { return m_TextureId; }
 
     protected:
         void LoadImpl() override;
         void UnloadImpl() override;
 
     private:
-        int m_TextureId;
     };
 }

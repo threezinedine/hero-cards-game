@@ -4,7 +4,8 @@
 
 Game::Game()
 {
-    GetSceneManager()->AddScene(std::move(CreateScope<HomeScene>()));
+    GetSceneManager()->AddScene(CreateRef<HomeScene>());
+    GetSceneManager()->AddScene(CreateRef<GameScene>());
 }
 
 Game::~Game()
@@ -17,4 +18,9 @@ void Game::UpdateImpl(float delta)
 
 void Game::RenderImpl()
 {
+}
+
+Ref<Application> CreateApplication()
+{
+    return CreateRef<Game>();
 }

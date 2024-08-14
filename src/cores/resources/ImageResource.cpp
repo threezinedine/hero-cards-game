@@ -19,6 +19,6 @@ namespace ntt
 
     void ImageResource::UnloadImpl()
     {
-        renderer::UnloadTexture(m_TextureId);
+        renderer::UnloadTexture(GetResourceID());
     }
 } // namespace ntt

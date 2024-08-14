@@ -19,7 +19,7 @@ namespace ntt::renderer
         {
             auto it = s_Textures.find(textureId);
 
-            return it == s_Textures.end() || !it->second.active;
+            return it == s_Textures.end();
         }
     }
 
@@ -48,6 +48,8 @@ namespace ntt::renderer
         {
             return;
         }
+
+        PRINT("Unloading texture: %d", id);
 
         UnloadTexture(*(s_Textures[id].texture));
         s_Textures[id].active = false;

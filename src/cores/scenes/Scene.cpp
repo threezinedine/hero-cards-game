@@ -17,7 +17,7 @@ namespace ntt
 
     void Scene::Load()
     {
-        m_Loaded = true;
+        SetIsLoaded(true);
         LoadConfigure(Config::GetSceneData(m_SceneName));
 
         GetResourceManager()->Load();
@@ -64,8 +64,9 @@ namespace ntt
     void Scene::Unload()
     {
         GetResourceManager()->Unload();
+        GetEntityManager()->Unload();
         UnloadImpl();
-        m_Loaded = false;
+        SetIsLoaded(false);
     }
 
     void Scene::UnloadImpl()

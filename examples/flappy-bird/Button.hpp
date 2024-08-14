@@ -10,7 +10,12 @@ public:
     Button(eid_t entityId, rid_t resourceId);
     virtual ~Button();
 
-    inline void SetOnClicked(std::function<void()> onClicked) { m_OnClicked = onClicked; }
+    inline void SetOnClicked(const std::function<void()> &onClicked)
+    {
+        DEBUG_POINT();
+        m_OnClicked = onClicked;
+        DEBUG_POINT();
+    }
 
 protected:
     void LoadConfigureImpl(JSON config) override;

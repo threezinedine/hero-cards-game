@@ -4,7 +4,7 @@
 namespace ntt
 {
     SceneManager::SceneManager()
-        : m_CurrentSceneIndex(-1)
+        : m_CurrentScene(nullptr)
     {
     }
 
@@ -12,64 +12,59 @@ namespace ntt
     {
         for (auto &scene : m_Scenes)
         {
-            if (scene->IsLoaded())
+            if (scene.second->IsLoaded())
             {
-                scene->Unload();
+                scene.second->Unload();
             }
         }
     }
 
-    void SceneManager::AddScene(Scope<Scene> scene)
+    void SceneManager::AddScene(Ref<Scene> scene)
     {
         scene->SetSceneManager(this);
-        m_Scenes.push_back(std::move(scene));
+        m_Scenes[scene->GetSceneName()] = scene;
 
         if (m_Scenes.size() == 1)
         {
-            ChangeScene(0);
+            ChangeScene(scene->GetSceneName());
         }
     }
 
     void SceneManager::Update(float delta)
     {
-        if (m_CurrentSceneIndex != -1)
-        {
-            m_Scenes[m_CurrentSceneIndex]->Update(delta);
-        }
+        m_CurrentScene->Update(delta);
     }
 
     void SceneManager::Render()
     {
-        if (m_CurrentSceneIndex != -1)
-        {
-            m_Scenes[m_CurrentSceneIndex]->Render();
-        }
+        m_CurrentScene->Render();
     }
 
-    void SceneManager::ChangeScene(int index)
+    void SceneManager::ChangeScene(String sceneName)
     {
-        if (index < 0 || index >= m_Scenes.size())
+        if (m_Scenes.find(sceneName) != m_Scenes.end())
         {
-            return;
-        }
-        else
-        {
-            if (m_CurrentSceneIndex != index)
+            if (m_CurrentScene == nullptr)
             {
-                if (m_CurrentSceneIndex >= 0 &&
-                    m_CurrentSceneIndex < m_Scenes.size() &&
-                    m_Scenes[m_CurrentSceneIndex]->IsLoaded())
+                m_CurrentScene = m_Scenes[sceneName];
+                if (!m_CurrentScene->IsLoaded())
                 {
-                    m_Scenes[m_CurrentSceneIndex]->Unload();
-                }
-
-                if (!m_Scenes[index]->IsLoaded())
-                {
-                    m_Scenes[index]->Load();
+                    m_CurrentScene->Load();
                 }
             }
+            else
+            {
+                if (m_CurrentScene->IsLoaded())
+                {
+                    m_CurrentScene->Unload();
+                }
 
-            m_CurrentSceneIndex = index;
+                m_CurrentScene = m_Scenes[sceneName];
+                if (!m_CurrentScene->IsLoaded())
+                {
+                    m_CurrentScene->Load();
+                }
+            }
         }
     }
 }
