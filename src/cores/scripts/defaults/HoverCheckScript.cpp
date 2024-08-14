@@ -17,10 +17,8 @@ namespace ntt
 
     void HoverCheckScript::LoadConfigureImpl(JSON config)
     {
-        DEBUG_POINT();
         if (config.contains("factor") && config["factor"].is_number())
         {
-            DEBUG_POINT();
             m_Factor = config["factor"];
         }
     }

@@ -7,7 +7,7 @@ namespace ntt
     Scene::Scene(String sceneName)
         : m_SceneManager(nullptr), m_SceneName(sceneName)
     {
-        m_ResourceManager = CreateRef<ResourceManager>(sceneName);
+        m_ResourceManager = CreateRef<ResourceManager>();
         m_EntityManager = CreateRef<EntityManager>(sceneName);
     }
 

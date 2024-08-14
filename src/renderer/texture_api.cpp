@@ -49,8 +49,6 @@ namespace ntt::renderer
             return;
         }
 
-        PRINT("Unloading texture: %d", id);
-
         UnloadTexture(*(s_Textures[id].texture));
         s_Textures[id].active = false;
     }

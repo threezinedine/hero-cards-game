@@ -1,5 +1,6 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
+#include <utils/configuration/configutation.hpp>
 
 namespace ntt
 {

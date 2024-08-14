@@ -44,8 +44,7 @@ namespace ntt
         }
 
         static JSON GetSceneData(String sceneName);
-        static Map<rid_t, JSON> GetResourcesMapOfScene(String name);
-        static Map<eid_t, JSON> GetEntitiesMapOfScene(String name);
+        static JSON GetGlobalResourceConfig();
 
     private:
         static JSON s_Configs;

@@ -10,7 +10,7 @@ namespace ntt
     class ResourceManager : public Loadable, public IConfigurable
     {
     public:
-        ResourceManager(const String &sceneName);
+        ResourceManager();
         ~ResourceManager();
 
         void AddResource(Scope<Resource> resource);
@@ -21,6 +21,5 @@ namespace ntt
 
     private:
         Map<rid_t, Scope<Resource>> m_Resources;
-        String m_SceneName;
     };
 } // namespace ntt

@@ -10,7 +10,8 @@ Card game online
 -   [x] Add IConfigurable for needed classes
 -   [x] Handle the proble of IsLoadded method
 -   [x] Change the #include to only needed
--   [ ] Convert project to library format
+-   [x] Convert project to library format
+-   [ ] Add global resources
 -   [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [x] Load configure file using List rather than using Map
 -   [ ] Separate Configure file -> mutile files

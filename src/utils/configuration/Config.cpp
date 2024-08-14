@@ -48,43 +48,13 @@ namespace ntt
         return JSON::object();
     }
 
-    Map<rid_t, JSON> Config::GetResourcesMapOfScene(String name)
+    JSON Config::GetGlobalResourceConfig()
     {
-        auto sceneData = GetSceneData(name);
-
-        Map<rid_t, JSON> resourcesMap;
-
-        if (sceneData.contains("resources") && sceneData["resources"].is_array())
+        if (s_Configs.contains("resources") && s_Configs["resources"].is_array())
         {
-            for (const auto &resource : sceneData["resources"])
-            {
-                if (resource.contains("rid") && resource["rid"].is_number())
-                {
-                    resourcesMap[resource["rid"].get<rid_t>()] = resource;
-                }
-            }
+            return s_Configs;
         }
 
-        return resourcesMap;
-    }
-
-    Map<eid_t, JSON> Config::GetEntitiesMapOfScene(String name)
-    {
-        auto sceneData = GetSceneData(name);
-
-        Map<eid_t, JSON> entitiesMap;
-
-        if (sceneData.contains("entities") && sceneData["entities"].is_array())
-        {
-            for (const auto &entity : sceneData["entities"])
-            {
-                if (entity.contains("eid") && entity["eid"].is_number())
-                {
-                    entitiesMap[entity["eid"].get<eid_t>()] = entity;
-                }
-            }
-        }
-
-        return entitiesMap;
+        return JSON::object();
     }
 }

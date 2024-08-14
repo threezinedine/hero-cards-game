@@ -12,9 +12,7 @@ public:
 
     inline void SetOnClicked(const std::function<void()> &onClicked)
     {
-        DEBUG_POINT();
         m_OnClicked = onClicked;
-        DEBUG_POINT();
     }
 
 protected:

@@ -4,8 +4,7 @@
 
 namespace ntt
 {
-    ResourceManager::ResourceManager(const String &name)
-        : m_SceneName(name)
+    ResourceManager::ResourceManager()
     {
     }
 

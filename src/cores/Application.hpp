@@ -3,6 +3,7 @@
 #include <cores/commons/common.hpp>
 #include "interfaces/IRenderable.hpp"
 #include "scenes/SceneManager.hpp"
+#include "resources/ResourceManager.hpp"
 
 namespace ntt
 {
@@ -26,5 +27,6 @@ namespace ntt
     private:
         bool m_Running;
         Ref<SceneManager> m_SceneManager;
+        Ref<ResourceManager> m_GlobalResourceManager;
     };
 }

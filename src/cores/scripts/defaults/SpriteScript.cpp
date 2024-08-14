@@ -10,7 +10,6 @@ namespace ntt
           m_CurrentColIndex(0), m_CurrentRowIndex(0),
           m_ChangePerSecond(0.1)
     {
-        DEBUG_POINT();
     }
 
     SpriteScript::~SpriteScript()

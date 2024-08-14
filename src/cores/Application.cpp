@@ -16,10 +16,17 @@ namespace ntt
         renderer::Init(title, screenWidth, screenHeight, fps);
 
         m_SceneManager = CreateRef<SceneManager>();
+        m_GlobalResourceManager = CreateRef<ResourceManager>();
+
+        auto config = Config::GetGlobalResourceConfig();
+        m_GlobalResourceManager->LoadConfigure(config);
+
+        m_GlobalResourceManager->Load();
     }
 
     Application::~Application()
     {
+        m_GlobalResourceManager->Unload();
         renderer::Release();
     }
 
