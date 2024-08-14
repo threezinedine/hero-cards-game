@@ -50,9 +50,9 @@ namespace ntt
 
     JSON Config::GetGlobalResourceConfig()
     {
-        if (s_Configs.contains("resources") && s_Configs["resources"].is_array())
+        if (s_Configs.contains("resources"))
         {
-            return s_Configs;
+            return s_Configs["resources"];
         }
 
         return JSON::object();

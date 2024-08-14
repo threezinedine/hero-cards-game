@@ -28,9 +28,19 @@ namespace ntt
 
     void Scene::LoadConfigure(JSON config)
     {
-        LoadConfigureImpl(config);
-        GetResourceManager()->LoadConfigure(config);
-        GetEntityManager()->LoadConfigure(config);
+        if (config.is_object())
+        {
+            LoadConfigureImpl(config);
+
+            if (config.contains("resources"))
+            {
+                GetResourceManager()->LoadConfigure(config["resources"]);
+            }
+            if (config.contains("entities"))
+            {
+                GetEntityManager()->LoadConfigure(config["entities"]);
+            }
+        }
     }
 
     void Scene::LoadConfigureImpl(JSON config)

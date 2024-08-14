@@ -27,9 +27,9 @@ namespace ntt
 
     void EntityManager::LoadConfigure(JSON config)
     {
-        if (config.contains("entities") && config["entities"].is_array())
+        if (config.is_array())
         {
-            for (const auto &enCfg : config["entities"])
+            for (const auto &enCfg : config)
             {
                 if (enCfg.contains("eid") && enCfg["eid"].is_number())
                 {

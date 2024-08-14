@@ -54,7 +54,10 @@ namespace ntt
 
     void Script::LoadConfigure(JSON config)
     {
-        LoadConfigureImpl(config);
+        if (config.is_object())
+        {
+            LoadConfigureImpl(config);
+        }
     }
 
     void Script::LoadConfigureImpl(JSON config)

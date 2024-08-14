@@ -31,9 +31,9 @@ namespace ntt
 
     void ResourceManager::LoadConfigure(JSON config)
     {
-        if (config.contains("resources") && config["resources"].is_array())
+        if (config.is_array())
         {
-            for (const auto &rscCfg : config["resources"])
+            for (const auto &rscCfg : config)
             {
                 if (!rscCfg.is_object())
                 {

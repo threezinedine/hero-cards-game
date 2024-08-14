@@ -41,29 +41,32 @@ namespace ntt
 
     void Entity::LoadConfigure(JSON config)
     {
-        if (config.contains("geometry") && config["geometry"].is_object())
+        if (config.is_object())
         {
-            m_Geometry.LoadConfigure(config["geometry"]);
-        }
-
-        if (config.contains("scripts") && config["scripts"].is_array())
-        {
-            auto configScripts = config["scripts"];
-
-            for (const auto &configScript : configScripts)
+            if (config.contains("geometry") && config["geometry"].is_object())
             {
-                if (configScript.contains("sid") && configScript["sid"].is_number())
+                m_Geometry.LoadConfigure(config["geometry"]);
+            }
+
+            if (config.contains("scripts") && config["scripts"].is_array())
+            {
+                auto configScripts = config["scripts"];
+
+                for (const auto &configScript : configScripts)
                 {
-                    auto sid = configScript["sid"];
-                    if (m_Scripts.find(sid) != m_Scripts.end())
+                    if (configScript.contains("sid") && configScript["sid"].is_number())
                     {
-                        m_Scripts[sid]->LoadConfigure(configScript);
+                        auto sid = configScript["sid"];
+                        if (m_Scripts.find(sid) != m_Scripts.end())
+                        {
+                            m_Scripts[sid]->LoadConfigure(configScript);
+                        }
                     }
                 }
             }
-        }
 
-        LoadConfigureImpl(config);
+            LoadConfigureImpl(config);
+        }
     }
 
     void Entity::LoadConfigureImpl(JSON config)

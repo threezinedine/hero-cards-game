@@ -24,17 +24,20 @@ namespace ntt
 
     void Resource::LoadConfigure(JSON config)
     {
-        if (config.contains("rid") && config["rid"].is_number_unsigned())
+        if (config.is_object())
         {
-            m_ResourceID = config["rid"];
-        }
+            if (config.contains("rid") && config["rid"].is_number_unsigned())
+            {
+                m_ResourceID = config["rid"];
+            }
 
-        if (config.contains("relPath"))
-        {
-            m_Path = CreateScope<ResourcePath>(config["relPath"].get<String>());
-        }
+            if (config.contains("relPath"))
+            {
+                m_Path = CreateScope<ResourcePath>(config["relPath"].get<String>());
+            }
 
-        LoadConfigureImpl(config);
+            LoadConfigureImpl(config);
+        }
     }
 
     void Resource::LoadConfigureImpl(JSON config)
