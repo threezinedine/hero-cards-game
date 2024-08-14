@@ -12,6 +12,7 @@ Card game online
 -   [x] Change the #include to only needed
 -   [x] Convert project to library format
 -   [x] Add global resources
+-   [ ] Change the load configuration without care about the key
 -   [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [x] Load configure file using List rather than using Map
 -   [ ] Separate Configure file -> mutile files
