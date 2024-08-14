@@ -1,5 +1,5 @@
 #pragma once
-#include <common.hpp>
+#include <cores/commons/common.hpp>
 #include <cores/core.hpp>
 #include <utils/utils.hpp>
 #include "Enemy.hpp"

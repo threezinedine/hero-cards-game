@@ -1,6 +1,6 @@
 #pragma once
-#include <common.hpp>
-#include <cores/datatypes.hpp>
+#include <cores/commons/common.hpp>
+#include <cores/commons/datatypes.hpp>
 #include <cores/interfaces/ILoadable.hpp>
 #include "Resource.hpp"
 

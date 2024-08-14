@@ -14,3 +14,9 @@ Card game online
 [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 [ ] Add comments to all classes
 [ ] Configuring log
+
+### Todo:
+
+[ ] ECS system
+[ ] Physic sytem
+[ ] Audio Loading

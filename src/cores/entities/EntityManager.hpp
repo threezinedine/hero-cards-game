@@ -1,5 +1,5 @@
 #pragma once
-#include <common.hpp>
+#include <cores/commons/common.hpp>
 #include "Entity.hpp"
 #include <cores/interfaces/ILoadable.hpp>
 #include <cores/interfaces/IRenderable.hpp>

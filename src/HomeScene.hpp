@@ -1,6 +1,6 @@
 #pragma once
 #include <cores/core.hpp>
-#include <common.hpp>
+#include <cores/commons/common.hpp>
 // #include <components/components.hpp>
 
 using namespace ntt;

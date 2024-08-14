@@ -1,6 +1,6 @@
 #pragma once
-#include <cores/datatypes.hpp>
-#include <common.hpp>
+#include <cores/commons/datatypes.hpp>
+#include <cores/commons/common.hpp>
 #include <utils/path/IPath.hpp>
 #include "Resource.hpp"
 

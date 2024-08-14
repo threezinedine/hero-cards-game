@@ -1,6 +1,6 @@
 #include "Game.hpp"
 #include <utils/utils.hpp>
-#include <common.hpp>
+#include <cores/commons/common.hpp>
 
 Game::Game()
 {

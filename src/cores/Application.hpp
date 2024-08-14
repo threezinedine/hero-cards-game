@@ -1,6 +1,6 @@
 #pragma once
 
-#include <common.hpp>
+#include <cores/commons/common.hpp>
 #include "interfaces/IRenderable.hpp"
 #include "scenes/SceneManager.hpp"
 
