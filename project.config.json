@@ -25,7 +25,7 @@
 			"entities": [
 				{
 					"eid": 0,
-					"rid": 2,
+					"rid": 0,
 					"grid": {
 						"numCols": 1,
 						"numRows": 3

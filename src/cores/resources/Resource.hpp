@@ -1,12 +1,12 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/interfaces/ILoadable.hpp>
+#include <cores/interfaces/Loadable.hpp>
 #include <utils/path/IPath.hpp>
 #include "ResourceType.hpp"
 
 namespace ntt
 {
-    class Resource : public ILoadable
+    class Resource : public Loadable
     {
     public:
         Resource(rid_t id, Scope<IPath> path, ResourceType type);
@@ -15,7 +15,6 @@ namespace ntt
         void Load() override;
         void Unload() override;
 
-        inline bool IsLoaded() const { return m_Loaded; }
         inline rid_t GetResourceID() const { return m_ResourceID; }
         inline String GetPath() const { return m_Path->Get(); }
         inline ResourceType GetType() const { return m_Type; }
@@ -37,7 +36,6 @@ namespace ntt
         }
 
     private:
-        bool m_Loaded = false;
         rid_t m_ResourceID;
         Scope<IPath> m_Path;
         ResourceType m_Type;

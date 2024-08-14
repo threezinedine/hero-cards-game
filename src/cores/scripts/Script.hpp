@@ -6,7 +6,7 @@ namespace ntt
 {
     class Entity;
 
-    class Script : public IRenderable, public ILoadable, public IConfigurable
+    class Script : public IRenderable, public Loadable, public IConfigurable
     {
     public:
         Script(sid_t scriptId);
@@ -22,7 +22,6 @@ namespace ntt
 
         inline sid_t GetScriptID() const { return m_ScriptID; }
         inline void SetEntity(Entity *entity) { m_Entity = entity; }
-        inline bool IsLoaded() const override { return true; }
 
     protected:
         virtual void LoadImpl();

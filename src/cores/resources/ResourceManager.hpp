@@ -1,13 +1,13 @@
 #pragma once
 #include <cores/commons/common.hpp>
 #include <cores/commons/datatypes.hpp>
-#include <cores/interfaces/ILoadable.hpp>
+#include <cores/interfaces/Loadable.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
 #include "Resource.hpp"
 
 namespace ntt
 {
-    class ResourceManager : public ILoadable, public IConfigurable
+    class ResourceManager : public Loadable, public IConfigurable
     {
     public:
         ResourceManager(const String &sceneName);
@@ -16,8 +16,6 @@ namespace ntt
         void AddResource(Scope<Resource> resource);
         void Load() override;
         void Unload() override;
-
-        bool IsLoaded() const override { return true; }
 
         void LoadConfigure(JSON config) override;
 

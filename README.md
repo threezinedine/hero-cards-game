@@ -9,10 +9,11 @@ Card game online
 -   [x] Change SceneManagment -> SceneManager
 -   [x] Add IConfigurable for needed classes
 -   [ ] Handle the proble of IsLoadded method
+-   [ ] Change the #include to only needed
 -   [ ] Convert project to library format
+-   [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [x] Load configure file using List rather than using Map
 -   [ ] Separate Configure file -> mutile files
--   [ ] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [ ] Add comments to all classes
 -   [ ] Configuring log
 
@@ -20,4 +21,4 @@ Card game online
 
 -   [ ] ECS system
 -   [ ] Physic sytem
--   [ ] Audio Loading
+-   [ ] Audio resource

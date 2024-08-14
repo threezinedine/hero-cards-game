@@ -3,6 +3,7 @@
 #include <cores/interfaces/interfaces.hpp>
 #include <cores/resources/ResourceManager.hpp>
 #include <cores/entities/EntityManager.hpp>
+#include <cores/interfaces/Loadable.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
 
 namespace ntt
@@ -11,7 +12,7 @@ namespace ntt
     class ResourceManager;
     class Application;
 
-    class Scene : public IRenderable, public ILoadable, public IConfigurable
+    class Scene : public IRenderable, public Loadable, public IConfigurable
     {
     public:
         Scene(String sceneName);
@@ -21,8 +22,6 @@ namespace ntt
         void Update(float delta) override;
         virtual void Render() override;
         virtual void Unload() override;
-
-        inline bool IsLoaded() const override { return m_Loaded; }
 
         inline void SetSceneManager(SceneManager *sceneManager) { m_SceneManager = sceneManager; }
         inline String GetSceneName() const { return m_SceneName; }

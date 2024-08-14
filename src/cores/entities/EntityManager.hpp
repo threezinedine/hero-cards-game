@@ -1,13 +1,13 @@
 #pragma once
 #include <cores/commons/common.hpp>
 #include "Entity.hpp"
-#include <cores/interfaces/ILoadable.hpp>
+#include <cores/interfaces/Loadable.hpp>
 #include <cores/interfaces/IRenderable.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
 
 namespace ntt
 {
-    class EntityManager : public IRenderable, public ILoadable, public IConfigurable
+    class EntityManager : public IRenderable, public Loadable, public IConfigurable
     {
     public:
         EntityManager(String sceneName);
@@ -17,8 +17,6 @@ namespace ntt
         void Update(float delta) override;
         void Render() override;
         void Unload() override;
-
-        inline bool IsLoaded() const override { return true; }
 
         void AddEntity(Scope<Entity> entity);
 

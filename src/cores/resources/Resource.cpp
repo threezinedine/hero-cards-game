@@ -14,12 +14,12 @@ namespace ntt
 
     void Resource::Load()
     {
-        if (m_Loaded)
+        if (IsLoaded())
         {
             return;
         }
         LoadImpl();
-        m_Loaded = true;
+        SetIsLoaded(true);
     }
 
     void Resource::LoadConfigure(JSON config)
@@ -47,12 +47,12 @@ namespace ntt
 
     void Resource::Unload()
     {
-        if (!m_Loaded)
+        if (!IsLoaded())
         {
             return;
         }
         UnloadImpl();
-        m_Loaded = false;
+        SetIsLoaded(false);
     }
 
     void Resource::UnloadImpl()

@@ -7,7 +7,7 @@
 
 namespace ntt
 {
-    class Entity : public IRenderable, public ILoadable, public IConfigurable
+    class Entity : public IRenderable, public Loadable, public IConfigurable
     {
     public:
         Entity(eid_t entityId);

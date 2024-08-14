@@ -4,3 +4,4 @@
 #include "IRenderable.hpp"
 #include "ILoadable.hpp"
 #include "IConfigurable.hpp"
+#include "Loadable.hpp"
