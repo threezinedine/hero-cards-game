@@ -1,6 +1,6 @@
 #pragma once
 #include <common.hpp>
-#include <cores/ILoadable.hpp>
+#include <cores/interfaces/ILoadable.hpp>
 #include <utils/path/IPath.hpp>
 #include "ResourceType.hpp"
 

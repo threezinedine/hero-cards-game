@@ -1,7 +1,7 @@
 #pragma once
 #include <common.hpp>
 #include <cores/datatypes.hpp>
-#include <cores/ILoadable.hpp>
+#include <cores/interfaces/ILoadable.hpp>
 #include "Resource.hpp"
 
 namespace ntt

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <common.hpp>
-#include "IRenderable.hpp"
+#include "interfaces/IRenderable.hpp"
 #include "SceneManagement.hpp"
 
 namespace ntt

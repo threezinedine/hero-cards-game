@@ -1,7 +1,7 @@
 #pragma once
 #include <common.hpp>
-#include "IRenderable.hpp"
-#include "ILoadable.hpp"
+#include "interfaces/IRenderable.hpp"
+#include "interfaces/ILoadable.hpp"
 #include "Application.hpp"
 #include "resources/ResourceManager.hpp"
 #include "entities/EntityManager.hpp"

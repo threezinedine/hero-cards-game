@@ -1,8 +1,6 @@
 #pragma once
 #include <common.hpp>
-#include <cores/IRenderable.hpp>
-#include <cores/ILoadable.hpp>
-#include <cores/IConfigurable.hpp>
+#include <cores/interfaces/interfaces.hpp>
 
 namespace ntt
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <common.hpp>
 #include "Entity.hpp"
-#include <cores/ILoadable.hpp>
-#include <cores/IRenderable.hpp>
+#include <cores/interfaces/ILoadable.hpp>
+#include <cores/interfaces/IRenderable.hpp>
 
 namespace ntt
 {

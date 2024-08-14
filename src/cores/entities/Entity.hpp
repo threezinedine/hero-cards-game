@@ -2,9 +2,7 @@
 #include <common.hpp>
 #include <cores/datatypes.hpp>
 #include "Geometry.hpp"
-#include <cores/IRenderable.hpp>
-#include <cores/ILoadable.hpp>
-#include <cores/IConfigurable.hpp>
+#include <cores/interfaces/interfaces.hpp>
 #include <cores/scripts/scripts.hpp>
 
 namespace ntt

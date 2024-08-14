@@ -1,6 +1,6 @@
 #pragma once
 #include <common.hpp>
-#include "IRenderable.hpp"
+#include "interfaces/IRenderable.hpp"
 
 namespace ntt
 {
