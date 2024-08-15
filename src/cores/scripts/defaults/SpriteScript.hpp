@@ -18,8 +18,16 @@ namespace ntt
         void UpdateImpl(float delta) override;
 
     private:
+        struct Frame
+        {
+            unsigned int colIndex;
+            unsigned int rowIndex;
+        };
+
         Texture m_Texture;
         float m_ChangePerSecond;
+        List<Frame> m_Frames;
+        unsigned int m_CurrentFrameIndex;
 
         AccTimer m_Timer;
     };

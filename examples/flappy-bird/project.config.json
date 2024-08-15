@@ -67,11 +67,21 @@
 					"scripts": [
 						{
 							"sid": 3,
-							"rid": 1,
+							"rid": 0,
 							"grid": {
 								"numCols": 1,
-								"numRows": 2
+								"numRows": 3
 							},
+							"frames": [
+								{
+									"colIndex": 0,
+									"rowIndex": 0
+								},
+								{
+									"colIndex": 0,
+									"rowIndex": 1
+								}
+							],
 							"changePerSecond": 0.2
 						}
 					]

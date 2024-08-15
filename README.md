@@ -15,7 +15,7 @@ Card game online
 -   [x] Change the load configuration without care about the key
 -   [x] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [x] Load configure file using List rather than using Map
--   [ ] Remove Render and Update separation, using using Update
+-   [x] Remove Render and Update separation, using using Update
 -   [ ] Separate Configure file -> mutile files
 -   [ ] Add comments to all classes
 
