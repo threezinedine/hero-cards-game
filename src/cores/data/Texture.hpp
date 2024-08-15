@@ -24,13 +24,10 @@ namespace ntt
             m_NumRows = numRows;
         }
 
-        inline void SetRowIndex(unsigned int rowIndex) { m_CurrentRowIndex = rowIndex; }
-        inline void SetColIndex(unsigned int colIndex) { m_CurrentColIndex = colIndex; }
-        inline void SetCurrentFrame(unsigned int colIndex, unsigned int rowIndex)
-        {
-            m_CurrentColIndex = colIndex;
-            m_CurrentRowIndex = rowIndex;
-        }
+        void SetRowIndex(unsigned int rowIndex);
+        void SetColIndex(unsigned int colIndex);
+        void SetCurrentFrame(unsigned int colIndex, unsigned int rowIndex);
+        bool IsValidFrame(unsigned int colIndex, unsigned int rowIndex) const;
 
         void Load();
         void Render() override;

@@ -19,6 +19,33 @@ namespace ntt
     {
     }
 
+    void Texture::SetRowIndex(unsigned int rowIndex)
+    {
+        if (rowIndex >= m_NumRows)
+            return;
+        m_CurrentRowIndex = rowIndex;
+    }
+
+    void Texture::SetColIndex(unsigned int colIndex)
+    {
+        if (colIndex >= m_NumCols)
+            return;
+        m_CurrentColIndex = colIndex;
+    }
+
+    void Texture::SetCurrentFrame(unsigned int colIndex, unsigned int rowIndex)
+    {
+        if (!IsValidFrame(colIndex, rowIndex))
+            return;
+        m_CurrentColIndex = colIndex;
+        m_CurrentRowIndex = rowIndex;
+    }
+
+    bool Texture::IsValidFrame(unsigned int colIndex, unsigned int rowIndex) const
+    {
+        return colIndex < m_NumCols && rowIndex < m_NumRows;
+    }
+
     void Texture::Load()
     {
         auto textureSize = renderer::GetTextureSize(m_ResourceId);
