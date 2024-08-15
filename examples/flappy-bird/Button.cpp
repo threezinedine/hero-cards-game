@@ -4,11 +4,8 @@
 
 #define BIND(x) std::bind(&Button::x, this)
 
-Button::Button(eid_t entityId, rid_t resourceId)
-    : Entity(entityId), m_ResourceId(m_ResourceId),
-      m_NumCols(1), m_NumRows(3),
-      m_CurrentColIndex(0), m_CurrentRowIndex(0),
-      m_ChangePerSecond(1)
+Button::Button(eid_t entityId)
+    : Entity(entityId), m_Texture(0)
 {
     auto fsm = CreateScope<FSMScript>(2);
 
@@ -19,17 +16,37 @@ Button::Button(eid_t entityId, rid_t resourceId)
     auto hoverIdle = CreateRef<FSMState>("hoverIdle");
     auto pressed = CreateRef<FSMState>("pressed");
 
-    idle->SetOnState(BIND(OnIdle));
+    std::function<void()> Update = [this]()
+    {
+        this->m_Texture.Update(0.0f);
+    };
+
+    std::function<bool()> IsLeftPressed = []()
+    {
+        return renderer::IsMouseButtonPressed(renderer::MouseButton::LEFT);
+    };
+
+    idle->SetOnState(Update);
     idle->AddTransition({BIND(IsHovered), hover});
+    idle->SetOnEnter([this]()
+                     { this->m_Texture.SetRowIndex(0); });
 
     hover->AddTransition({BIND(IsHovered), idle, true});
-    hover->SetOnState(BIND(OnHover));
+    hover->SetOnEnter([this]()
+                      { this->m_Texture.SetRowIndex(1); });
+    hover->SetOnState(Update);
 
-    hoverIdle->AddTransition({BIND(IsLeftPressed), pressed});
-    pressed->AddTransition({BIND(IsLeftPressed), hoverIdle, true});
-    pressed->SetOnExit(BIND(HandleClick));
+    hoverIdle->AddTransition({IsLeftPressed, pressed});
+    hoverIdle->SetOnEnter([this]()
+                          { this->m_Texture.SetRowIndex(1); });
 
-    pressed->SetOnState(BIND(OnPressed));
+    pressed->SetOnEnter([this]()
+                        { this->m_Texture.SetRowIndex(2); });
+    pressed->AddTransition({IsLeftPressed, hoverIdle, true});
+    pressed->SetOnExit([this]()
+                       { this->HandleClick(); });
+
+    pressed->SetOnState(Update);
 
     hover->SetState(hoverIdle);
 
@@ -47,7 +64,7 @@ void Button::LoadConfigureImpl(JSON config)
 {
     if (config.contains("rid") && config["rid"].is_number_unsigned())
     {
-        m_ResourceId = config["rid"];
+        m_Texture.SetResourceId(config["rid"]);
     }
 
     if (config.contains("grid") && config["grid"].is_object())
@@ -55,44 +72,24 @@ void Button::LoadConfigureImpl(JSON config)
         auto gridCfg = config["grid"];
         if (gridCfg.contains("numCols") && gridCfg["numCols"].is_number_unsigned())
         {
-            m_NumCols = gridCfg["numCols"];
+            m_Texture.SetNumCols(gridCfg["numCols"]);
         }
 
         if (gridCfg.contains("numRows") && gridCfg["numRows"].is_number_unsigned())
         {
-            m_NumRows = gridCfg["numRows"];
+            m_Texture.SetNumRows(gridCfg["numRows"]);
         }
-    }
-
-    if (config.contains("changePerSecond") && config["changePerSecond"].is_number())
-    {
-        m_ChangePerSecond = config["changePerSecond"];
     }
 }
 
 void Button::LoadImpl()
 {
-    auto textureSize = renderer::GetTextureSize(m_ResourceId);
-
-    m_ResourceSize.width = textureSize.width;
-    m_ResourceSize.height = textureSize.height;
-
-    m_FrameSize.width = m_ResourceSize.width / m_NumCols;
-    m_FrameSize.height = m_ResourceSize.height / m_NumRows;
-
-    auto width = GetGeometry().GetSize().width;
-    GetGeometry().GetSize().height = m_FrameSize.height / m_FrameSize.width * width;
+    m_Texture.SetGeometry(GetGeometry());
+    m_Texture.Load();
 }
 
 void Button::UpdateImpl(float delta)
 {
-
-    renderer::DrawTexture(
-        m_ResourceId,
-        {m_FrameSize.width * m_CurrentColIndex, m_FrameSize.height * m_CurrentRowIndex},
-        m_FrameSize,
-        GetGeometry().GetPoint(),
-        GetGeometry().GetSize());
 }
 
 void Button::RenderImpl()
@@ -102,39 +99,14 @@ void Button::RenderImpl()
 bool Button::IsHovered()
 {
     auto mouse = renderer::GetMousePosition();
-    auto pos = GetGeometry().GetPoint();
-    auto size = GetGeometry().GetSize();
+    auto pos = GetGeometry()->GetPoint();
+    auto size = GetGeometry()->GetSize();
 
-    bool res = mouse.x >= pos.x - size.width / 2 && mouse.x <= pos.x + size.width / 2 &&
-               mouse.y >= pos.y - size.height / 2 && mouse.y <= pos.y + size.height / 2;
-
-    return res;
-}
-
-bool Button::IsLeftPressed()
-{
-    return renderer::IsMouseButtonPressed(renderer::MouseButton::LEFT);
-}
-
-void Button::OnIdle()
-{
-    m_CurrentColIndex = 0;
-    m_CurrentRowIndex = 0;
-}
-
-void Button::OnHover()
-{
-    m_CurrentColIndex = 0;
-    m_CurrentRowIndex = 1;
+    return mouse.x >= pos.x - size.width / 2 && mouse.x <= pos.x + size.width / 2 &&
+           mouse.y >= pos.y - size.height / 2 && mouse.y <= pos.y + size.height / 2;
 }
 
 void Button::HandleClick()
 {
     m_OnClicked();
-}
-
-void Button::OnPressed()
-{
-    m_CurrentColIndex = 0;
-    m_CurrentRowIndex = 2;
 }

@@ -5,6 +5,7 @@ namespace ntt
     Entity::Entity(eid_t entityId)
         : m_EntityID(entityId)
     {
+        m_Geometry = CreateRef<Geometry>();
     }
 
     Entity::~Entity()
@@ -45,7 +46,7 @@ namespace ntt
         {
             if (config.contains("geometry") && config["geometry"].is_object())
             {
-                m_Geometry.LoadConfigure(config["geometry"]);
+                m_Geometry->LoadConfigure(config["geometry"]);
             }
 
             if (config.contains("scripts") && config["scripts"].is_array())

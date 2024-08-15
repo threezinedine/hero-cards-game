@@ -37,7 +37,6 @@
 						"numCols": 1,
 						"numRows": 3
 					},
-					"changePerSecond": 1,
 					"geometry": {
 						"position": {
 							"x": 400,
@@ -51,6 +50,29 @@
 						{
 							"sid": 23,
 							"factor": 20
+						}
+					]
+				},
+				{
+					"eid": 1,
+					"geometry": {
+						"position": {
+							"x": 400,
+							"y": 300
+						},
+						"size": {
+							"width": 200
+						}
+					},
+					"scripts": [
+						{
+							"sid": 3,
+							"rid": 1,
+							"grid": {
+								"numCols": 1,
+								"numRows": 2
+							},
+							"changePerSecond": 0.5
 						}
 					]
 				}

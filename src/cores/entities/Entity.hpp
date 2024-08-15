@@ -15,7 +15,7 @@ namespace ntt
         Entity(eid_t entityId);
         virtual ~Entity();
 
-        inline Geometry &GetGeometry() { return m_Geometry; }
+        inline Ref<Geometry> GetGeometry() { return m_Geometry; }
         inline eid_t GetEntityID() const { return m_EntityID; }
 
         void Load() override;
@@ -37,7 +37,7 @@ namespace ntt
         virtual void LoadConfigureImpl(JSON config);
 
     private:
-        Geometry m_Geometry;
+        Ref<Geometry> m_Geometry;
         eid_t m_EntityID;
         Map<sid_t, Scope<Script>> m_Scripts;
     };
