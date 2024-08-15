@@ -24,3 +24,8 @@ Ref<Application> CreateApplication()
 {
     return CreateRef<Game>();
 }
+
+String GetCofigPath()
+{
+    return "C:/Users/Acer/Games Dev/hero-cards-game/examples/flappy-bird/project.config.json";
+}

@@ -7,7 +7,8 @@
 
 int main(int argc, char **argv)
 {
-    Config::Load("project.config.json");
+    auto configPath = GetCofigPath();
+    Config::Load(configPath);
     auto game = CreateApplication();
     DeltaTimer timer;
     timer.Start();

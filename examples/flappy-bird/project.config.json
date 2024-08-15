@@ -72,7 +72,7 @@
 								"numCols": 1,
 								"numRows": 2
 							},
-							"changePerSecond": 0.5
+							"changePerSecond": 0.2
 						}
 					]
 				}
