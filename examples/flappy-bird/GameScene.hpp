@@ -16,7 +16,6 @@ public:
 protected:
     void LoadImpl() override;
     void UpdateImpl(float delta) override;
-    void RenderImpl() override;
     void UnloadImpl() override;
 
     void UpdateEnemies(float delta);

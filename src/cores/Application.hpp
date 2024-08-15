@@ -1,26 +1,24 @@
 #pragma once
 
 #include <cores/commons/common.hpp>
-#include "interfaces/IRenderable.hpp"
+#include "interfaces/IUpdatable.hpp"
 #include "scenes/SceneManager.hpp"
 #include "resources/ResourceManager.hpp"
 
 namespace ntt
 {
-    class Application : public IRenderable
+    class Application : public IUpdatable
     {
     public:
         Application();
         virtual ~Application();
 
         void Update(float delta) override;
-        void Render() override;
 
         inline bool IsRunning() const { return m_Running; }
 
     protected:
         virtual void UpdateImpl(float delta);
-        virtual void RenderImpl();
 
         inline Ref<SceneManager> GetSceneManager() const { return m_SceneManager; }
 

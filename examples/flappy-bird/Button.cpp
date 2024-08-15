@@ -18,7 +18,7 @@ Button::Button(eid_t entityId)
 
     std::function<void()> Update = [this]()
     {
-        this->m_Texture.Update(0.0f);
+        this->m_Texture.Render();
     };
 
     std::function<bool()> IsLeftPressed = []()
@@ -44,7 +44,11 @@ Button::Button(eid_t entityId)
                         { this->m_Texture.SetRowIndex(2); });
     pressed->AddTransition({IsLeftPressed, hoverIdle, true});
     pressed->SetOnExit([this]()
-                       { this->HandleClick(); });
+                       { 
+                        PRINT("IsHovered: %d", this->IsHovered());
+                        if (this->IsHovered()) {
+                            this->HandleClick();
+                       } });
 
     pressed->SetOnState(Update);
 
@@ -89,10 +93,6 @@ void Button::LoadImpl()
 }
 
 void Button::UpdateImpl(float delta)
-{
-}
-
-void Button::RenderImpl()
 {
 }
 

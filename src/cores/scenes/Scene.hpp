@@ -4,7 +4,7 @@
 #include <cores/entities/EntityManager.hpp>
 #include <cores/interfaces/Loadable.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
-#include <cores/interfaces/IRenderable.hpp>
+#include <cores/interfaces/IUpdatable.hpp>
 
 namespace ntt
 {
@@ -12,7 +12,7 @@ namespace ntt
     class ResourceManager;
     class Application;
 
-    class Scene : public IRenderable, public Loadable, public IConfigurable
+    class Scene : public IUpdatable, public Loadable, public IConfigurable
     {
     public:
         Scene(String sceneName);
@@ -20,7 +20,6 @@ namespace ntt
 
         void Load() override;
         void Update(float delta) override;
-        virtual void Render() override;
         virtual void Unload() override;
 
         inline void SetSceneManager(SceneManager *sceneManager) { m_SceneManager = sceneManager; }
@@ -31,7 +30,6 @@ namespace ntt
     protected:
         virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
-        virtual void RenderImpl();
         virtual void UnloadImpl();
 
         virtual void LoadConfigureImpl(JSON config);

@@ -6,7 +6,7 @@ namespace ntt
 {
     class Entity;
 
-    class Script : public IRenderable, public Loadable, public IConfigurable
+    class Script : public IUpdatable, public Loadable, public IConfigurable
     {
     public:
         Script(sid_t scriptId);
@@ -15,7 +15,6 @@ namespace ntt
 
         void Load() override;
         void Update(float delta) override;
-        void Render() override;
         void Unload() override;
 
         void LoadConfigure(JSON config) override;
@@ -26,7 +25,6 @@ namespace ntt
     protected:
         virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
-        virtual void RenderImpl();
         virtual void UnloadImpl();
 
         virtual void LoadConfigureImpl(JSON config);

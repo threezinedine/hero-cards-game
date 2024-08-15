@@ -9,7 +9,6 @@ namespace ntt
     public:
         virtual ~IRenderable() = default;
 
-        virtual void Update(float delta) = 0;
         virtual void Render() = 0;
     };
 }

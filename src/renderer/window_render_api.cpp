@@ -29,14 +29,6 @@ namespace ntt::renderer
         return GetScreenHeight();
     }
 
-    void BeginUpdate()
-    {
-    }
-
-    void EndUpdate()
-    {
-    }
-
     void BeginDraw()
     {
         ClearBackground(BLACK);

@@ -33,10 +33,6 @@ void HomeScene::UpdateImpl(float delta)
 {
 }
 
-void HomeScene::RenderImpl()
-{
-}
-
 void HomeScene::UnloadImpl()
 {
 }

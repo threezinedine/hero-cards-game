@@ -30,7 +30,7 @@ namespace ntt
         m_Geometry->GetSize().height = m_FrameSize.height / m_FrameSize.width * width;
     }
 
-    void Texture::Update(float delta)
+    void Texture::Render()
     {
         renderer::DrawTexture(
             m_ResourceId,

@@ -80,20 +80,6 @@ namespace ntt
         m_Scripts[script->GetScriptID()] = std::move(script);
     }
 
-    void Entity::Render()
-    {
-        RenderImpl();
-
-        for (const auto &script : m_Scripts)
-        {
-            script.second->Render();
-        }
-    }
-
-    void Entity::RenderImpl()
-    {
-    }
-
     void Entity::Unload()
     {
         UnloadImpl();

@@ -50,14 +50,6 @@ namespace ntt
         }
     }
 
-    void EntityManager::Render()
-    {
-        for (auto &entity : m_Entities)
-        {
-            entity.second->Render();
-        }
-    }
-
     void EntityManager::Unload()
     {
         for (auto &entity : m_Entities)

@@ -13,7 +13,6 @@ public:
 
 protected:
     void UpdateImpl(float delta) override;
-    void RenderImpl() override;
 
 private:
 };

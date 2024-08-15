@@ -48,16 +48,6 @@ void GameScene::SpawnEnemy()
     }
 }
 
-void GameScene::RenderImpl()
-{
-    for (const auto &enemy : m_Enemies)
-    {
-        enemy->Render();
-    }
-
-    // m_ScoreText->Render();
-}
-
 void GameScene::UnloadImpl()
 {
 }

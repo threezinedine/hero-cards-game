@@ -14,7 +14,6 @@ namespace ntt
 
     protected:
         void UpdateImpl(float delta) override;
-        void RenderImpl() override;
 
     private:
         Ref<FSMState> m_State;

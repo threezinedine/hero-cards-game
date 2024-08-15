@@ -9,9 +9,6 @@ namespace ntt::renderer
     float GetWindowWidth();
     float GetWindowHeight();
 
-    void BeginUpdate();
-    void EndUpdate();
-
     void BeginDraw();
     void EndDraw();
 

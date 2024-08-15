@@ -1,12 +1,12 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/interfaces/IRenderable.hpp>
+#include <cores/interfaces/IUpdatable.hpp>
 
 namespace ntt
 {
     class Scene;
 
-    class SceneManager : public IRenderable
+    class SceneManager : public IUpdatable
     {
     public:
         SceneManager();
@@ -15,7 +15,6 @@ namespace ntt
         void AddScene(Ref<Scene> scene);
 
         void Update(float delta) override;
-        void Render() override;
 
         void ChangeScene(String sceneName);
 

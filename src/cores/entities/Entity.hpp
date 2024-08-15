@@ -5,11 +5,11 @@
 #include <cores/scripts/scripts.hpp>
 #include <cores/interfaces/IConfigurable.hpp>
 #include <cores/interfaces/Loadable.hpp>
-#include <cores/interfaces/IRenderable.hpp>
+#include <cores/interfaces/IUpdatable.hpp>
 
 namespace ntt
 {
-    class Entity : public IRenderable, public Loadable, public IConfigurable
+    class Entity : public IUpdatable, public Loadable, public IConfigurable
     {
     public:
         Entity(eid_t entityId);
@@ -20,7 +20,6 @@ namespace ntt
 
         void Load() override;
         void Update(float delta) override;
-        void Render() override;
         void Unload() override;
 
         void LoadConfigure(JSON config) override;
@@ -32,7 +31,6 @@ namespace ntt
     protected:
         virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
-        virtual void RenderImpl();
         virtual void UnloadImpl();
         virtual void LoadConfigureImpl(JSON config);
 

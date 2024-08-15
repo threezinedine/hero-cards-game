@@ -54,6 +54,6 @@ namespace ntt
             m_Timer.Reset();
         }
 
-        m_Texture.Update(delta);
+        m_Texture.Render();
     }
 } // namespace ntt

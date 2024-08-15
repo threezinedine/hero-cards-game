@@ -20,8 +20,4 @@ namespace ntt
 
         m_State->Update();
     }
-
-    void FSMScript::RenderImpl()
-    {
-    }
 } // namespace ntt

@@ -34,15 +34,6 @@ namespace ntt
     {
     }
 
-    void Script::Render()
-    {
-        RenderImpl();
-    }
-
-    void Script::RenderImpl()
-    {
-    }
-
     void Script::Unload()
     {
         UnloadImpl();

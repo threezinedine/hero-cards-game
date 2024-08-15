@@ -17,8 +17,6 @@ int main(int argc, char **argv)
     {
         timer.Start();
         game->Update(timer.GetDelta());
-
-        game->Render();
     }
 
     return 0;

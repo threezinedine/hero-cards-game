@@ -36,11 +36,6 @@ namespace ntt
         m_CurrentScene->Update(delta);
     }
 
-    void SceneManager::Render()
-    {
-        m_CurrentScene->Render();
-    }
-
     void SceneManager::ChangeScene(String sceneName)
     {
         if (m_Scenes.find(sceneName) != m_Scenes.end())

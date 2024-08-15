@@ -61,16 +61,6 @@ namespace ntt
     {
     }
 
-    void Scene::Render()
-    {
-        m_EntityManager->Render();
-        RenderImpl();
-    }
-
-    void Scene::RenderImpl()
-    {
-    }
-
     void Scene::Unload()
     {
         GetResourceManager()->Unload();

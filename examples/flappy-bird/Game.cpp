@@ -16,10 +16,6 @@ void Game::UpdateImpl(float delta)
 {
 }
 
-void Game::RenderImpl()
-{
-}
-
 Ref<Application> CreateApplication()
 {
     return CreateRef<Game>();

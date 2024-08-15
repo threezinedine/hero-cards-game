@@ -32,6 +32,8 @@ namespace ntt
 
     void Application::Update(float delta)
     {
+        renderer::BeginDraw();
+
         if (renderer::IsWindowClosed())
         {
             m_Running = false;
@@ -39,22 +41,11 @@ namespace ntt
 
         m_SceneManager->Update(delta);
         UpdateImpl(delta);
-    }
 
-    void Application::UpdateImpl(float delta)
-    {
-        renderer::BeginUpdate();
-        renderer::EndUpdate();
-    }
-
-    void Application::Render()
-    {
-        renderer::BeginDraw();
-        m_SceneManager->Render();
         renderer::EndDraw();
     }
 
-    void Application::RenderImpl()
+    void Application::UpdateImpl(float delta)
     {
     }
 }

@@ -1,10 +1,11 @@
 #pragma once
 #include <cores/commons/commons.hpp>
 #include <cores/entities/Geometry.hpp>
+#include <cores/interfaces/IRenderable.hpp>
 
 namespace ntt
 {
-    class Texture
+    class Texture : public IRenderable
     {
     public:
         Texture(rid_t resourceId);
@@ -32,7 +33,7 @@ namespace ntt
         }
 
         void Load();
-        void Update(float delta);
+        void Render() override;
         void NextFrame();
 
     private:
