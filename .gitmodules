@@ -7,3 +7,6 @@
 [submodule "vendors/nlohmann"]
 	path = vendors/nlohmann
 	url = https://github.com/nlohmann/json.git
+[submodule "vendors\\googletest"]
+	path = vendors\\googletest
+	url = https://github.com/google/googletest.git
