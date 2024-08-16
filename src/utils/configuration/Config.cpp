@@ -5,6 +5,48 @@ namespace ntt
 {
     JSON Config::s_Configs = JSON::object();
 
+    template <>
+    bool Config::IsType<int>(JSON obj)
+    {
+        return obj.is_number_integer();
+    }
+
+    template <>
+    bool Config::IsType<String>(JSON obj)
+    {
+        return obj.is_string();
+    }
+
+    template <>
+    bool Config::IsType<bool>(JSON obj)
+    {
+        return obj.is_boolean();
+    }
+
+    template <>
+    bool Config::IsType<float>(JSON obj)
+    {
+        return obj.is_number_float();
+    }
+
+    List<JSON> Config::GetList(String key, List<JSON> defaultValue)
+    {
+        if (s_Configs.contains(key) && s_Configs[key].is_array())
+        {
+            List<JSON> list;
+            for (const auto &item : s_Configs[key])
+            {
+                list.push_back(item);
+            }
+
+            return list;
+        }
+
+        // TODO: Add warning message
+
+        return defaultValue;
+    }
+
     void Config::Load(String path)
     {
         String content = "";

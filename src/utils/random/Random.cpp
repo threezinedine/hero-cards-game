@@ -11,4 +11,9 @@ namespace ntt
 
         return distrib(gen);
     }
+
+    float RandomFloatUniform(float max)
+    {
+        return RandomFloatUniform(0, max);
+    }
 }

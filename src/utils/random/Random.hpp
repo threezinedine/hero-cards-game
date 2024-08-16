@@ -4,5 +4,6 @@
 
 namespace ntt
 {
+    float RandomFloatUniform(float max);
     float RandomFloatUniform(float min, float max);
 }

@@ -11,11 +11,29 @@ file(
     src/*.cpp
 )
 
-foreach(SOURCE ${SOURCES})
-    if(${SOURCE} MATCHES "src/components")
-        list(REMOVE_ITEM SOURCES ${SOURCE})
-    endif()
-endforeach()
+list(FILTER SOURCES EXCLUDE REGEX ".*_test\\\.cpp$")
+list(FILTER SOURCES EXCLUDE REGEX ".*_fixture\\\.cpp$")
+
+file(
+    GLOB_RECURSE 
+    TESTING_SOURCES
+    src/*_test.cpp
+)
+
+file(
+    GLOB_RECURSE 
+    TESTING_FIXTURES
+    src/*_fixture.cpp
+)
+
+# foreach(SOURCE ${SOURCES})
+#     message(STATUS "SOURCE CODE: ${SOURCE}")
+# endforeach()
+
+# foreach(TESTING_SOURCE ${TESTING_SOURCES})
+#     message(STATUS "TESTING SOURCE CODE: ${TESTING_SOURCE}")
+# endforeach()
+
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(_DEBUG)
@@ -41,6 +59,22 @@ target_include_directories(
     PUBLIC
     src
     include
+)
+
+# testing setup
+add_executable(
+    ${PROJECT_NAME}_test
+    ${TESTING_SOURCES}
+    ${TESTING_FIXTURES}
+    test.cpp
+)
+
+target_link_libraries(
+    ${PROJECT_NAME}_test
+    PUBLIC
+    ${PROJECT_NAME}
+    gtest
+    gmock
 )
 
 add_subdirectory(examples)

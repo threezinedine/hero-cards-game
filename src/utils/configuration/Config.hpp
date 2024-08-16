@@ -9,40 +9,20 @@ namespace ntt
         static void Load(String path);
 
         template <typename T>
-        static T Get(String key, T defaultValue = T())
+        static bool IsType(JSON obj);
+
+        template <typename T>
+        static T Get(String key, T defaultValue)
         {
-            if (s_Configs.contains(key))
+            if (s_Configs.contains(key) && IsType<T>(s_Configs[key]))
             {
                 return s_Configs[key].get<T>();
             }
 
-            // TODO: Add warning message
-
             return defaultValue;
         }
 
-        template <typename T>
-        static List<T> Get(String key, List<T> defaultValue = List<T>())
-        {
-            if (s_Configs.contains(key))
-            {
-                if (s_Configs[key].is_array())
-                {
-                    List<T> list;
-                    for (const auto &item : s_Configs[key])
-                    {
-                        list.push_back(item.get<T>());
-                    }
-
-                    return list;
-                }
-            }
-
-            // TODO: Add warning message
-
-            return defaultValue;
-        }
-
+        static List<JSON> GetList(String key, List<JSON> defaultValue = List<JSON>());
         static JSON GetSceneData(String sceneName);
         static JSON GetGlobalResourceConfig();
 

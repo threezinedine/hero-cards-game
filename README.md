@@ -16,6 +16,8 @@ Card game online
 -   [x] Split out the Texture with columns and rows (duplicate in Sprite vs FSMState example)
 -   [x] Load configure file using List rather than using Map
 -   [x] Remove Render and Update separation, using using Update
+-   [ ] Add test to project
+-   [ ] Change all primitive type to use the typedef
 -   [ ] Separate Configure file -> mutile files
 -   [ ] Add comments to all classes
 

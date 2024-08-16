@@ -45,7 +45,6 @@ Button::Button(eid_t entityId)
     pressed->AddTransition({IsLeftPressed, hoverIdle, true});
     pressed->SetOnExit([this]()
                        { 
-                        PRINT("IsHovered: %d", this->IsHovered());
                         if (this->IsHovered()) {
                             this->HandleClick();
                        } });
