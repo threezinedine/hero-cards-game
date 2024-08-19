@@ -1,22 +1,27 @@
 #include "Geometry.hpp"
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
     Geometry::Geometry()
     {
+        FUNCTION_LOG();
     }
 
     Geometry::Geometry(const Point &position, const Size &size)
         : point(position), size(size)
     {
+        FUNCTION_LOG();
     }
 
     Geometry::~Geometry()
     {
+        FUNCTION_LOG();
     }
 
     void Geometry::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.contains("position") && config["position"].is_object())
         {
             auto pointConfig = config["position"];

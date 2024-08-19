@@ -1,16 +1,19 @@
 #include "SceneManager.hpp"
 #include "Scene.hpp"
 #include <utils/configuration/configutation.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
     SceneManager::SceneManager()
         : m_CurrentScene(nullptr)
     {
+        FUNCTION_LOG();
     }
 
     SceneManager::~SceneManager()
     {
+        FUNCTION_LOG();
         for (auto &scene : m_Scenes)
         {
             if (scene.second->IsLoaded())
@@ -22,6 +25,7 @@ namespace ntt
 
     void SceneManager::AddScene(Ref<IScene> scene)
     {
+        FUNCTION_LOG();
         scene->SetSceneManager(this);
         m_Scenes[scene->GetSceneName()] = scene;
 
@@ -38,40 +42,28 @@ namespace ntt
 
     void SceneManager::ChangeScene(String sceneName)
     {
-        DEBUG_POINT();
+        FUNCTION_LOG();
         if (m_Scenes.find(sceneName) != m_Scenes.end())
         {
-            DEBUG_POINT();
             if (m_CurrentScene == nullptr)
             {
-                DEBUG_POINT();
                 m_CurrentScene = m_Scenes[sceneName];
-                DEBUG_POINT();
                 if (!m_CurrentScene->IsLoaded())
                 {
-                    DEBUG_POINT();
                     m_CurrentScene->Load();
-                    DEBUG_POINT();
                 }
             }
             else
             {
-                DEBUG_POINT();
                 if (m_CurrentScene->IsLoaded())
                 {
-                    DEBUG_POINT();
                     m_CurrentScene->Unload();
-                    DEBUG_POINT();
                 }
 
-                DEBUG_POINT();
                 m_CurrentScene = m_Scenes[sceneName];
-                DEBUG_POINT();
                 if (!m_CurrentScene->IsLoaded())
                 {
-                    DEBUG_POINT();
                     m_CurrentScene->Load();
-                    DEBUG_POINT();
                 }
             }
         }

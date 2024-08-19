@@ -10,6 +10,7 @@ namespace ntt
     Scene::Scene(String sceneName)
         : m_SceneManager(nullptr), m_SceneName(sceneName)
     {
+        FUNCTION_LOG();
         m_ResourceManager = CreateRef<ResourceManager>();
         m_EntityManager = CreateRef<EntityManager>(sceneName);
         m_ScriptManager = CreateRef<ScriptManager>();
@@ -17,15 +18,18 @@ namespace ntt
 
     Scene::~Scene()
     {
+        FUNCTION_LOG();
     }
 
     void Scene::AddScript(Ref<IScript> script)
     {
+        FUNCTION_LOG();
         m_ScriptManager->AddScript(script);
     }
 
     void Scene::Load()
     {
+        FUNCTION_LOG();
         SetIsLoaded(true);
         LoadConfigure(Config::GetSceneData(m_SceneName));
 
@@ -38,6 +42,7 @@ namespace ntt
 
     void Scene::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_object())
         {
             LoadConfigureImpl(config);
@@ -74,6 +79,7 @@ namespace ntt
 
     void Scene::Unload()
     {
+        FUNCTION_LOG();
         GetResourceManager()->Unload();
         GetEntityManager()->Unload();
         m_ScriptManager->Unload();

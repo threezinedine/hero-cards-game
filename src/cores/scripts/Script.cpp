@@ -1,24 +1,29 @@
 #include "Script.hpp"
 #include <cores/entities/IEntity.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
     Script::Script(sid_t scriptId)
         : m_ScriptID(scriptId)
     {
+        FUNCTION_LOG();
     }
 
     Script::Script(sid_t scriptId, IEntity *entity)
         : m_ScriptID(scriptId)
     {
+        FUNCTION_LOG();
     }
 
     Script::~Script()
     {
+        FUNCTION_LOG();
     }
 
     void Script::Load()
     {
+        FUNCTION_LOG();
         LoadImpl();
     }
 
@@ -37,6 +42,7 @@ namespace ntt
 
     void Script::Unload()
     {
+        FUNCTION_LOG();
         UnloadImpl();
     }
 
@@ -46,6 +52,7 @@ namespace ntt
 
     void Script::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_object())
         {
             LoadConfigureImpl(config);

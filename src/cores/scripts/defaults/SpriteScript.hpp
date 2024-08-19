@@ -1,8 +1,8 @@
 #pragma once
 
 #include "default_scripts_include.hpp"
-#include <utils/timer/AccTimer.hpp>
 #include <cores/data/Texture.hpp>
+#include <utils/timer/AccTimer.hpp>
 
 namespace ntt
 {
@@ -29,6 +29,6 @@ namespace ntt
         List<Frame> m_Frames;
         unsigned int m_CurrentFrameIndex;
 
-        AccTimer m_Timer;
+        ntt::AccTimer m_Timer;
     };
 }

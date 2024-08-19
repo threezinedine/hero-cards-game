@@ -7,19 +7,23 @@ namespace ntt
 {
     ResourceManager::ResourceManager()
     {
+        FUNCTION_LOG();
     }
 
     ResourceManager::~ResourceManager()
     {
+        FUNCTION_LOG();
     }
 
     void ResourceManager::AddResource(Scope<IResource> resource)
     {
+        FUNCTION_LOG();
         m_Resources[resource->GetResourceID()] = std::move(resource);
     }
 
     void ResourceManager::Load()
     {
+        FUNCTION_LOG();
         for (auto &resource : m_Resources)
         {
             if (resource.second->IsLoaded())
@@ -32,6 +36,7 @@ namespace ntt
 
     void ResourceManager::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_array())
         {
             for (const auto &rscCfg : config)
@@ -66,6 +71,7 @@ namespace ntt
 
     void ResourceManager::Unload()
     {
+        FUNCTION_LOG();
         for (auto &resource : m_Resources)
         {
             if (!resource.second->IsLoaded())

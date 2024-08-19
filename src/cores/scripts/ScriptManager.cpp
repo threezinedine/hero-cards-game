@@ -1,5 +1,6 @@
 #include "ScriptManager.hpp"
 #include "IScript.hpp"
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
@@ -13,11 +14,13 @@ namespace ntt
 
     void ScriptManager::AddScript(Ref<IScript> script)
     {
+        FUNCTION_LOG();
         m_Scripts[script->GetScriptID()] = script;
     }
 
     void ScriptManager::Load()
     {
+        FUNCTION_LOG();
         for (auto &script : m_Scripts)
         {
             script.second->Load();
@@ -34,6 +37,7 @@ namespace ntt
 
     void ScriptManager::Unload()
     {
+        FUNCTION_LOG();
         for (auto &script : m_Scripts)
         {
             script.second->Unload();
@@ -42,6 +46,7 @@ namespace ntt
 
     void ScriptManager::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_array())
         {
             for (const auto &cfg : config)

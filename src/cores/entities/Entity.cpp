@@ -1,12 +1,14 @@
 #include "Entity.hpp"
 #include <cores/scripts/IScript.hpp>
 #include <cores/scripts/ScriptManager.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
     Entity::Entity(eid_t entityId)
         : m_EntityID(entityId)
     {
+        FUNCTION_LOG();
         m_Geometry = CreateRef<Geometry>();
         m_ScriptManager = CreateRef<ScriptManager>();
         m_ScriptManager->SetSender(this);
@@ -14,10 +16,12 @@ namespace ntt
 
     Entity::~Entity()
     {
+        FUNCTION_LOG();
     }
 
     void Entity::Load()
     {
+        FUNCTION_LOG();
         LoadImpl();
 
         m_ScriptManager->Load();
@@ -40,6 +44,7 @@ namespace ntt
 
     void Entity::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_object())
         {
             if (config.contains("geometry") && config["geometry"].is_object())
@@ -47,22 +52,6 @@ namespace ntt
                 m_Geometry->LoadConfigure(config["geometry"]);
             }
 
-            // if (config.contains("scripts") && config["scripts"].is_array())
-            // {
-            //     auto configScripts = config["scripts"];
-
-            //     for (const auto &configScript : configScripts)
-            //     {
-            //         if (configScript.contains("sid") && configScript["sid"].is_number())
-            //         {
-            //             auto sid = configScript["sid"];
-            //             if (m_Scripts.find(sid) != m_Scripts.end())
-            //             {
-            //                 m_Scripts[sid]->LoadConfigure(configScript);
-            //             }
-            //         }
-            //     }
-            // }
             if (config.contains("scripts"))
             {
                 m_ScriptManager->LoadConfigure(config["scripts"]);

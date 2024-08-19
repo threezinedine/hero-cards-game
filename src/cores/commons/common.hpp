@@ -56,6 +56,4 @@ namespace ntt
 
     using sid_t = unsigned int;
     constexpr sid_t INVALID_SID = -1;
-
-#include <utils/log/log.hpp>
 }

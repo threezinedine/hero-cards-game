@@ -7,19 +7,23 @@ namespace ntt
     EntityManager::EntityManager(String sceneName)
         : m_SceneName(sceneName)
     {
+        FUNCTION_LOG();
     }
 
     EntityManager::~EntityManager()
     {
+        FUNCTION_LOG();
     }
 
     void EntityManager::AddEntity(Scope<IEntity> entity)
     {
+        FUNCTION_LOG();
         m_Entities[entity->GetEntityID()] = std::move(entity);
     }
 
     void EntityManager::Load()
     {
+        FUNCTION_LOG();
         for (auto &entity : m_Entities)
         {
             entity.second->Load();
@@ -28,6 +32,7 @@ namespace ntt
 
     void EntityManager::LoadConfigure(JSON config)
     {
+        FUNCTION_LOG();
         if (config.is_array())
         {
             for (const auto &enCfg : config)
@@ -53,6 +58,7 @@ namespace ntt
 
     void EntityManager::Unload()
     {
+        FUNCTION_LOG();
         for (auto &entity : m_Entities)
         {
             entity.second->Unload();
