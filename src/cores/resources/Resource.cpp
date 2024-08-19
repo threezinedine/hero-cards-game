@@ -3,8 +3,8 @@
 
 namespace ntt
 {
-    Resource::Resource(rid_t id, Scope<IPath> path, ResourceType type)
-        : m_ResourceID(id), m_Path(std::move(path)), m_Type(type)
+    Resource::Resource(rid_t id, String path, ResourceType type)
+        : m_ResourceID(id), m_Path(path), m_Type(type)
     {
     }
 
@@ -33,7 +33,7 @@ namespace ntt
 
             if (config.contains("relPath"))
             {
-                m_Path = CreateScope<ResourcePath>(config["relPath"].get<String>());
+                m_Path = path::relative(config["relPath"]);
             }
 
             LoadConfigureImpl(config);

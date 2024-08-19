@@ -37,11 +37,6 @@ namespace ntt::renderer
         UnloadImage(image);
     }
 
-    void LoadTexture(rid_t id, Scope<IPath> path)
-    {
-        LoadTexture(id, path->Get());
-    }
-
     void UnloadTexture(rid_t id)
     {
         if (IsInvalidTextureId(id))

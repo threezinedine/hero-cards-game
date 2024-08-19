@@ -56,7 +56,7 @@ namespace ntt
                     default:
                         m_Resources[rid] = std::move(CreateScope<ImageResource>(
                             rid,
-                            CreateScope<ResourcePath>("images/button.png")));
+                            path::relative("assets/images/button.png")));
                         m_Resources[rid]->LoadConfigure(rscCfg);
                     }
                 }

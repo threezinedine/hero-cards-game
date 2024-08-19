@@ -12,7 +12,7 @@ namespace ntt
         virtual ~IResource() = default;
 
         virtual rid_t GetResourceID() const = 0;
-        virtual String GetPath() const = 0;
+        virtual const String &GetPath() const = 0;
         virtual ResourceType GetType() const = 0;
         virtual String ResourceName() const = 0;
     };

@@ -6,7 +6,7 @@
 	"resources": [
 		{
 			"rid": 6,
-			"relPath": "images/deck-of-card.png",
+			"relPath": "assets/images/deck-of-card.png",
 			"type": 0
 		}
 	],
@@ -15,17 +15,17 @@
 			"resources": [
 				{
 					"rid": 0,
-					"relPath": "images/button.png",
+					"relPath": "assets/images/button.png",
 					"type": 0
 				},
 				{
 					"rid": 1,
-					"relPath": "images/new-btn.png",
+					"relPath": "assets/images/new-btn.png",
 					"type": 0
 				},
 				{
 					"rid": 2,
-					"relPath": "images/play-btn.png",
+					"relPath": "assets/images/play-btn.png",
 					"type": 0
 				}
 			],

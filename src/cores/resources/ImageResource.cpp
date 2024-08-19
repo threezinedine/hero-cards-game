@@ -3,8 +3,8 @@
 
 namespace ntt
 {
-    ImageResource::ImageResource(rid_t id, Scope<IPath> path)
-        : Resource(id, std::move(path), ResourceType::IMAGE)
+    ImageResource::ImageResource(rid_t id, String path)
+        : Resource(id, path, ResourceType::IMAGE)
     {
     }
 

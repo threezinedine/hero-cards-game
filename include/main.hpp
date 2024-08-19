@@ -9,6 +9,7 @@ int main(int argc, char **argv)
 {
     auto configPath = GetCofigPath();
     Config::Load(configPath);
+    ntt::path::setBasePath(Config::Get<String>("root", "."));
     auto game = CreateApplication();
     DeltaTimer timer;
     timer.Start();

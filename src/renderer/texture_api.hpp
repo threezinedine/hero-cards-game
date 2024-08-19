@@ -1,11 +1,10 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <utils/path/IPath.hpp>
+#include <utils/path/path.hpp>
 #include <cores/commons/datatypes.hpp>
 
 namespace ntt::renderer
 {
-    void LoadTexture(rid_t id, Scope<IPath> path);
     void LoadTexture(rid_t id, const String &path);
     void UnloadTexture(rid_t id);
 

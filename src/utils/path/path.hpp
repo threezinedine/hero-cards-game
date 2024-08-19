@@ -1,5 +1,3 @@
 #pragma once
 
-#include "IPath.hpp"
-#include "RelativePath.hpp"
-#include "ResourcePath.hpp"
+#include "path_tools.hpp"

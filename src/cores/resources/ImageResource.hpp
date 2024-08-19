@@ -1,7 +1,6 @@
 #pragma once
 #include <cores/commons/datatypes.hpp>
 #include <cores/commons/common.hpp>
-#include <utils/path/IPath.hpp>
 #include "Resource.hpp"
 
 namespace ntt
@@ -9,7 +8,7 @@ namespace ntt
     class ImageResource : public Resource
     {
     public:
-        ImageResource(rid_t id, Scope<IPath> path);
+        ImageResource(rid_t id, String path);
         virtual ~ImageResource();
 
         inline String ResourceName() const override { return "ImageResource"; }
