@@ -3,6 +3,7 @@
 #include <cores/commons/datatypes.hpp>
 #include "Geometry.hpp"
 #include "IEntity.hpp"
+#include <cores/scripts/IScriptManager.hpp>
 
 namespace ntt
 {
@@ -21,7 +22,7 @@ namespace ntt
 
         void LoadConfigure(JSON config) override;
 
-        void AddScript(Scope<IScript> script) override;
+        void AddScript(Ref<IScript> script) override { m_ScriptManager->AddScript(script); }
 
     protected:
         virtual void LoadImpl();
@@ -32,6 +33,7 @@ namespace ntt
     private:
         Ref<Geometry> m_Geometry;
         eid_t m_EntityID;
-        Map<sid_t, Scope<IScript>> m_Scripts;
+        // Map<sid_t, Scope<IScript>> m_Scripts;
+        Ref<IScriptManager> m_ScriptManager;
     };
 } // namespace ntt

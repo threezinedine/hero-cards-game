@@ -63,12 +63,17 @@ namespace ntt
 
     void SpriteScript::LoadImpl()
     {
-        m_Texture.SetGeometry(GetEntity()->GetGeometry());
-        m_Texture.Load();
     }
 
-    void SpriteScript::UpdateImpl(float delta)
+    void SpriteScript::UpdateImpl(void *sender, float delta)
     {
+        if (!IsLoaded())
+        {
+            auto entity = static_cast<IEntity *>(sender);
+            m_Texture.SetGeometry(entity->GetGeometry());
+            m_Texture.Load();
+        }
+
         if (m_Timer.GetDelta() > m_ChangePerSecond)
         {
             if (m_Frames.size() == 0)

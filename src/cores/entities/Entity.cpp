@@ -1,5 +1,6 @@
 #include "Entity.hpp"
 #include <cores/scripts/IScript.hpp>
+#include <cores/scripts/ScriptManager.hpp>
 
 namespace ntt
 {
@@ -7,6 +8,8 @@ namespace ntt
         : m_EntityID(entityId)
     {
         m_Geometry = CreateRef<Geometry>();
+        m_ScriptManager = CreateRef<ScriptManager>();
+        m_ScriptManager->SetSender(this);
     }
 
     Entity::~Entity()
@@ -17,10 +20,7 @@ namespace ntt
     {
         LoadImpl();
 
-        for (const auto &script : m_Scripts)
-        {
-            script.second->Load();
-        }
+        m_ScriptManager->Load();
     }
 
     void Entity::LoadImpl()
@@ -31,10 +31,7 @@ namespace ntt
     {
         UpdateImpl(delta);
 
-        for (const auto &script : m_Scripts)
-        {
-            script.second->Update(delta);
-        }
+        m_ScriptManager->Update(delta);
     }
 
     void Entity::UpdateImpl(float delta)
@@ -50,21 +47,25 @@ namespace ntt
                 m_Geometry->LoadConfigure(config["geometry"]);
             }
 
-            if (config.contains("scripts") && config["scripts"].is_array())
-            {
-                auto configScripts = config["scripts"];
+            // if (config.contains("scripts") && config["scripts"].is_array())
+            // {
+            //     auto configScripts = config["scripts"];
 
-                for (const auto &configScript : configScripts)
-                {
-                    if (configScript.contains("sid") && configScript["sid"].is_number())
-                    {
-                        auto sid = configScript["sid"];
-                        if (m_Scripts.find(sid) != m_Scripts.end())
-                        {
-                            m_Scripts[sid]->LoadConfigure(configScript);
-                        }
-                    }
-                }
+            //     for (const auto &configScript : configScripts)
+            //     {
+            //         if (configScript.contains("sid") && configScript["sid"].is_number())
+            //         {
+            //             auto sid = configScript["sid"];
+            //             if (m_Scripts.find(sid) != m_Scripts.end())
+            //             {
+            //                 m_Scripts[sid]->LoadConfigure(configScript);
+            //             }
+            //         }
+            //     }
+            // }
+            if (config.contains("scripts"))
+            {
+                m_ScriptManager->LoadConfigure(config["scripts"]);
             }
 
             LoadConfigureImpl(config);
@@ -75,20 +76,11 @@ namespace ntt
     {
     }
 
-    void Entity::AddScript(Scope<IScript> script)
-    {
-        script->SetEntity(this);
-        m_Scripts[script->GetScriptID()] = std::move(script);
-    }
-
     void Entity::Unload()
     {
         UnloadImpl();
 
-        for (const auto &script : m_Scripts)
-        {
-            script.second->Unload();
-        }
+        m_ScriptManager->Unload();
     }
 
     void Entity::UnloadImpl()

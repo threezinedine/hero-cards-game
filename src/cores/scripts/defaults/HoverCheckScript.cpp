@@ -8,7 +8,7 @@ namespace ntt
     {
     }
 
-    void HoverCheckScript::UpdateImpl(float delta)
+    void HoverCheckScript::UpdateImpl(void *sender, float delta)
     {
         auto mousePos = renderer::GetMousePosition();
         std::cout << "Mouse position: (" << mousePos.x * m_Factor

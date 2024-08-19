@@ -13,7 +13,7 @@ namespace ntt
         inline void SetState(Ref<FSMState> state) { m_State = state; }
 
     protected:
-        void UpdateImpl(float delta) override;
+        void UpdateImpl(void *sender, float delta) override;
 
     private:
         Ref<FSMState> m_State;

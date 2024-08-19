@@ -17,7 +17,7 @@ public:
 
 protected:
     void LoadImpl() override { LoadCount++; }
-    void UpdateImpl(float delta) override { UpdateCount++; }
+    void UpdateImpl(void *sender, float delta) override { UpdateCount++; }
     void UnloadImpl() override { UnloadCount++; }
 };
 

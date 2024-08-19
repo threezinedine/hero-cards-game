@@ -8,12 +8,13 @@ namespace ntt
 {
     class IEntity;
 
-    class IScript : public IUpdatable, public Loadable, public IConfigurable
+    class IScript : public Loadable, public IConfigurable
     {
     public:
         virtual ~IScript() = default;
 
         virtual sid_t GetScriptID() const = 0;
-        virtual void SetEntity(IEntity *entity) = 0;
+
+        virtual void Update(void *sender, float delta) = 0;
     };
 } // namespace ntt

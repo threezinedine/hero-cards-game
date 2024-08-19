@@ -15,7 +15,7 @@ namespace ntt
     protected:
         void LoadImpl() override;
         void LoadConfigureImpl(JSON config) override;
-        void UpdateImpl(float delta) override;
+        void UpdateImpl(void *sender, float delta) override;
 
     private:
         struct Frame

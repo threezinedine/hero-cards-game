@@ -41,6 +41,7 @@ namespace ntt
         ISceneManager *m_SceneManager;
         Ref<IResourceManager> m_ResourceManager;
         Ref<IEntityManager> m_EntityManager;
+        Ref<IScriptManager> m_ScriptManager;
         Map<sid_t, Ref<IScript>> m_Scripts;
         bool m_Loaded = false;
         String m_SceneName;

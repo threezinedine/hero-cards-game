@@ -11,7 +11,7 @@ namespace ntt
     {
     }
 
-    void FSMScript::UpdateImpl(float delta)
+    void FSMScript::UpdateImpl(void *sender, float delta)
     {
         if (m_State == nullptr)
         {

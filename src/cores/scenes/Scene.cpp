@@ -3,7 +3,7 @@
 #include <cores/resources/ResourceManager.hpp>
 #include "ISceneManager.hpp"
 #include <cores/entities/EntityManager.hpp>
-#include <cores/scripts/IScript.hpp>
+#include <cores/scripts/ScriptManager.hpp>
 
 namespace ntt
 {
@@ -12,6 +12,7 @@ namespace ntt
     {
         m_ResourceManager = CreateRef<ResourceManager>();
         m_EntityManager = CreateRef<EntityManager>(sceneName);
+        m_ScriptManager = CreateRef<ScriptManager>();
     }
 
     Scene::~Scene()
@@ -20,7 +21,7 @@ namespace ntt
 
     void Scene::AddScript(Ref<IScript> script)
     {
-        m_Scripts[script->GetScriptID()] = script;
+        m_ScriptManager->AddScript(script);
     }
 
     void Scene::Load()
@@ -28,13 +29,9 @@ namespace ntt
         SetIsLoaded(true);
         LoadConfigure(Config::GetSceneData(m_SceneName));
 
-        for (const auto &script : m_Scripts)
-        {
-            script.second->Load();
-        }
-
         GetResourceManager()->Load();
         GetEntityManager()->Load();
+        m_ScriptManager->Load();
 
         LoadImpl();
     }
@@ -67,6 +64,7 @@ namespace ntt
     void Scene::Update(float delta)
     {
         m_EntityManager->Update(delta);
+        m_ScriptManager->Update(delta);
         UpdateImpl(delta);
     }
 
@@ -78,6 +76,7 @@ namespace ntt
     {
         GetResourceManager()->Unload();
         GetEntityManager()->Unload();
+        m_ScriptManager->Unload();
         UnloadImpl();
         SetIsLoaded(false);
     }

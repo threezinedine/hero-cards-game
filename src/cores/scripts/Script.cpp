@@ -4,12 +4,12 @@
 namespace ntt
 {
     Script::Script(sid_t scriptId)
-        : m_ScriptID(scriptId), m_Entity(nullptr)
+        : m_ScriptID(scriptId)
     {
     }
 
     Script::Script(sid_t scriptId, IEntity *entity)
-        : m_ScriptID(scriptId), m_Entity(entity)
+        : m_ScriptID(scriptId)
     {
     }
 
@@ -26,12 +26,12 @@ namespace ntt
     {
     }
 
-    void Script::Update(float delta)
+    void Script::Update(void *sender, float delta)
     {
-        UpdateImpl(delta);
+        UpdateImpl(sender, delta);
     }
 
-    void Script::UpdateImpl(float delta)
+    void Script::UpdateImpl(void *sender, float delta)
     {
     }
 

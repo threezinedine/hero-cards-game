@@ -16,6 +16,6 @@ namespace ntt
         virtual Ref<Geometry> GetGeometry() = 0;
         virtual eid_t GetEntityID() const = 0;
 
-        virtual void AddScript(Scope<IScript> script) = 0;
+        virtual void AddScript(Ref<IScript> script) = 0;
     };
 } // namespace ntt

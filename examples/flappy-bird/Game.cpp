@@ -4,15 +4,12 @@
 
 Game::Game()
 {
+    CreateRef<HomeScene>();
     GetSceneManager()->AddScene(CreateRef<HomeScene>());
     GetSceneManager()->AddScene(CreateRef<GameScene>());
 }
 
 Game::~Game()
-{
-}
-
-void Game::UpdateImpl(float delta)
 {
 }
 

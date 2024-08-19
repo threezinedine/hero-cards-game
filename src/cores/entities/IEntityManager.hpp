@@ -10,7 +10,7 @@ namespace ntt
     class IEntityManager : public IUpdatable, public Loadable, public IConfigurable
     {
     public:
-        ~IEntityManager() = default;
+        virtual ~IEntityManager() = default;
 
         virtual void AddEntity(Scope<IEntity> entity) = 0;
     };

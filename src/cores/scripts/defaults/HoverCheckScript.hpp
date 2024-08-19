@@ -9,7 +9,7 @@ namespace ntt
         HoverCheckScript(sid_t scriptId);
 
     protected:
-        void UpdateImpl(float delta) override;
+        void UpdateImpl(void *sender, float delta) override;
         void LoadConfigureImpl(JSON config) override;
 
     private:

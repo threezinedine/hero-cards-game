@@ -38,27 +38,40 @@ namespace ntt
 
     void SceneManager::ChangeScene(String sceneName)
     {
+        DEBUG_POINT();
         if (m_Scenes.find(sceneName) != m_Scenes.end())
         {
+            DEBUG_POINT();
             if (m_CurrentScene == nullptr)
             {
+                DEBUG_POINT();
                 m_CurrentScene = m_Scenes[sceneName];
+                DEBUG_POINT();
                 if (!m_CurrentScene->IsLoaded())
                 {
+                    DEBUG_POINT();
                     m_CurrentScene->Load();
+                    DEBUG_POINT();
                 }
             }
             else
             {
+                DEBUG_POINT();
                 if (m_CurrentScene->IsLoaded())
                 {
+                    DEBUG_POINT();
                     m_CurrentScene->Unload();
+                    DEBUG_POINT();
                 }
 
+                DEBUG_POINT();
                 m_CurrentScene = m_Scenes[sceneName];
+                DEBUG_POINT();
                 if (!m_CurrentScene->IsLoaded())
                 {
+                    DEBUG_POINT();
                     m_CurrentScene->Load();
+                    DEBUG_POINT();
                 }
             }
         }

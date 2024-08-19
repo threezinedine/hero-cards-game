@@ -12,7 +12,5 @@ public:
     ~Game();
 
 protected:
-    void UpdateImpl(float delta) override;
-
 private:
 };
