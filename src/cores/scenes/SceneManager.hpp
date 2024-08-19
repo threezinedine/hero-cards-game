@@ -1,25 +1,23 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/interfaces/IUpdatable.hpp>
+#include "ISceneManager.hpp"
 
 namespace ntt
 {
-    class Scene;
-
-    class SceneManager : public IUpdatable
+    class SceneManager : public ISceneManager
     {
     public:
         SceneManager();
         ~SceneManager();
 
-        void AddScene(Ref<Scene> scene);
+        void AddScene(Ref<IScene> scene) override;
 
         void Update(float delta) override;
 
-        void ChangeScene(String sceneName);
+        void ChangeScene(String sceneName) override;
 
     private:
-        Map<String, Ref<Scene>> m_Scenes;
-        Ref<Scene> m_CurrentScene;
+        Map<String, Ref<IScene>> m_Scenes;
+        Ref<IScene> m_CurrentScene;
     };
 }

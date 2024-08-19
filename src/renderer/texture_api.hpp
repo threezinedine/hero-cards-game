@@ -1,6 +1,6 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <utils/utils.hpp>
+#include <utils/path/IPath.hpp>
 #include <cores/commons/datatypes.hpp>
 
 namespace ntt::renderer

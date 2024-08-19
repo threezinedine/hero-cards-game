@@ -1,4 +1,5 @@
 #include "Script.hpp"
+#include <cores/entities/IEntity.hpp>
 
 namespace ntt
 {
@@ -7,7 +8,7 @@ namespace ntt
     {
     }
 
-    Script::Script(sid_t scriptId, Entity *entity)
+    Script::Script(sid_t scriptId, IEntity *entity)
         : m_ScriptID(scriptId), m_Entity(entity)
     {
     }

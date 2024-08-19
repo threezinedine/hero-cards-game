@@ -2,21 +2,18 @@
 #include <cores/commons/common.hpp>
 #include <cores/commons/datatypes.hpp>
 #include "Geometry.hpp"
-#include <cores/scripts/scripts.hpp>
-#include <cores/interfaces/IConfigurable.hpp>
-#include <cores/interfaces/Loadable.hpp>
-#include <cores/interfaces/IUpdatable.hpp>
+#include "IEntity.hpp"
 
 namespace ntt
 {
-    class Entity : public IUpdatable, public Loadable, public IConfigurable
+    class Entity : public IEntity
     {
     public:
         Entity(eid_t entityId);
         virtual ~Entity();
 
-        inline Ref<Geometry> GetGeometry() { return m_Geometry; }
-        inline eid_t GetEntityID() const { return m_EntityID; }
+        inline Ref<Geometry> GetGeometry() override { return m_Geometry; }
+        inline eid_t GetEntityID() const override { return m_EntityID; }
 
         void Load() override;
         void Update(float delta) override;
@@ -24,9 +21,7 @@ namespace ntt
 
         void LoadConfigure(JSON config) override;
 
-        void AddScript(Scope<Script> script);
-
-        inline bool IsLoaded() const override { return true; }
+        void AddScript(Scope<IScript> script) override;
 
     protected:
         virtual void LoadImpl();
@@ -37,6 +32,6 @@ namespace ntt
     private:
         Ref<Geometry> m_Geometry;
         eid_t m_EntityID;
-        Map<sid_t, Scope<Script>> m_Scripts;
+        Map<sid_t, Scope<IScript>> m_Scripts;
     };
 } // namespace ntt

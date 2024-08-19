@@ -1,5 +1,6 @@
 #include "EntityManager.hpp"
 #include <utils/utils.hpp>
+#include "IEntity.hpp"
 
 namespace ntt
 {
@@ -12,7 +13,7 @@ namespace ntt
     {
     }
 
-    void EntityManager::AddEntity(Scope<Entity> entity)
+    void EntityManager::AddEntity(Scope<IEntity> entity)
     {
         m_Entities[entity->GetEntityID()] = std::move(entity);
     }

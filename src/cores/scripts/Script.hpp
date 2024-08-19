@@ -1,16 +1,15 @@
 #pragma once
-#include <cores/commons/common.hpp>
-#include <cores/interfaces/interfaces.hpp>
+#include "IScript.hpp"
 
 namespace ntt
 {
-    class Entity;
+    class IEntity;
 
-    class Script : public IUpdatable, public Loadable, public IConfigurable
+    class Script : public IScript
     {
     public:
         Script(sid_t scriptId);
-        Script(sid_t scriptId, Entity *entity);
+        Script(sid_t scriptId, IEntity *entity);
         virtual ~Script();
 
         void Load() override;
@@ -19,8 +18,8 @@ namespace ntt
 
         void LoadConfigure(JSON config) override;
 
-        inline sid_t GetScriptID() const { return m_ScriptID; }
-        inline void SetEntity(Entity *entity) { m_Entity = entity; }
+        inline sid_t GetScriptID() const override { return m_ScriptID; }
+        inline void SetEntity(IEntity *entity) override { m_Entity = entity; }
 
     protected:
         virtual void LoadImpl();
@@ -29,10 +28,10 @@ namespace ntt
 
         virtual void LoadConfigureImpl(JSON config);
 
-        inline Entity *GetEntity() const { return m_Entity; }
+        inline IEntity *GetEntity() const { return m_Entity; }
 
     private:
         sid_t m_ScriptID;
-        Entity *m_Entity;
+        IEntity *m_Entity;
     };
 } // namespace ntt

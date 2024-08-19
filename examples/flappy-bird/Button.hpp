@@ -1,6 +1,5 @@
 #pragma once
-#include <cores/commons/common.hpp>
-#include <cores/core.hpp>
+#include <NTTEngine.hpp>
 
 using namespace ntt;
 

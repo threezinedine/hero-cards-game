@@ -1,6 +1,8 @@
 #include "Application.hpp"
 #include <utils/utils.hpp>
 #include <renderer/renderer.hpp>
+#include <cores/resources/ResourceManager.hpp>
+#include <cores/scenes/SceneManager.hpp>
 
 namespace ntt
 {

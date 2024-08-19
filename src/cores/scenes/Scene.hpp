@@ -1,18 +1,15 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/resources/ResourceManager.hpp>
-#include <cores/entities/EntityManager.hpp>
 #include <cores/interfaces/Loadable.hpp>
-#include <cores/interfaces/IConfigurable.hpp>
-#include <cores/interfaces/IUpdatable.hpp>
+#include "IScene.hpp"
 
 namespace ntt
 {
-    class SceneManager;
-    class ResourceManager;
-    class Application;
+    class IEntityManager;
+    class IResourceManager;
+    class IScriptManager;
 
-    class Scene : public IUpdatable, public Loadable, public IConfigurable
+    class Scene : public IScene
     {
     public:
         Scene(String sceneName);
@@ -22,10 +19,12 @@ namespace ntt
         void Update(float delta) override;
         virtual void Unload() override;
 
-        inline void SetSceneManager(SceneManager *sceneManager) { m_SceneManager = sceneManager; }
-        inline String GetSceneName() const { return m_SceneName; }
+        inline void SetSceneManager(ISceneManager *sceneManager) override { m_SceneManager = sceneManager; }
+        inline const String &GetSceneName() const { return m_SceneName; }
 
         void LoadConfigure(JSON config) override;
+
+        void AddScript(Ref<IScript> script) override;
 
     protected:
         virtual void LoadImpl();
@@ -34,14 +33,15 @@ namespace ntt
 
         virtual void LoadConfigureImpl(JSON config);
 
-        inline SceneManager *GetSceneManager() const { return m_SceneManager; }
-        inline Ref<ResourceManager> GetResourceManager() const { return m_ResourceManager; }
-        inline Ref<EntityManager> GetEntityManager() const { return m_EntityManager; }
+        inline ISceneManager *GetSceneManager() const { return m_SceneManager; }
+        inline Ref<IResourceManager> GetResourceManager() const { return m_ResourceManager; }
+        inline Ref<IEntityManager> GetEntityManager() const { return m_EntityManager; }
 
     private:
-        SceneManager *m_SceneManager;
-        Ref<ResourceManager> m_ResourceManager;
-        Ref<EntityManager> m_EntityManager;
+        ISceneManager *m_SceneManager;
+        Ref<IResourceManager> m_ResourceManager;
+        Ref<IEntityManager> m_EntityManager;
+        Map<sid_t, Ref<IScript>> m_Scripts;
         bool m_Loaded = false;
         String m_SceneName;
     };

@@ -1,6 +1,8 @@
 #include "SpriteScript.hpp"
 #include <renderer/renderer.hpp>
 #include "FSMScript.hpp"
+#include <cores/entities/Geometry.hpp>
+#include <cores/entities/IEntity.hpp>
 
 namespace ntt
 {

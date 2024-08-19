@@ -1,6 +1,9 @@
 #include "Scene.hpp"
 #include <utils/utils.hpp>
 #include <cores/resources/ResourceManager.hpp>
+#include "ISceneManager.hpp"
+#include <cores/entities/EntityManager.hpp>
+#include <cores/scripts/IScript.hpp>
 
 namespace ntt
 {
@@ -15,10 +18,20 @@ namespace ntt
     {
     }
 
+    void Scene::AddScript(Ref<IScript> script)
+    {
+        m_Scripts[script->GetScriptID()] = script;
+    }
+
     void Scene::Load()
     {
         SetIsLoaded(true);
         LoadConfigure(Config::GetSceneData(m_SceneName));
+
+        for (const auto &script : m_Scripts)
+        {
+            script.second->Load();
+        }
 
         GetResourceManager()->Load();
         GetEntityManager()->Load();

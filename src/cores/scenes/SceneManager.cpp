@@ -20,7 +20,7 @@ namespace ntt
         }
     }
 
-    void SceneManager::AddScene(Ref<Scene> scene)
+    void SceneManager::AddScene(Ref<IScene> scene)
     {
         scene->SetSceneManager(this);
         m_Scenes[scene->GetSceneName()] = scene;

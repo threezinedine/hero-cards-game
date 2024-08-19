@@ -1,5 +1,6 @@
 #include "ResourceManager.hpp"
-#include "Resource.hpp"
+#include "IResource.hpp"
+#include "ImageResource.hpp"
 #include <utils/utils.hpp>
 
 namespace ntt
@@ -12,7 +13,7 @@ namespace ntt
     {
     }
 
-    void ResourceManager::AddResource(Scope<Resource> resource)
+    void ResourceManager::AddResource(Scope<IResource> resource)
     {
         m_Resources[resource->GetResourceID()] = std::move(resource);
     }

@@ -2,11 +2,12 @@
 
 #include <cores/commons/common.hpp>
 #include "interfaces/IUpdatable.hpp"
-#include "scenes/SceneManager.hpp"
-#include "resources/ResourceManager.hpp"
 
 namespace ntt
 {
+    class ISceneManager;
+    class IResourceManager;
+
     class Application : public IUpdatable
     {
     public:
@@ -20,11 +21,11 @@ namespace ntt
     protected:
         virtual void UpdateImpl(float delta);
 
-        inline Ref<SceneManager> GetSceneManager() const { return m_SceneManager; }
+        inline Ref<ISceneManager> GetSceneManager() const { return m_SceneManager; }
 
     private:
         bool m_Running;
-        Ref<SceneManager> m_SceneManager;
-        Ref<ResourceManager> m_GlobalResourceManager;
+        Ref<ISceneManager> m_SceneManager;
+        Ref<IResourceManager> m_GlobalResourceManager;
     };
 }

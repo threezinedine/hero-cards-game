@@ -1,6 +1,6 @@
 #pragma once
 #include <cores/commons/common.hpp>
-#include <cores/core.hpp>
+#include <cores/commons/datatypes.hpp>
 
 namespace ntt
 {

@@ -1,4 +1,5 @@
 #include "Entity.hpp"
+#include <cores/scripts/IScript.hpp>
 
 namespace ntt
 {
@@ -74,7 +75,7 @@ namespace ntt
     {
     }
 
-    void Entity::AddScript(Scope<Script> script)
+    void Entity::AddScript(Scope<IScript> script)
     {
         script->SetEntity(this);
         m_Scripts[script->GetScriptID()] = std::move(script);

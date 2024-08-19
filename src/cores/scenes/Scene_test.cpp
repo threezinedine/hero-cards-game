@@ -1,28 +1,24 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "Scene.hpp"
+#include "cores/scripts/Script.hpp"
 
 using namespace ntt;
 
-class SceneMock : public Scene
+class TestScript : public Script
 {
 public:
-    SceneMock(const String &name) : Scene(name) {}
-    ~SceneMock() {}
+    TestScript(sid_t scriptId) : Script(scriptId) {}
+    ~TestScript() {}
+
+    int LoadCount = 0;
+    int UpdateCount = 0;
+    int UnloadCount = 0;
 
 protected:
-    void LoadImpl() override { LoadImplCallCount++; }
-    void UpdateImpl(float delta) override { UpdateImplCallCount++; }
-    void UnloadImpl() override { UnloadImplCallCount++; }
-
-    void LoadConfigureImpl(JSON config) override
-    {
-    }
-
-public:
-    int LoadImplCallCount = 0;
-    int UpdateImplCallCount = 0;
-    int UnloadImplCallCount = 0;
+    void LoadImpl() override { LoadCount++; }
+    void UpdateImpl(float delta) override { UpdateCount++; }
+    void UnloadImpl() override { UnloadCount++; }
 };
 
 class SceneTest : public ::testing::Test
@@ -30,14 +26,14 @@ class SceneTest : public ::testing::Test
 protected:
     void SetUp() override
     {
-        m_Scene = CreateScope<SceneMock>("TestScene");
+        m_Scene = CreateScope<Scene>("TestScene");
     }
 
     void TearDown() override
     {
     }
 
-    Scope<SceneMock> m_Scene;
+    Scope<IScene> m_Scene;
 };
 
 TEST_F(SceneTest, TestSceneConstructor)
@@ -52,4 +48,14 @@ TEST_F(SceneTest, TestSceneLoad)
     m_Scene->Load();
 
     EXPECT_TRUE(m_Scene->IsLoaded());
+}
+
+TEST_F(SceneTest, WhenAddingScriptToScene_ThenScriptIsLoaded)
+{
+    auto script = CreateRef<TestScript>(1);
+    m_Scene->AddScript(script);
+
+    m_Scene->Load();
+
+    EXPECT_EQ(script->LoadCount, 1);
 }

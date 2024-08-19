@@ -1,25 +1,23 @@
 #pragma once
 #include <cores/commons/common.hpp>
 #include <cores/commons/datatypes.hpp>
-#include <cores/interfaces/Loadable.hpp>
-#include <cores/interfaces/IConfigurable.hpp>
-#include "Resource.hpp"
+#include "IResourceManager.hpp"
 
 namespace ntt
 {
-    class ResourceManager : public Loadable, public IConfigurable
+    class ResourceManager : public IResourceManager
     {
     public:
         ResourceManager();
         ~ResourceManager();
 
-        void AddResource(Scope<Resource> resource);
+        void AddResource(Scope<IResource> resource) override;
         void Load() override;
         void Unload() override;
 
         void LoadConfigure(JSON config) override;
 
     private:
-        Map<rid_t, Scope<Resource>> m_Resources;
+        Map<rid_t, Scope<IResource>> m_Resources;
     };
 } // namespace ntt
