@@ -9,16 +9,27 @@ namespace ntt
         : m_File(file), m_FunctionName(functionName), m_Line(line)
     {
         auto path = std::filesystem::path(file);
-        m_File = path.filename().string();
 
-        PRINT("Function: %s at %s:%u started",
+        // get the current file path
+        auto current = std::filesystem::current_path();
+        // get the root path which is the src folder
+        auto root = current.parent_path()
+                        .parent_path()
+                        .parent_path();
+
+        root.append("src");
+
+        // m_File should be the relative path from root
+        m_File = std::filesystem::relative(path, root).string();
+
+        PRINT("%s at %s:%u started",
               functionName.c_str(), m_File.c_str(), line);
         m_Timer.Reset();
     }
 
     FunctionLog::~FunctionLog()
     {
-        PRINT("Function: %s at %s:%u ended in %f ms",
+        PRINT("%s at %s:%u ended in %f ms",
               m_FunctionName.c_str(),
               m_File.c_str(), m_Line,
               m_Timer.GetDelta() * 1000);
