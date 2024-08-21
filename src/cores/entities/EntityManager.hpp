@@ -16,7 +16,7 @@ namespace ntt
 
         void AddEntity(Scope<IEntity> entity) override;
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(List<ConfigurableObject> configs) override;
 
     protected:
     private:

@@ -10,7 +10,7 @@ namespace ntt
 
     protected:
         void UpdateImpl(void *sender, float delta) override;
-        void LoadConfigureImpl(JSON config) override;
+        void LoadConfigureImpl(ConfigurableObject &config) override;
 
     private:
         unsigned int m_Factor = 1;

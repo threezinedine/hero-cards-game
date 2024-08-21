@@ -55,6 +55,10 @@ namespace ntt
             }
             else
             {
+                if (m_CurrentScene->GetSceneName() == sceneName)
+                {
+                    return;
+                }
                 if (m_CurrentScene->IsLoaded())
                 {
                     m_CurrentScene->Unload();
@@ -63,6 +67,7 @@ namespace ntt
                 m_CurrentScene = m_Scenes[sceneName];
                 if (!m_CurrentScene->IsLoaded())
                 {
+                    // m_CurrentScene->LoadConfigure()
                     m_CurrentScene->Load();
                 }
             }

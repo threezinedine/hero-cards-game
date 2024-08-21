@@ -20,7 +20,7 @@ namespace ntt
         void Update(float delta) override;
         void Unload() override;
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(ConfigurableObject &object) override;
 
         void AddScript(Ref<IScript> script) override { m_ScriptManager->AddScript(script); }
 
@@ -28,7 +28,6 @@ namespace ntt
         virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
         virtual void UnloadImpl();
-        virtual void LoadConfigureImpl(JSON config);
 
     private:
         Ref<Geometry> m_Geometry;

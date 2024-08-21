@@ -26,23 +26,11 @@ namespace ntt
         SetIsLoaded(true);
     }
 
-    void Resource::LoadConfigure(JSON config)
+    void Resource::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
-        if (config.is_object())
-        {
-            if (config.contains("rid") && config["rid"].is_number_unsigned())
-            {
-                m_ResourceID = config["rid"];
-            }
-
-            if (config.contains("relPath"))
-            {
-                m_Path = path::relative(config["relPath"]);
-            }
-
-            LoadConfigureImpl(config);
-        }
+        m_ResourceID = config.Get<rid_t>("rid", m_ResourceID);
+        m_Path = config.Get<String>("path", m_Path);
     }
 
     void Resource::LoadConfigureImpl(JSON config)

@@ -63,38 +63,6 @@ Button::~Button()
 {
 }
 
-void Button::LoadConfigureImpl(JSON config)
-{
-    if (config.contains("rid") && config["rid"].is_number_unsigned())
-    {
-        m_Texture.SetResourceId(config["rid"]);
-    }
-
-    if (config.contains("grid") && config["grid"].is_object())
-    {
-        auto gridCfg = config["grid"];
-        if (gridCfg.contains("numCols") && gridCfg["numCols"].is_number_unsigned())
-        {
-            m_Texture.SetNumCols(gridCfg["numCols"]);
-        }
-
-        if (gridCfg.contains("numRows") && gridCfg["numRows"].is_number_unsigned())
-        {
-            m_Texture.SetNumRows(gridCfg["numRows"]);
-        }
-    }
-}
-
-void Button::LoadImpl()
-{
-    m_Texture.SetGeometry(GetGeometry());
-    m_Texture.Load();
-}
-
-void Button::UpdateImpl(float delta)
-{
-}
-
 bool Button::IsHovered()
 {
     auto mouse = renderer::GetMousePosition();

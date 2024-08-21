@@ -16,48 +16,28 @@ namespace ntt
     {
     }
 
-    void SpriteScript::LoadConfigureImpl(JSON config)
+    void SpriteScript::LoadConfigureImpl(ConfigurableObject &config)
     {
-        if (config.contains("rid") && config["rid"].is_number_unsigned())
+        if (rid_t rid = config.Get<rid_t>("rid", INVALID_RID); rid != INVALID_RID)
         {
-            m_Texture.SetResourceId(config["rid"]);
+            m_Texture.SetResourceId(rid);
         }
 
-        if (config.contains("grid") && config["grid"].is_object())
-        {
-            auto gridCfg = config["grid"];
-            if (gridCfg.contains("numCols") && gridCfg["numCols"].is_number_unsigned())
-            {
-                m_Texture.SetNumCols(gridCfg["numCols"]);
-            }
+        auto gridConfig = config.GetMap<int>("grid", {{"numCols", 1},
+                                                      {"numRows", 1}});
 
-            if (gridCfg.contains("numRows") && gridCfg["numRows"].is_number_unsigned())
-            {
-                m_Texture.SetNumRows(gridCfg["numRows"]);
-            }
-        }
+        m_Texture.SetNumCols(gridConfig["numCols"]);
+        m_Texture.SetNumRows(gridConfig["numRows"]);
 
-        if (config.contains("changePerSecond") && config["changePerSecond"].is_number())
-        {
-            m_ChangePerSecond = config["changePerSecond"];
-        }
+        m_ChangePerSecond = config.Get<float>("changePerSecond", m_ChangePerSecond);
 
-        if (config.contains("frames") && config["frames"].is_array())
+        auto frameConfigs = config.GetList<ConfigurableObject>("frames");
+        for (auto frameConfig : frameConfigs)
         {
-            auto framesCfg = config["frames"];
-            for (auto frameCfg : framesCfg)
-            {
-                if (frameCfg.is_object())
-                {
-                    Frame frame;
-                    if (frameCfg.contains("colIndex") && frameCfg["colIndex"].is_number_unsigned() && frameCfg.contains("rowIndex") && frameCfg["rowIndex"].is_number_unsigned())
-                    {
-                        frame.colIndex = frameCfg["colIndex"];
-                        frame.rowIndex = frameCfg["rowIndex"];
-                        m_Frames.push_back(frame);
-                    }
-                }
-            }
+            Frame frame;
+            frame.colIndex = frameConfig.Get<int>("colIndex", 0);
+            frame.rowIndex = frameConfig.Get<int>("rowIndex", 0);
+            m_Frames.push_back(frame);
         }
     }
 

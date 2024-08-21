@@ -3,15 +3,15 @@
 #include <NTTEngine.hpp>
 
 #ifdef _LIB
-#include "Game.hpp"
 
 int main(int argc, char **argv)
 {
     auto configPath = GetCofigPath();
-    Config::Load(configPath);
-    ntt::path::setBasePath(Config::Get<String>("root", "."));
-    auto game = CreateApplication();
-    DeltaTimer timer;
+    ntt::ConfigurableObject config;
+    config.FromFile(configPath);
+    ntt::path::setBasePath(config.Get<ntt::String>("root", "."));
+    auto game = CreateApplication(config);
+    ntt::DeltaTimer timer;
     timer.Start();
 
     while (game->IsRunning())

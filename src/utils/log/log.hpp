@@ -7,7 +7,12 @@
     printf(__VA_ARGS__); \
     std::cout << std::endl
 #define DEBUG_POINT() printf("Debug point: %s:%d\n", __FILE__, __LINE__)
+
+#ifdef _TEST
 #define FUNCTION_LOG() FunctionLog log(__PRETTY_FUNCTION__, __FILE__, __LINE__)
+#else
+#define FUNCTION_LOG()
+#endif
 #else
 #define PRINT(...)
 #define DEBUG_POINT()

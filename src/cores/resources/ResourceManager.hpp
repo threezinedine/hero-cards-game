@@ -11,13 +11,13 @@ namespace ntt
         ResourceManager();
         ~ResourceManager();
 
-        void AddResource(Scope<IResource> resource) override;
+        void AddResource(Ref<IResource> resource) override;
         void Load() override;
         void Unload() override;
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(List<ConfigurableObject> configs) override;
 
     private:
-        Map<rid_t, Scope<IResource>> m_Resources;
+        Map<rid_t, Ref<IResource>> m_Resources;
     };
 } // namespace ntt

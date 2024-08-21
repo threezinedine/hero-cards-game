@@ -31,7 +31,6 @@ namespace ntt
     {
         FUNCTION_LOG();
         SetIsLoaded(true);
-        LoadConfigure(Config::GetSceneData(m_SceneName));
 
         GetResourceManager()->Load();
         GetEntityManager()->Load();
@@ -40,26 +39,11 @@ namespace ntt
         LoadImpl();
     }
 
-    void Scene::LoadConfigure(JSON config)
+    void Scene::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
-        if (config.is_object())
-        {
-            LoadConfigureImpl(config);
-
-            if (config.contains("resources"))
-            {
-                GetResourceManager()->LoadConfigure(config["resources"]);
-            }
-            if (config.contains("entities"))
-            {
-                GetEntityManager()->LoadConfigure(config["entities"]);
-            }
-        }
-    }
-
-    void Scene::LoadConfigureImpl(JSON config)
-    {
+        GetResourceManager()->LoadConfigure(config.GetList<ConfigurableObject>("resources"));
+        GetEntityManager()->LoadConfigure(config.GetList<ConfigurableObject>("entities"));
     }
 
     void Scene::LoadImpl()

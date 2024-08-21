@@ -29,43 +29,26 @@ namespace ntt
     class ConfigurableObject
     {
     public:
+        ConfigurableObject() = default;
         virtual ~ConfigurableObject() = default;
 
+        void FromFile(const String &path);
+
+        template <typename T>
+        T Get(const String &key, T defaultValue = T());
+
+        template <typename T>
+        List<T> GetList(const String &key, List<T> defaultValue = List<T>());
+
+        template <typename T>
+        Map<String, T> GetMap(const String &key, Map<String, T> defaultValue = Map<String, T>());
+
+        void Override(const ConfigurableObject &object);
+
+    protected:
+        ConfigurableObject(const JSON &config);
         template <typename T>
         bool IsType(const JSON &obj);
-
-        template <typename T>
-        T Get(const String &key, T defaultValue)
-        {
-            if (m_Config.contains(key) && IsType<T>(m_Config[key]))
-            {
-                return m_Config[key].get<T>();
-            }
-
-            return defaultValue;
-        }
-
-        template <typename T>
-        List<T> GetList(const String &key)
-        {
-            List<T> result;
-            if (m_Config.contains(key) && m_Config[key].is_array())
-            {
-                for (auto &item : m_Config[key])
-                {
-                    if (IsType<T>(item))
-                    {
-                        result.push_back(item.get<T>());
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        void LoadConfigure(JSON config);
-
-        List<ConfigurableObject> ExtractList(const String &key);
 
     private:
         JSON m_Config;

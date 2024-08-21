@@ -2,6 +2,7 @@
 #include <cores/commons/common.hpp>
 #include "ResourceType.hpp"
 #include "IResource.hpp"
+#include <utils/configuration/ConfigurableObject.hpp>
 
 namespace ntt
 {
@@ -18,7 +19,7 @@ namespace ntt
         inline const String &GetPath() const override { return m_Path; }
         inline ResourceType GetType() const override { return m_Type; }
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(ConfigurableObject &config) override;
 
     protected:
         virtual void LoadImpl();

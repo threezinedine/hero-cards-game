@@ -2,6 +2,7 @@
 
 #include <cores/commons/common.hpp>
 #include "interfaces/IUpdatable.hpp"
+#include <utils/configuration/ConfigurableObject.hpp>
 
 namespace ntt
 {
@@ -11,7 +12,7 @@ namespace ntt
     class Application : public IUpdatable
     {
     public:
-        Application();
+        Application(const ConfigurableObject &config);
         virtual ~Application();
 
         void Update(float delta) override;
@@ -24,6 +25,7 @@ namespace ntt
         inline Ref<ISceneManager> GetSceneManager() const { return m_SceneManager; }
 
     private:
+        ConfigurableObject m_Config;
         bool m_Running;
         Ref<ISceneManager> m_SceneManager;
         Ref<IResourceManager> m_GlobalResourceManager;

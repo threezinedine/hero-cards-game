@@ -14,7 +14,7 @@ namespace ntt
 
     protected:
         void LoadImpl() override;
-        void LoadConfigureImpl(JSON config) override;
+        void LoadConfigureImpl(ConfigurableObject &config) override;
         void UpdateImpl(void *sender, float delta) override;
 
     private:

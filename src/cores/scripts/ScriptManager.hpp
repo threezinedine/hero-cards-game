@@ -16,7 +16,7 @@ namespace ntt
         void Update(float delta) override;
         void Unload() override;
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(List<ConfigurableObject> configs);
 
         void AddScript(Ref<IScript> script) override;
         inline void SetSender(void *sender) override { m_Sender = sender; }

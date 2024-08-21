@@ -1,6 +1,7 @@
 #include "ScriptManager.hpp"
 #include "IScript.hpp"
 #include <utils/log/log.hpp>
+#include <utils/configuration/ConfigurableObject.hpp>
 
 namespace ntt
 {
@@ -44,20 +45,16 @@ namespace ntt
         }
     }
 
-    void ScriptManager::LoadConfigure(JSON config)
+    void ScriptManager::LoadConfigure(List<ConfigurableObject> configs)
     {
         FUNCTION_LOG();
-        if (config.is_array())
+        for (auto &config : configs)
         {
-            for (const auto &cfg : config)
+            if (sid_t sid = config.Get<sid_t>("sid", INVALID_SID); sid != INVALID_SID)
             {
-                if (cfg.contains("sid") && cfg["sid"].is_number())
+                if (m_Scripts.find(sid) != m_Scripts.end())
                 {
-                    sid_t sid = cfg["sid"];
-                    if (m_Scripts.find(sid) != m_Scripts.end())
-                    {
-                        m_Scripts[sid]->LoadConfigure(cfg);
-                    }
+                    m_Scripts[sid]->LoadConfigure(config);
                 }
             }
         }

@@ -50,16 +50,13 @@ namespace ntt
     {
     }
 
-    void Script::LoadConfigure(JSON config)
+    void Script::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
-        if (config.is_object())
-        {
-            LoadConfigureImpl(config);
-        }
+        LoadConfigureImpl(config);
     }
 
-    void Script::LoadConfigureImpl(JSON config)
+    void Script::LoadConfigureImpl(ConfigurableObject &config)
     {
     }
 } // namespace ntt

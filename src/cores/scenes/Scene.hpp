@@ -22,7 +22,7 @@ namespace ntt
         inline void SetSceneManager(ISceneManager *sceneManager) override { m_SceneManager = sceneManager; }
         inline const String &GetSceneName() const { return m_SceneName; }
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(ConfigurableObject &config) override;
 
         void AddScript(Ref<IScript> script) override;
 
@@ -30,8 +30,6 @@ namespace ntt
         virtual void LoadImpl();
         virtual void UpdateImpl(float delta);
         virtual void UnloadImpl();
-
-        virtual void LoadConfigureImpl(JSON config);
 
         inline ISceneManager *GetSceneManager() const { return m_SceneManager; }
         inline Ref<IResourceManager> GetResourceManager() const { return m_ResourceManager; }

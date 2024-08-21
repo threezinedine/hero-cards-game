@@ -15,11 +15,8 @@ namespace ntt
                   << ", " << mousePos.y * m_Factor << ")" << std::endl;
     }
 
-    void HoverCheckScript::LoadConfigureImpl(JSON config)
+    void HoverCheckScript::LoadConfigureImpl(ConfigurableObject &config)
     {
-        if (config.contains("factor") && config["factor"].is_number())
-        {
-            m_Factor = config["factor"];
-        }
+        m_Factor = config.Get<float>("factor", m_Factor);
     }
 } // namespace ntt

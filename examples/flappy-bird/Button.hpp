@@ -15,10 +15,6 @@ public:
     }
 
 protected:
-    void LoadConfigureImpl(JSON config) override;
-    void LoadImpl() override;
-    void UpdateImpl(float delta) override;
-
     void HandleClick();
 
     bool IsHovered();

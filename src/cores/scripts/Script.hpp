@@ -16,7 +16,7 @@ namespace ntt
         void Update(void *sender, float delta) override;
         void Unload() override;
 
-        void LoadConfigure(JSON config) override;
+        void LoadConfigure(ConfigurableObject &config) override;
 
         inline sid_t GetScriptID() const override { return m_ScriptID; }
 
@@ -25,7 +25,7 @@ namespace ntt
         virtual void UpdateImpl(void *sender, float delta);
         virtual void UnloadImpl();
 
-        virtual void LoadConfigureImpl(JSON config);
+        virtual void LoadConfigureImpl(ConfigurableObject &config);
 
     private:
         sid_t m_ScriptID;

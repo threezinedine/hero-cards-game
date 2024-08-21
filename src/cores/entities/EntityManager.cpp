@@ -30,19 +30,16 @@ namespace ntt
         }
     }
 
-    void EntityManager::LoadConfigure(JSON config)
+    void EntityManager::LoadConfigure(List<ConfigurableObject> configs)
     {
         FUNCTION_LOG();
-        if (config.is_array())
+        for (auto &config : configs)
         {
-            for (const auto &enCfg : config)
+            if (eid_t eid = config.Get<rid_t>("eid", INVALID_EID); eid != INVALID_EID)
             {
-                if (enCfg.contains("eid") && enCfg["eid"].is_number())
+                if (m_Entities.find(eid) != m_Entities.end())
                 {
-                    if (m_Entities.find(enCfg["eid"]) != m_Entities.end())
-                    {
-                        m_Entities[enCfg["eid"]]->LoadConfigure(enCfg);
-                    }
+                    m_Entities[eid]->LoadConfigure(config);
                 }
             }
         }

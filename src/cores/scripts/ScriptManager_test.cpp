@@ -4,19 +4,10 @@
 #include "IScript.hpp"
 #include "ScriptManager.hpp"
 #include <cores/entities/Entity.hpp>
+#include "MockScript.hpp"
+#include <cores/resources/MockResource.hpp>
 
 using namespace ntt;
-
-class MockScript : public IScript
-{
-public:
-    inline sid_t GetScriptID() const override { return 1; }
-
-    MOCK_METHOD(void, Load, ());
-    MOCK_METHOD(void, Update, (void *, float));
-    MOCK_METHOD(void, Unload, ());
-    MOCK_METHOD(void, LoadConfigure, (JSON));
-};
 
 class ScriptManagerTest : public ::testing::Test
 {
@@ -34,6 +25,7 @@ protected:
 
     void SetupScript()
     {
+        m_Script->SetScriptID(1);
         m_ScriptManager->AddScript(m_Script);
     }
 

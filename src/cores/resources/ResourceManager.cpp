@@ -15,10 +15,10 @@ namespace ntt
         FUNCTION_LOG();
     }
 
-    void ResourceManager::AddResource(Scope<IResource> resource)
+    void ResourceManager::AddResource(Ref<IResource> resource)
     {
         FUNCTION_LOG();
-        m_Resources[resource->GetResourceID()] = std::move(resource);
+        m_Resources[resource->GetResourceID()] = resource;
     }
 
     void ResourceManager::Load()
@@ -26,44 +26,31 @@ namespace ntt
         FUNCTION_LOG();
         for (auto &resource : m_Resources)
         {
-            if (resource.second->IsLoaded())
-            {
-                continue;
-            }
             resource.second->Load();
         }
     }
 
-    void ResourceManager::LoadConfigure(JSON config)
+    void ResourceManager::LoadConfigure(List<ConfigurableObject> configs)
     {
         FUNCTION_LOG();
-        if (config.is_array())
+        for (auto &config : configs)
         {
-            for (const auto &rscCfg : config)
+            if (config.Get<rid_t>("rid", INVALID_RID) == INVALID_RID)
             {
-                if (!rscCfg.is_object())
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                if (!rscCfg.contains("rid") || !rscCfg["rid"].is_number_unsigned())
-                {
-                    continue;
-                }
+            auto rid = config.Get<rid_t>("rid");
 
-                auto rid = rscCfg["rid"].get<rid_t>();
-
-                if (rscCfg.contains("type") && rscCfg["type"].is_number_unsigned())
+            if (auto type = config.Get<unsigned int>("type", -1); type != -1)
+            {
+                switch (type)
                 {
-                    auto type = rscCfg["type"].get<ResourceType>();
-                    switch (type)
-                    {
-                    default:
-                        m_Resources[rid] = std::move(CreateScope<ImageResource>(
-                            rid,
-                            path::relative("assets/images/button.png")));
-                        m_Resources[rid]->LoadConfigure(rscCfg);
-                    }
+                default:
+                    m_Resources[rid] = std::move(CreateScope<ImageResource>(
+                        rid,
+                        path::relative("assets/images/button.png")));
+                    m_Resources[rid]->LoadConfigure(config);
                 }
             }
         }
@@ -74,10 +61,6 @@ namespace ntt
         FUNCTION_LOG();
         for (auto &resource : m_Resources)
         {
-            if (!resource.second->IsLoaded())
-            {
-                continue;
-            }
             resource.second->Unload();
         }
     }

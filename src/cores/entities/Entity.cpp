@@ -42,27 +42,16 @@ namespace ntt
     {
     }
 
-    void Entity::LoadConfigure(JSON config)
+    void Entity::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
-        if (config.is_object())
-        {
-            if (config.contains("geometry") && config["geometry"].is_object())
-            {
-                m_Geometry->LoadConfigure(config["geometry"]);
-            }
 
-            if (config.contains("scripts"))
-            {
-                m_ScriptManager->LoadConfigure(config["scripts"]);
-            }
+        // if (config.contains("geometry") && config["geometry"].is_object())
+        // {
+        //     m_Geometry->LoadConfigure(config["geometry"]);
+        // }
 
-            LoadConfigureImpl(config);
-        }
-    }
-
-    void Entity::LoadConfigureImpl(JSON config)
-    {
+        m_ScriptManager->LoadConfigure(config.GetList<ConfigurableObject>("scripts"));
     }
 
     void Entity::Unload()

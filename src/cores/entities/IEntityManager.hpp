@@ -7,11 +7,12 @@ namespace ntt
 {
     class IEntity;
 
-    class IEntityManager : public IUpdatable, public Loadable, public IConfigurable
+    class IEntityManager : public IUpdatable, public Loadable
     {
     public:
         virtual ~IEntityManager() = default;
 
         virtual void AddEntity(Scope<IEntity> entity) = 0;
+        virtual void LoadConfigure(List<ConfigurableObject> configs) = 0;
     };
 } // namespace ntt

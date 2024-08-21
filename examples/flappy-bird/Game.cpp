@@ -2,7 +2,8 @@
 #include <utils/utils.hpp>
 #include <cores/commons/common.hpp>
 
-Game::Game()
+Game::Game(const ConfigurableObject &config)
+    : Application(config)
 {
     CreateRef<HomeScene>();
     GetSceneManager()->AddScene(CreateRef<HomeScene>());
@@ -13,9 +14,9 @@ Game::~Game()
 {
 }
 
-Ref<Application> CreateApplication()
+Ref<Application> CreateApplication(const ConfigurableObject &config)
 {
-    return CreateRef<Game>();
+    return CreateRef<Game>(config);
 }
 
 String GetCofigPath()

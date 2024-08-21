@@ -8,7 +8,7 @@ using namespace ntt;
 class Game : public Application
 {
 public:
-    Game();
+    Game(const ConfigurableObject &config);
     ~Game();
 
 protected:

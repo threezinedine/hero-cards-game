@@ -6,22 +6,21 @@
 
 namespace ntt
 {
-    Application::Application()
-        : m_Running(true)
+    Application::Application(const ConfigurableObject &config)
+        : m_Config(config), m_Running(true)
     {
-        const int screenWidth = Config::Get<int>("screenWidth", 800);
-        const int screenHeight = Config::Get<int>("screenHeight", 600);
-        const int fps = Config::Get<int>("fps", 60);
-
-        String title = Config::Get<String>("title", "Hero Cards");
+        const int screenWidth = m_Config.Get<int>("screenWidth", 800);
+        const int screenHeight = m_Config.Get<int>("screenHeight", 600);
+        const int fps = m_Config.Get<int>("fps", 60);
+        String title = m_Config.Get<String>("title", "Hero Cards");
 
         renderer::Init(title, screenWidth, screenHeight, fps);
 
         m_SceneManager = CreateRef<SceneManager>();
         m_GlobalResourceManager = CreateRef<ResourceManager>();
 
-        auto config = Config::GetGlobalResourceConfig();
-        m_GlobalResourceManager->LoadConfigure(config);
+        m_GlobalResourceManager->LoadConfigure(
+            m_Config.GetList<ConfigurableObject>("resources"));
 
         m_GlobalResourceManager->Load();
     }
