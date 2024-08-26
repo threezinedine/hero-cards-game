@@ -1,5 +1,6 @@
 #include "Texture.hpp"
 #include <renderer/renderer.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {

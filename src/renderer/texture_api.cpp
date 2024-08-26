@@ -1,5 +1,6 @@
 #include "texture_api.hpp"
 #include <raylib.h>
+#include <utils/log/log.hpp>
 
 namespace ntt::renderer
 {

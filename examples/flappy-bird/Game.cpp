@@ -1,11 +1,10 @@
 #include "Game.hpp"
-#include <utils/utils.hpp>
-#include <cores/commons/common.hpp>
+#include <NTTEngine.hpp>
 
 Game::Game(const ConfigurableObject &config)
     : Application(config)
 {
-    CreateRef<HomeScene>();
+    FUNCTION_LOG();
     GetSceneManager()->AddScene(CreateRef<HomeScene>());
     GetSceneManager()->AddScene(CreateRef<GameScene>());
 }
@@ -14,8 +13,9 @@ Game::~Game()
 {
 }
 
-Ref<Application> CreateApplication(const ConfigurableObject &config)
+Ref<Application> CreateApplication(ConfigurableObject &config)
 {
+    DEBUG_POINT();
     return CreateRef<Game>(config);
 }
 

@@ -1,5 +1,6 @@
 #include "ImageResource.hpp"
 #include <renderer/renderer.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
@@ -14,6 +15,7 @@ namespace ntt
 
     void ImageResource::LoadImpl()
     {
+        FUNCTION_LOG_P("Loading Image: %s - RID: %d", GetPath().c_str(), GetResourceID());
         renderer::LoadTexture(GetResourceIDRef(), GetPath());
     }
 

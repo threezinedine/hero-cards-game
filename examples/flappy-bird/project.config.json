@@ -43,7 +43,8 @@
 							"y": 200
 						},
 						"size": {
-							"width": 200
+							"width": 200,
+							"height": 300
 						}
 					},
 					"scripts": [
@@ -67,7 +68,7 @@
 					"scripts": [
 						{
 							"sid": 3,
-							"rid": 0,
+							"rid": 2,
 							"grid": {
 								"numCols": 1,
 								"numRows": 3
@@ -82,7 +83,7 @@
 									"rowIndex": 1
 								}
 							],
-							"changePerSecond": 0.2
+							"changePerSecond": 0.5
 						}
 					]
 				}

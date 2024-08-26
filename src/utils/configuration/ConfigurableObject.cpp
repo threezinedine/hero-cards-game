@@ -166,6 +166,11 @@ namespace ntt
         return result;
     }
 
+    String ConfigurableObject::ToString() const
+    {
+        return m_Config.dump(4);
+    }
+
     template int ConfigurableObject::Get<int>(const String &, int);
     template unsigned int ConfigurableObject::Get<unsigned int>(const String &, unsigned int);
     template float ConfigurableObject::Get<float>(const String &, float);

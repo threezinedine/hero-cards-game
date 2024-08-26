@@ -32,7 +32,6 @@ namespace ntt
     private:
         Ref<Geometry> m_Geometry;
         eid_t m_EntityID;
-        // Map<sid_t, Scope<IScript>> m_Scripts;
         Ref<IScriptManager> m_ScriptManager;
     };
 } // namespace ntt

@@ -9,6 +9,7 @@ namespace ntt
     Application::Application(const ConfigurableObject &config)
         : m_Config(config), m_Running(true)
     {
+        FUNCTION_LOG();
         const int screenWidth = m_Config.Get<int>("screenWidth", 800);
         const int screenHeight = m_Config.Get<int>("screenHeight", 600);
         const int fps = m_Config.Get<int>("fps", 60);
@@ -23,10 +24,12 @@ namespace ntt
             m_Config.GetList<ConfigurableObject>("resources"));
 
         m_GlobalResourceManager->Load();
+        m_SceneManager->SetConfig(m_Config);
     }
 
     Application::~Application()
     {
+        FUNCTION_LOG();
         m_GlobalResourceManager->Unload();
         renderer::Release();
     }
@@ -41,12 +44,7 @@ namespace ntt
         }
 
         m_SceneManager->Update(delta);
-        UpdateImpl(delta);
 
         renderer::EndDraw();
-    }
-
-    void Application::UpdateImpl(float delta)
-    {
     }
 }

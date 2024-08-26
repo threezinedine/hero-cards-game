@@ -20,8 +20,6 @@ namespace ntt
         inline bool IsRunning() const { return m_Running; }
 
     protected:
-        virtual void UpdateImpl(float delta);
-
         inline Ref<ISceneManager> GetSceneManager() const { return m_SceneManager; }
 
     private:

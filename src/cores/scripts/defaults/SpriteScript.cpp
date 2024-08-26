@@ -3,6 +3,7 @@
 #include "FSMScript.hpp"
 #include <cores/entities/Geometry.hpp>
 #include <cores/entities/IEntity.hpp>
+#include <utils/log/log.hpp>
 
 namespace ntt
 {
@@ -18,6 +19,7 @@ namespace ntt
 
     void SpriteScript::LoadConfigureImpl(ConfigurableObject &config)
     {
+        FUNCTION_LOG_P("Resource: %d", config.Get<rid_t>("rid", INVALID_RID));
         if (rid_t rid = config.Get<rid_t>("rid", INVALID_RID); rid != INVALID_RID)
         {
             m_Texture.SetResourceId(rid);

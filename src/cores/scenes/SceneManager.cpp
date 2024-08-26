@@ -50,6 +50,11 @@ namespace ntt
                 m_CurrentScene = m_Scenes[sceneName];
                 if (!m_CurrentScene->IsLoaded())
                 {
+                    if (m_Configs.find(m_CurrentScene->GetSceneName()) == m_Configs.end())
+                    {
+                        return;
+                    }
+                    m_CurrentScene->LoadConfigure(m_Configs[m_CurrentScene->GetSceneName()]);
                     m_CurrentScene->Load();
                 }
             }
@@ -67,10 +72,20 @@ namespace ntt
                 m_CurrentScene = m_Scenes[sceneName];
                 if (!m_CurrentScene->IsLoaded())
                 {
-                    // m_CurrentScene->LoadConfigure()
+                    if (m_Configs.find(m_CurrentScene->GetSceneName()) == m_Configs.end())
+                    {
+                        return;
+                    }
+                    m_CurrentScene->LoadConfigure(m_Configs[m_CurrentScene->GetSceneName()]);
                     m_CurrentScene->Load();
                 }
             }
         }
+    }
+
+    void SceneManager::SetConfig(ConfigurableObject &config)
+    {
+        FUNCTION_LOG();
+        m_Configs = config.GetMap<ConfigurableObject>("scenes");
     }
 }

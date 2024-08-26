@@ -1,6 +1,7 @@
 #include "Resource.hpp"
 #include <utils/path/path.hpp>
 #include <utils/log/log.hpp>
+#include <utils/path/path.hpp>
 
 namespace ntt
 {
@@ -29,8 +30,13 @@ namespace ntt
     void Resource::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
+        // FUNCTION_LOG_P("Config: %s", config.ToString().c_str());
         m_ResourceID = config.Get<rid_t>("rid", m_ResourceID);
-        m_Path = config.Get<String>("path", m_Path);
+
+        if (auto newPath = config.Get<String>("relPath", ""); newPath != "")
+        {
+            m_Path = ntt::path::relative(newPath);
+        }
     }
 
     void Resource::LoadConfigureImpl(JSON config)

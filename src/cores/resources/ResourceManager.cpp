@@ -47,9 +47,9 @@ namespace ntt
                 switch (type)
                 {
                 default:
-                    m_Resources[rid] = std::move(CreateScope<ImageResource>(
+                    m_Resources[rid] = CreateRef<ImageResource>(
                         rid,
-                        path::relative("assets/images/button.png")));
+                        path::relative("assets/images/button.png"));
                     m_Resources[rid]->LoadConfigure(config);
                 }
             }

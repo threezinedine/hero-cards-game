@@ -10,6 +10,8 @@ namespace ntt
         FunctionLog(String functionName, String file, unsigned int line);
         ~FunctionLog();
 
+        void Print(const char *format, ...);
+
     protected:
     private:
         String m_FunctionName;

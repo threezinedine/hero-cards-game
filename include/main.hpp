@@ -1,11 +1,14 @@
 #pragma once
-
 #include <NTTEngine.hpp>
 
 #ifdef _LIB
 
 int main(int argc, char **argv)
 {
+#ifdef _TEST
+    printf("Tracing mode\n");
+#endif
+
     auto configPath = GetCofigPath();
     ntt::ConfigurableObject config;
     config.FromFile(configPath);

@@ -44,6 +44,7 @@ namespace ntt
         Map<String, T> GetMap(const String &key, Map<String, T> defaultValue = Map<String, T>());
 
         void Override(const ConfigurableObject &object);
+        String ToString() const;
 
     protected:
         ConfigurableObject(const JSON &config);

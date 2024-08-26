@@ -9,7 +9,7 @@ namespace ntt
     }
 
     Geometry::Geometry(const Point &position, const Size &size)
-        : point(position), size(size)
+        : m_Point(position), m_Size(size)
     {
         FUNCTION_LOG();
     }
@@ -19,35 +19,15 @@ namespace ntt
         FUNCTION_LOG();
     }
 
-    void Geometry::LoadConfigure(JSON config)
+    void Geometry::LoadConfigure(ConfigurableObject &config)
     {
         FUNCTION_LOG();
-        if (config.contains("position") && config["position"].is_object())
-        {
-            auto pointConfig = config["position"];
-            if (pointConfig.contains("x") && pointConfig["x"].is_number())
-            {
-                point.x = pointConfig["x"];
-            }
+        auto position = config.Get<ConfigurableObject>("position");
+        m_Point.x = position.Get<float>("x", m_Point.x);
+        m_Point.y = position.Get<float>("y", m_Point.y);
 
-            if (pointConfig.contains("y") && pointConfig["y"].is_number())
-            {
-                point.y = pointConfig["y"];
-            }
-        }
-
-        if (config.contains("size") && config["size"].is_object())
-        {
-            auto sizeConfig = config["size"];
-            if (sizeConfig.contains("width") && sizeConfig["width"].is_number())
-            {
-                size.width = sizeConfig["width"];
-            }
-
-            if (sizeConfig.contains("height") && sizeConfig["height"].is_number())
-            {
-                size.height = sizeConfig["height"];
-            }
-        }
+        auto size = config.Get<ConfigurableObject>("size");
+        m_Size.width = size.Get<float>("width", m_Size.width);
+        m_Size.height = size.Get<float>("height", m_Size.height);
     }
 }

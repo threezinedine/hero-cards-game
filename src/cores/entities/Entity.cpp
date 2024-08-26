@@ -44,13 +44,9 @@ namespace ntt
 
     void Entity::LoadConfigure(ConfigurableObject &config)
     {
-        FUNCTION_LOG();
-
-        // if (config.contains("geometry") && config["geometry"].is_object())
-        // {
-        //     m_Geometry->LoadConfigure(config["geometry"]);
-        // }
-
+        FUNCTION_LOG_P("Entity ID: %d", m_EntityID);
+        auto geometry = config.Get<ConfigurableObject>("geometry");
+        m_Geometry->LoadConfigure(geometry);
         m_ScriptManager->LoadConfigure(config.GetList<ConfigurableObject>("scripts"));
     }
 
